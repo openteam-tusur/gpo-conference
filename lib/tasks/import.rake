@@ -8,7 +8,7 @@ namespace :import do
     progress_bar      = ProgressBar.new(chairs_attributes.size)
 
     chairs_attributes.each do |chair_attributes|
-      chair = Chair.find_or_initialize_by_abbr(chair_attributes.abbr)
+      chair = Chair.find_or_initialize_by_gpo_id(chair_attributes.id)
       chair.update_attributes!(abbr: chair_attributes.abbr,
                                chief: chair_attributes.chief,
                                faculty: chair_attributes.faculty,
@@ -26,7 +26,8 @@ namespace :import do
     progress_bar      = ProgressBar.new(themes_attributes.size)
 
     themes_attributes.each do |theme_attributes|
-      theme = Theme.find_or_create_by_name(theme_attributes.name)
+      theme = Theme.find_or_create_by_gpo_id(theme_attributes.id)
+      theme.update_attributes! name: theme_attributes.name
 
       progress_bar.increment!
     end
