@@ -50,6 +50,7 @@ GpoConference::Application.routes.draw do
   # just remember to delete public/index.html.
   # root :to => 'welcome#index'
 
+  # FIXME change this path
   root to: 'application#welcome'
 
   # See how all your routes lay out with "rake routes"
