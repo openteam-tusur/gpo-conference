@@ -1,0 +1,74 @@
+=default_input
+  +sans_font
+  background-color: white
+  border: 1px solid $input_border_color
+  +border-radius(3px)
+  margin: 0 10px 0 0
+  padding: 4px
+
+.simple_form
+  p
+    margin-bottom: 0
+  dt
+    margin: 0px
+    padding: 0px
+    margin-right: 15px
+  dd
+    margin: 0px
+    padding: 0
+    margin-bottom: 7px
+  fieldset
+    background: #f3f3f3
+    padding: 10px 15px
+    margin-bottom: 2.5em
+    border: 1px solid #eee
+  .input
+    margin-bottom: 10px
+
+    &.email
+      margin-left: 0
+
+      label
+        margin-left: 0
+
+    label
+      display: block
+      margin-bottom: 1px
+      span
+        color: $comment_color
+      abbr
+        +clearfix
+        width: 6px
+        +inline-block
+        text-indent: -9999em
+        cursor: help
+        background: transparent image_url("required.png") no-repeat 0 3px
+    textarea
+      +default_input
+      font-size: 1em
+      width: 95%
+      height: 100px
+      &.comment_for_change_state_order
+        width: 98%
+        margin-right: 0
+    select
+      +default_input
+      font-size: 1em
+      width: 200px
+    input
+      +default_input
+      font-size: 1.1em
+      margin-right: 10px
+      &.datepicker
+        width: 65px
+        margin-right: 3px
+    img.ui-datepicker-trigger
+      cursor: pointer
+
+    .error
+      color: #cc3333
+      font-size: 11px
+      font-weight: bold
+      margin-bottom: 0 !important
+  .button
+    margin-right: 5px

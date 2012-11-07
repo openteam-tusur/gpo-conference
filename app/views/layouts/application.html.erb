@@ -2,12 +2,43 @@
 <html lang="ru">
   <head>
     <meta charset="UTF-8">
-    <title>GpoConference</title>
+    <title>Интернет-конференция участников ГПО ТУСУР</title>
     <%= stylesheet_link_tag    "application", :media => "all" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <%= yield %>
+
+    <div id="header">
+      <div id="header-wrapper">
+        <div id="header-navigation">
+          Интернет-конференция участников ГПО ТУСУР
+        </div>
+        <div id="userbox">
+          <%= render :partial => 'common/user_box' %>
+        </div>
+      </div>
+    </div>
+
+    <div id="wrapper" class="top-level">
+      <div id="navigation">
+        # Тут можно воткнуть основную навигацию #
+      </div>
+      <div id="content">
+        <div id="page-header">
+          <div id="page-title">
+            <h1><%= yield :page_title %></h1>
+          </div>
+        </div>
+        <div id="container-one-collumn">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+
+    <div id="footer">
+      <%= render :partial => 'common/footer' %>
+    </div>
+
   </body>
 </html>
