@@ -58,5 +58,20 @@ module GpoConference
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    config.generators do |generators|
+      generators.assets               false
+      generators.helper               false
+      generators.stylesheets          false
+
+      generators.test_framework       :rspec
+
+      generators.fixture_replacement  :fabrication
+
+      generators.controller_specs     false
+      generators.helper_specs         false
+      generators.routing_specs        false
+      generators.view_specs           false
+    end
   end
 end

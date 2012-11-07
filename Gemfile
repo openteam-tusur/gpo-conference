@@ -21,5 +21,7 @@ group :production do
 end
 
 group :test do
+  gem 'fabrication'
+  gem 'rspec-rails'
   gem 'sqlite3'
 end
