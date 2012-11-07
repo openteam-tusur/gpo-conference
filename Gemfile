@@ -12,6 +12,7 @@ group :default do
   gem 'compass-rails'
   gem 'curb'
   gem 'hashie'
+  gem 'openteam-commons'
   gem 'progress_bar'
   gem 'rails'
   gem 'russian'
