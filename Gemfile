@@ -10,7 +10,11 @@ end
 
 group :default do
   gem 'compass-rails'
+  gem 'curb'
+  gem 'hashie'
+  gem 'progress_bar'
   gem 'rails'
+  gem 'russian'
 end
 
 group :development do
