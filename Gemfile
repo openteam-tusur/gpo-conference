@@ -4,10 +4,12 @@ group :assets do
   gem 'coffee-rails'
   gem 'jquery-rails'
   gem 'sass-rails'
+  gem 'therubyracer', :platforms => :ruby
   gem 'uglifier'
 end
 
 group :default do
+  gem 'compass-rails'
   gem 'rails'
 end
 
