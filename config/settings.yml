@@ -1,5 +1,0 @@
-app:
-  secret: 9462917c5d5b6c309052cbea2c4ff0c57cb03cda9ff4ae6e4fa2ad61b184bd8942bc7e2f06bcd93129947b9c3557928cc0ad83b60686c72d202a6df355199433
-
-gpo:
-  url: http://localhost:3001
