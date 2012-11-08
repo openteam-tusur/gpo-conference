@@ -1,0 +1,15 @@
+Fabricator(:project) do
+  analysis         "MyText"
+  expected_results "MyText"
+  features         "MyText"
+  forecast         "MyText"
+  funds_required   "MyText"
+  funds_sources    "MyText"
+  goal             "MyText"
+  novelty          "MyText"
+  purpose          "MyText"
+  release_cost     "MyText"
+  source_data      "MyText"
+  stakeholders     "MyText"
+  title            "MyString"
+end

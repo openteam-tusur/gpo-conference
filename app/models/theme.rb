@@ -1,5 +1,7 @@
 class Theme < ActiveRecord::Base
-  attr_accessible :name
+  attr_accessible :name, :gpo_id
 
-  validates_presence_of :name
+  has_many :projects
+
+  validates_presence_of :name, :gpo_id
 end
