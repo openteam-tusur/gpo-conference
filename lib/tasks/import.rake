@@ -45,7 +45,7 @@ namespace :import do
       theme = Theme.find_by_gpo_id(project_attributes.theme_id)
 
       unless theme
-        puts "Project '#{project_attributes.title}' does not have theme"
+        puts "Project '#{project_attributes.title}' with id #{project_attributes.id} does not have theme"
         next
       end
 
@@ -67,7 +67,35 @@ namespace :import do
     end
   end
 
+  desc 'Import participants'
+  task :participants => :environment do
+    puts 'Import participants'
+
+    response                = Curl.get("#{Settings['gpo.url']}/api/participants")
+    participants_attributes = JSON.parse(response.body_str).map { |hash| Hashie::Mash.new(hash) }
+    progress_bar            = ProgressBar.new(participants_attributes.size)
+
+    participants_attributes.each do |participant_attributes|
+      participant = Participant.find_or_initialize_by_gpo_id(participant_attributes.id)
+      project = Project.find_by_gpo_id(participant_attributes.project_id)
+
+      unless project
+        puts "It seems project with id #{participant_attributes.project_id} was not imported"
+        next
+      end
+
+      participant.update_attributes!(course: participant_attributes.course,
+                                     edu_group: participant_attributes.edu_group,
+                                     email: participant_attributes.email,
+                                     first_name: participant_attributes.first_name,
+                                     last_name: participant_attributes.last_name,
+                                     mid_name: participant_attributes.mid_name,
+                                     project_id: project.id)
+      progress_bar.increment!
+    end
+  end
+
   desc 'Import all'
-  task :all => [:chairs, :themes] do
+  task :all => [:chairs, :themes, :projects, :participants] do
   end
 end

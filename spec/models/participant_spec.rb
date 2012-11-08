@@ -1,16 +1,21 @@
 # == Schema Information
 #
-# Table name: themes
+# Table name: participants
 #
 #  id         :integer          not null, primary key
-#  name       :string(255)
+#  project_id :integer
+#  course     :integer
+#  edu_group  :string(255)
+#  email      :string(255)
+#  first_name :string(255)
+#  last_name  :string(255)
+#  mid_name   :string(255)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  gpo_id     :integer
 #
 
 require 'spec_helper'
 
-describe Theme do
+describe Participant do
   pending "add some examples to (or delete) #{__FILE__}"
 end
