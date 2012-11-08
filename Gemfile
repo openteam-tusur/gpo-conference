@@ -20,7 +20,9 @@ end
 
 group :development do
   gem 'annotate'
+  gem 'capistrano'
   gem 'hirb'
+  gem 'rvm-capistrano'
 end
 
 group :production do
