@@ -29,6 +29,7 @@ class Project < ActiveRecord::Base
 
   belongs_to :theme
 
+  has_many :managers
   has_many :participants
 
   validates_presence_of :theme

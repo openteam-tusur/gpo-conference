@@ -1,11 +1,9 @@
 # == Schema Information
 #
-# Table name: participants
+# Table name: managers
 #
 #  id         :integer          not null, primary key
 #  project_id :integer
-#  course     :integer
-#  edu_group  :string(255)
 #  email      :string(255)
 #  first_name :string(255)
 #  last_name  :string(255)
@@ -15,8 +13,8 @@
 #  updated_at :datetime         not null
 #
 
-class Participant < ActiveRecord::Base
-  attr_accessible :edu_group, :email, :first_name, :last_name, :mid_name, :course, :project_id
+class Manager < ActiveRecord::Base
+  attr_accessible :email, :first_name, :last_name, :mid_name, :project_id, :gpo_id
 
   belongs_to :project
 

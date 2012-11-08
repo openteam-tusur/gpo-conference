@@ -10,6 +10,7 @@
 #  first_name :string(255)
 #  last_name  :string(255)
 #  mid_name   :string(255)
+#  gpo_id     :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

@@ -95,7 +95,33 @@ namespace :import do
     end
   end
 
+  desc 'Import managers'
+  task :managers => :environment do
+    puts 'Import managers'
+
+    response            = Curl.get("#{Settings['gpo.url']}/api/managers")
+    managers_attributes = JSON.parse(response.body_str).map { |hash| Hashie::Mash.new(hash) }
+    progress_bar        = ProgressBar.new(managers_attributes.size)
+
+    managers_attributes.each do |manager_attributes|
+      manager = Manager.find_or_initialize_by_gpo_id(manager_attributes.id)
+      project = Project.find_by_gpo_id(manager_attributes.project_id)
+
+      unless project
+        puts "It seems project with id #{manager_attributes.project_id} was not imported"
+        next
+      end
+
+      manager.update_attributes!(email: manager_attributes.email,
+                                 first_name: manager_attributes.first_name,
+                                 last_name: manager_attributes.last_name,
+                                 mid_name: manager_attributes.mid_name,
+                                 project_id: project.id)
+      progress_bar.increment!
+    end
+  end
+
   desc 'Import all'
-  task :all => [:chairs, :themes, :projects, :participants] do
+  task :all => [:chairs, :themes, :projects, :participants, :managers] do
   end
 end
