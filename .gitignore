@@ -1,8 +1,12 @@
+*.swp
 /.bundle
 /bin
 /config/database.yml
 /config/settings.yml
 /db/*.sqlite3
 /log/*.log
+/log/*.log
+/log/*.log.lck
+/solr/data
+/solr/pids
 /tmp
-*.swp

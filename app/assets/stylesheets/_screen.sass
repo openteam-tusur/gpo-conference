@@ -40,26 +40,28 @@ a
     #header-navigation
       float: left
       +clearfix
-    #userbox
-      float: right
-      +clearfix
-      .signin_icon
-        display: block
-        float: left
-        padding-right: 20px
-        background: transparent image_url("icon_signin.png") no-repeat right
-      .text
-        display: block
-        float: left
-      .signout_icon
-        display: block
-        float: left
-        overflow: hidden
-        width: 16px
-        height: 16px
-        text-indent: -9999em
-        background: transparent image_url("icon_signout.png") no-repeat right
-        margin: 2px 0 0 4px
+    .esp_auth_header_wrapper
+      .esp_auth_header
+        .auth
+          float: right
+          +clearfix
+          .signin_icon
+            display: block
+            float: left
+            padding-right: 20px
+            background: transparent image_url("icon_signin.png") no-repeat right
+          .text
+            display: block
+            float: left
+          .signout_icon
+            display: block
+            float: left
+            overflow: hidden
+            width: 16px
+            height: 16px
+            text-indent: -9999em
+            background: transparent image_url("icon_signout.png") no-repeat right
+            margin: 2px 0 0 4px
 
 =navigation_text
   font-size: 13px
