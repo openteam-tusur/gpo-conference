@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121108141333) do
+ActiveRecord::Schema.define(:version => 20121109034948) do
 
   create_table "chairs", :force => true do |t|
     t.string   "abbr"
@@ -34,34 +34,6 @@ ActiveRecord::Schema.define(:version => 20121108141333) do
   add_index "contexts", ["ancestry"], :name => "index_contexts_on_ancestry"
   add_index "contexts", ["weight"], :name => "index_contexts_on_weight"
 
-  create_table "managers", :force => true do |t|
-    t.integer  "project_id"
-    t.string   "email"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "mid_name"
-    t.integer  "gpo_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "managers", ["project_id"], :name => "index_managers_on_project_id"
-
-  create_table "participants", :force => true do |t|
-    t.integer  "project_id"
-    t.integer  "course"
-    t.string   "edu_group"
-    t.string   "email"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "mid_name"
-    t.integer  "gpo_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "participants", ["project_id"], :name => "index_participants_on_project_id"
-
   create_table "permissions", :force => true do |t|
     t.integer  "user_id"
     t.integer  "context_id"
@@ -74,23 +46,10 @@ ActiveRecord::Schema.define(:version => 20121108141333) do
   add_index "permissions", ["user_id", "role", "context_id", "context_type"], :name => "by_user_and_role_and_context"
 
   create_table "projects", :force => true do |t|
-    t.text     "analysis"
-    t.text     "expected_results"
-    t.text     "features"
-    t.text     "forecast"
-    t.text     "funds_required"
-    t.text     "funds_sources"
-    t.text     "goal"
-    t.text     "novelty"
-    t.text     "purpose"
-    t.text     "release_cost"
-    t.text     "source_data"
-    t.text     "stakeholders"
-    t.string   "title"
     t.integer  "gpo_id"
     t.integer  "theme_id"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "subcontexts", :force => true do |t|
