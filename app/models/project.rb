@@ -7,17 +7,20 @@
 #  theme_id   :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  title      :string(255)
+#  chair_id   :integer
 #
 
 class Project < ActiveRecord::Base
-  attr_accessible :gpo_id, :theme_id
+  attr_accessible :chair_id, :gpo_id, :title, :theme_id
 
+  belongs_to :chair
   belongs_to :theme
 
-  validates_presence_of :theme
+  validates_presence_of :chair, :theme
 
   delegate :analysis, :expected_results, :forecast, :funds_required, :funds_sources, :goal,
-    :novelty, :purpose, :release_cost, :source_data, :stakeholders, :title, :participants, :project_managers,
+    :novelty, :purpose, :release_cost, :source_data, :stakeholders, :participants, :project_managers,
     to: :project_attributes
 
   private

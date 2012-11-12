@@ -43,13 +43,14 @@ namespace :import do
     projects_attributes.each do |project_attributes|
       project = Project.find_or_initialize_by_gpo_id(project_attributes.id)
       theme = Theme.find_by_gpo_id(project_attributes.theme_id)
+      chair = Chair.find_by_gpo_id(project_attributes.chair_id)
 
       unless theme
         puts "Project with id #{project_attributes.id} does not have theme"
         next
       end
 
-      project.update_attributes!(theme_id: theme.id)
+      project.update_attributes!(chair_id: chair.id, title: project_attributes.title, theme_id: theme.id)
       progress_bar.increment!
     end
   end

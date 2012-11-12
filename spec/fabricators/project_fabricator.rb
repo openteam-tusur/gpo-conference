@@ -7,6 +7,8 @@
 #  theme_id   :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  title      :string(255)
+#  chair_id   :integer
 #
 
 Fabricator(:project) do

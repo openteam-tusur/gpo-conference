@@ -1,18 +1,18 @@
 # == Schema Information
 #
-# Table name: projects
+# Table name: claims
 #
 #  id         :integer          not null, primary key
-#  gpo_id     :integer
-#  theme_id   :integer
+#  chair_id   :integer
+#  project_id :integer
+#  user_id    :integer
+#  role       :string(255)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  title      :string(255)
-#  chair_id   :integer
 #
 
 require 'spec_helper'
 
-describe Project do
+describe Claim do
   pending "add some examples to (or delete) #{__FILE__}"
 end

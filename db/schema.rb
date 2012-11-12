@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121109034948) do
+ActiveRecord::Schema.define(:version => 20121112072733) do
 
   create_table "chairs", :force => true do |t|
     t.string   "abbr"
@@ -22,6 +22,19 @@ ActiveRecord::Schema.define(:version => 20121109034948) do
     t.datetime "updated_at", :null => false
     t.integer  "gpo_id"
   end
+
+  create_table "claims", :force => true do |t|
+    t.integer  "chair_id"
+    t.integer  "project_id"
+    t.integer  "user_id"
+    t.string   "role"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "claims", ["chair_id"], :name => "index_claims_on_chair_id"
+  add_index "claims", ["project_id"], :name => "index_claims_on_project_id"
+  add_index "claims", ["user_id"], :name => "index_claims_on_user_id"
 
   create_table "contexts", :force => true do |t|
     t.string   "title"
@@ -50,7 +63,11 @@ ActiveRecord::Schema.define(:version => 20121109034948) do
     t.integer  "theme_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "title"
+    t.integer  "chair_id"
   end
+
+  add_index "projects", ["chair_id"], :name => "index_projects_on_chair_id"
 
   create_table "subcontexts", :force => true do |t|
     t.string   "title"

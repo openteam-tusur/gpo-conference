@@ -26,4 +26,6 @@
 
 class User < ActiveRecord::Base
   esp_auth_user
+
+  has_many :claims
 end

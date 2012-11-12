@@ -17,7 +17,7 @@ group :default do
   gem 'progress_bar'
   gem 'rails'
   gem 'russian'
-  gem 'sunspot_matchers'
+  gem 'simple_form'
 
    # HACK FOR HACK
   gem 'formtastic', '~> 2.1.0'
@@ -25,6 +25,7 @@ group :default do
   gem 'oauth2', '0.6.1'
   gem 'omniauth',  '1.1.0'
   gem 'omniauth-oauth2', '1.0.2'
+  gem 'sunspot_matchers'
 end
 
 group :development do
