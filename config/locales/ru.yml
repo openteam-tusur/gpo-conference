@@ -5,7 +5,7 @@ ru:
 
     attributes:
       claim:
-        project:    Проект
+        project_id: Проект
         role:       Роль
 
   enumerize:

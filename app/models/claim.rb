@@ -14,7 +14,7 @@
 class Claim < ActiveRecord::Base
   extend Enumerize
 
-  attr_accessible :role, :chair_id
+  attr_accessible :role, :project_id
 
   belongs_to :chair
   belongs_to :project
