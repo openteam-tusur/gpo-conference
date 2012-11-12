@@ -12,9 +12,15 @@
 #
 
 class Claim < ActiveRecord::Base
+  extend Enumerize
+
   attr_accessible :role, :chair_id
 
   belongs_to :chair
   belongs_to :project
   belongs_to :user
+
+  validates_presence_of :role, :project
+
+  enumerize :role, in: [:participant, :manager]
 end
