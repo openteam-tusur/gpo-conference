@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121112072733) do
+ActiveRecord::Schema.define(:version => 20121112093354) do
 
   create_table "chairs", :force => true do |t|
     t.string   "abbr"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(:version => 20121112072733) do
     t.string   "role"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "state"
   end
 
   add_index "claims", ["chair_id"], :name => "index_claims_on_chair_id"

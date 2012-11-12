@@ -9,11 +9,12 @@
 #  role       :string(255)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  state      :string(255)
 #
 
 Fabricator(:claim) do
-  chair   nil
-  project nil
-  user    nil
-  role    "MyString"
+  chair
+  project
+  user
+  role :participant
 end

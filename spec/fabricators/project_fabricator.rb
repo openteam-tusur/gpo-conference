@@ -12,5 +12,8 @@
 #
 
 Fabricator(:project) do
-  title            "MyString"
+  chair
+  theme
+  title 'title'
+  gpo_id 1
 end

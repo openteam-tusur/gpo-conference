@@ -1,15 +1,15 @@
 ru:
   activerecord:
     models:
-      claim:        Заявка
+      claim:              Заявка
 
     attributes:
       claim:
-        project_id: Проект
-        role:       Роль
+        project_id:       Проект
+        role:             Роль
 
   enumerize:
     claim:
       role:
-        participant:  Участник проекта
-        manager:      Менеджер проекта
+        participant:      Участник проекта
+        project_manager:  Руководитель проекта

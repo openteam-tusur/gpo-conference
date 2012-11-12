@@ -17,13 +17,31 @@ class Project < ActiveRecord::Base
   belongs_to :chair
   belongs_to :theme
 
-  validates_presence_of :chair, :theme
+  validates_presence_of :chair, :gpo_id, :theme
 
   delegate :analysis, :expected_results, :forecast, :funds_required, :funds_sources, :goal,
     :novelty, :purpose, :release_cost, :source_data, :stakeholders, :participants, :project_managers,
     to: :project_attributes
 
   scope :ordered_by_title, :order => :title
+
+  def has_participant?(user)
+    participants.each do |participant|
+      return true if participant.last_name == user.last_name &&
+        participant.first_name == user.first_name
+    end
+
+    false
+  end
+
+  def has_project_manager?(user)
+    project_managers.each do |project_manager|
+      return true if project_manager.last_name == user.last_name &&
+        project_manager.first_name == user.first_name
+    end
+
+    false
+  end
 
   private
 

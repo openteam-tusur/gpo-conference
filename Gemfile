@@ -19,6 +19,7 @@ group :default do
   gem 'rails'
   gem 'russian'
   gem 'simple_form'
+  gem 'state_machine'
 
    # HACK FOR HACK
   gem 'formtastic', '~> 2.1.0'

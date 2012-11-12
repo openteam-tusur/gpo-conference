@@ -13,9 +13,9 @@
 #
 
 Fabricator(:chair) do
-  abbr    "MyString"
-  chief   "MyString"
-  faculty "MyString"
-  title   "MyString"
+  abbr    'abbr'
+  chief   'chief'
+  faculty 'faculty'
+  title   'title'
   gpo_id  1
 end

@@ -10,5 +10,6 @@
 #
 
 Fabricator(:theme) do
-  name "MyString"
+  gpo_id  1
+  name    'name'
 end

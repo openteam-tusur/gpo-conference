@@ -22,5 +22,19 @@ class Claim < ActiveRecord::Base
 
   validates_presence_of :role, :project
 
-  enumerize :role, in: [:participant, :manager]
+  after_create :approve, if: :project_has_user?
+
+  enumerize :role, in: [:participant, :project_manager]
+
+  state_machine :state, initial: :pending do
+    event :approve do
+      transition pending: :approved
+    end
+  end
+
+  private
+
+  def project_has_user?
+    role == 'project_manager' ? project.has_project_manager?(user) : project.has_participant?(user)
+  end
 end
