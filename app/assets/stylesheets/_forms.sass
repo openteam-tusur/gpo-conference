@@ -25,12 +25,6 @@
   .input
     margin-bottom: 10px
 
-    &.email
-      margin-left: 0
-
-      label
-        margin-left: 0
-
     label
       display: block
       margin-bottom: 1px
@@ -55,6 +49,7 @@
       +default_input
       font-size: 1em
       width: 200px
+      padding-bottom: 3px
     input
       +default_input
       font-size: 1.1em
@@ -62,6 +57,8 @@
       &.datepicker
         width: 65px
         margin-right: 3px
+      &#claim_project
+        width: 400px
     img.ui-datepicker-trigger
       cursor: pointer
 
@@ -70,5 +67,11 @@
       font-size: 11px
       font-weight: bold
       margin-bottom: 0 !important
+
+  .radio
+    display: block
+    label
+      display: inline
+
   .button
     margin-right: 5px
