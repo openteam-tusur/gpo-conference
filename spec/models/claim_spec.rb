@@ -25,22 +25,35 @@ describe Claim do
     let(:participant_permission) { subject.user.permissions.where(context_type: 'Context', context_id: Context.root.id, role: :participant).first }
     let(:project_participant_permission) { subject.user.permissions.where(context_type: 'Project', context_id: project.id, role: :project_participant).first }
 
-    before { project.stub(:participants).and_return(participants) }
-    before { project.stub(:project_managers).and_return(managers) }
+    context 'non member' do
+      let(:claim) { Fabricate :claim, user: user, project: project, role: :project_participant }
 
-    context 'participant' do
-      subject { Fabricate :claim, user: user, project: project, role: :project_participant }
+      before { project.stub(:participants).and_return([]) }
+      before { project.stub(:project_managers).and_return([]) }
 
-      it { should be_approved }
-      specify { participant_permission.should be_persisted }
-      specify { project_participant_permission.should be_persisted }
+      specify {
+        expect { Fabricate(:claim, user: user, project: project, role: :project_participant) }.to raise_error(ActiveRecord::RecordInvalid)
+      }
     end
 
-    context 'project_manager' do
-      subject { Fabricate :claim, user: user, project: project, role: :project_manager }
+    describe 'member' do
+      before { project.stub(:participants).and_return(participants) }
+      before { project.stub(:project_managers).and_return(managers) }
 
-      it { should be_approved }
-      specify { participant_permission.should be_persisted }
+      context 'participant' do
+        subject { Fabricate :claim, user: user, project: project, role: :project_participant }
+
+        it { should be_approved }
+        specify { participant_permission.should be_persisted }
+        specify { project_participant_permission.should be_persisted }
+      end
+
+      context 'project_manager' do
+        subject { Fabricate :claim, user: user, project: project, role: :project_manager }
+
+        it { should be_approved }
+        specify { participant_permission.should be_persisted }
+      end
     end
   end
 end

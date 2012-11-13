@@ -25,7 +25,7 @@ class Claim < ActiveRecord::Base
 
   validates_presence_of :role, :project_id
 
-  validate :user_membership_of_project
+  validate :user_membership_of_project, :if => :project_id?
 
   after_create :approve, if: ->(claim) { claim.role_project_participant? || claim.role_project_manager? }
 
