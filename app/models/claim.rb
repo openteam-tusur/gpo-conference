@@ -15,8 +15,9 @@
 class Claim < ActiveRecord::Base
   extend Enumerize
 
-  attr_accessor :project_name
   attr_accessible :role, :project_id, :project_name
+
+  attr_accessor :project_name
 
   belongs_to :chair
   belongs_to :project
@@ -24,7 +25,9 @@ class Claim < ActiveRecord::Base
 
   validates_presence_of :role, :project_id
 
-  after_create :approve, if: :project_has_user?
+  validate :user_membership_of_project
+
+  after_create :approve, if: ->(claim) { claim.role_project_participant? || claim.role_project_manager? }
 
   enumerize :role,
     in: [:project_participant, :project_manager],
@@ -40,11 +43,10 @@ class Claim < ActiveRecord::Base
 
   private
 
-  def project_has_user?
-    return project.has_participant?(user) if role_project_participant?
-    return project.has_manager?(user)     if role_project_manager?
-
-    false
+  def user_membership_of_project
+    if !project.has_participant?(user) && !project.has_manager?(user)
+      errors[:base] << I18n.t('activerecord.errors.claim.creating_error')
+    end
   end
 
   def create_permissions

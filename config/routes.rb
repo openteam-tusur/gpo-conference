@@ -1,6 +1,6 @@
 GpoConference::Application.routes.draw do
   namespace :manage do
-    resources :claims, :only => [:new, :create, :show]
+    resources :claims
   end
 
   root to: 'application#welcome'
