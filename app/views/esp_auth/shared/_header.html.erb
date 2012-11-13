@@ -1,15 +1,10 @@
-<div class='esp_auth_header_wrapper'>
-  <div class='esp_auth_header'>
+<div class="esp_auth_header_wrapper">
+  <div class="esp_auth_header">
     <% if current_user %>
-      <% controller_namespace = controller_path.split('/').map(&:inquiry) %>
-      <div class='auth'>
-        <span class='current_user'><%= current_user %></span>
-        <%= link_to('Выход', esp_auth.destroy_user_session_path) %>
-      </div>
+      <span class="current_user"><%= current_user %></span>
+      <%= link_to("Выход", esp_auth.destroy_user_session_path, :class => "signout_icon") %>
     <% else %>
-      <div class='auth'>
-        <%= link_to 'Вход в систему', user_omniauth_authorize_path(:identity)  %>
-      </div>
+      <%= link_to("Вход в систему", user_omniauth_authorize_path(:identity), :class => "signin_icon") %>
     <% end %>
   </div>
 </div>

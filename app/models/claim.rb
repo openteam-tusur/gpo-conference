@@ -14,13 +14,14 @@
 class Claim < ActiveRecord::Base
   extend Enumerize
 
-  attr_accessible :role, :project_id
+  attr_accessor :project_name
+  attr_accessible :role, :project_id, :project_name
 
   belongs_to :chair
   belongs_to :project
   belongs_to :user
 
-  validates_presence_of :role, :project
+  validates_presence_of :role, :project_id
 
   after_create :approve, if: :project_has_user?
 

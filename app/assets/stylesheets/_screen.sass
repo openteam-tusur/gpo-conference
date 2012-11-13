@@ -22,7 +22,6 @@ a
   background-color: #c8d3e2
   padding: 10px
   +border-top-radius
-  +box-shadow(#999 0 1px 5px)
 
 #header
   border-bottom: 2px solid
@@ -42,26 +41,25 @@ a
       +clearfix
     .esp_auth_header_wrapper
       .esp_auth_header
-        .auth
-          float: right
-          +clearfix
-          .signin_icon
-            display: block
-            float: left
-            padding-right: 20px
-            background: transparent image_url("icon_signin.png") no-repeat right
-          .text
-            display: block
-            float: left
-          .signout_icon
-            display: block
-            float: left
-            overflow: hidden
-            width: 16px
-            height: 16px
-            text-indent: -9999em
-            background: transparent image_url("icon_signout.png") no-repeat right
-            margin: 2px 0 0 4px
+        float: right
+        +clearfix
+        .signin_icon
+          display: block
+          float: left
+          padding-right: 20px
+          background: transparent image_url("icon_signin.png") no-repeat right
+        .current_user
+          display: block
+          float: left
+        .signout_icon
+          display: block
+          float: left
+          overflow: hidden
+          width: 16px
+          height: 16px
+          text-indent: -9999em
+          background: transparent image_url("icon_signout.png") no-repeat right
+          margin: 2px 0 0 4px
 
 =navigation_text
   font-size: 13px
@@ -232,7 +230,6 @@ a
   +wrapped_into($page_width)
   background-color: #c8d3e2
   +border-bottom-radius
-  +box-shadow(#999 0 1px 5px)
   padding: 0 10px 10px
   margin-bottom: 30px
 
