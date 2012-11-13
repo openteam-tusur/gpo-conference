@@ -4,6 +4,7 @@ GpoConference::Application.routes.draw do
 
     resources :expert_claims
     resources :project_member_claims
+    root :to => 'application#index'
   end
 
   root to: 'application#welcome'

@@ -48,6 +48,10 @@ class Project < ActiveRecord::Base
     false
   end
 
+  def to_s
+    "#{cipher} #{title}"
+  end
+
   private
 
   def response
