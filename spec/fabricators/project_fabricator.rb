@@ -9,6 +9,7 @@
 #  updated_at :datetime         not null
 #  title      :string(255)
 #  chair_id   :integer
+#  cipher     :string(255)
 #
 
 Fabricator(:project) do

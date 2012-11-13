@@ -9,6 +9,7 @@
 #  updated_at :datetime         not null
 #  title      :string(255)
 #  chair_id   :integer
+#  cipher     :string(255)
 #
 
 class Project < ActiveRecord::Base
@@ -23,7 +24,11 @@ class Project < ActiveRecord::Base
     :novelty, :purpose, :release_cost, :source_data, :stakeholders, :participants, :project_managers,
     to: :project_attributes
 
-  scope :ordered_by_title, :order => :title
+  scope :ordered_by_title, :order => [:chair_id, :title]
+
+  def complex_title
+    "#{cipher} #{title}"
+  end
 
   def has_participant?(user)
     participants.each do |participant|

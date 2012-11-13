@@ -9,6 +9,7 @@
 #  role       :string(255)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  state      :string(255)
 #
 
 class Claim < ActiveRecord::Base

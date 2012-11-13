@@ -8,8 +8,7 @@
   $("option", select).each (index, item) ->
     projects.push( { id: $(this).val(), value: $(this).text() } ) if $(this).val().length
     true
-  input.autocomplete
-    autoFocus: true
+  input.focus().autocomplete
     source: projects
     select: (event, ui) ->
       select.val(ui.item.id)

@@ -1,5 +1,4 @@
 # encoding: utf-8
-
 # == Schema Information
 #
 # Table name: projects
@@ -11,6 +10,7 @@
 #  updated_at :datetime         not null
 #  title      :string(255)
 #  chair_id   :integer
+#  cipher     :string(255)
 #
 
 require 'spec_helper'
