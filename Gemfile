@@ -12,6 +12,7 @@ group :default do
   gem 'compass-rails'
   gem 'curb'
   gem 'enumerize'
+  gem 'el_vfs_client'
   gem 'esp-auth'
   gem 'hashie'
   gem 'openteam-commons'

@@ -1,4 +1,6 @@
 GpoConference::Application.routes.draw do
+  mount ElVfsClient::Engine => '/'
+
   namespace :manage do
     resources :claims, only: :new
 
