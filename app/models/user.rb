@@ -27,5 +27,6 @@
 class User < ActiveRecord::Base
   esp_auth_user
 
-  has_many :claims
+  has_many :permissions
+  has_many :projects, through: :permissions, source: :context, source_type: 'Project'
 end
