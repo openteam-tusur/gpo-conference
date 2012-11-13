@@ -12,7 +12,7 @@
 #
 
 class Project < ActiveRecord::Base
-  attr_accessible :chair_id, :gpo_id, :title, :theme_id
+  attr_accessible :chair_id, :cipher, :gpo_id, :title, :theme_id
 
   belongs_to :chair
   belongs_to :theme

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121112093354) do
+ActiveRecord::Schema.define(:version => 20121113034018) do
 
   create_table "chairs", :force => true do |t|
     t.string   "abbr"
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(:version => 20121112093354) do
     t.datetime "updated_at", :null => false
     t.string   "title"
     t.integer  "chair_id"
+    t.string   "cipher"
   end
 
   add_index "projects", ["chair_id"], :name => "index_projects_on_chair_id"

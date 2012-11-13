@@ -50,7 +50,10 @@ namespace :import do
         next
       end
 
-      project.update_attributes!(chair_id: chair.id, title: project_attributes.title, theme_id: theme.id)
+      project.update_attributes!(chair_id: chair.id,
+                                 title: project_attributes.title,
+                                 theme_id: theme.id,
+                                 cipher: project_attributes.cipher)
       progress_bar.increment!
     end
   end
