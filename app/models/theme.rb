@@ -15,4 +15,6 @@ class Theme < ActiveRecord::Base
   has_many :projects
 
   validates_presence_of :name, :gpo_id
+
+  scope :ordered_by_name, :order => :name
 end

@@ -7,6 +7,7 @@ ru:
       claim:
         project_id:             Проект
         role:                   Роль
+        theme_id:               Направление
 
       permission:
         role_enum:
@@ -20,7 +21,6 @@ ru:
                          Убедитесь, что ваш профиль заполнен правильно и повторите попытку.'
 
   enumerize:
-    claim:
-      role:
-        project_participant:    Участник проекта
-        project_manager:        Руководитель проекта
+    role:
+      project_participant:      Участник проекта
+      project_manager:          Руководитель проекта

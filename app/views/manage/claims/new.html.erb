@@ -1,6 +1,1 @@
-<%= simple_form_for [:manage, @claim] do |f| %>
-  <%= f.error :base %>
-  <%= f.input :project_id, as: :select, collection: Project.ordered_by_title %>
-  <%= f.input :role, as: :radio_buttons %>
-  <%= f.button :submit %>
-<% end %>
+<%= render :partial => 'form' %>

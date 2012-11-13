@@ -4,7 +4,6 @@
 # Table name: claims
 #
 #  id         :integer          not null, primary key
-#  chair_id   :integer
 #  project_id :integer
 #  user_id    :integer
 #  role       :string(255)
@@ -12,11 +11,12 @@
 #  updated_at :datetime         not null
 #  state      :string(255)
 #  type       :string(255)
+#  theme_id   :integer
 #
 
 require 'spec_helper'
 
-describe Claim do
+describe ProjectMemberClaim do
   describe 'try approve after create' do
     let(:user)          { Fabricate :user, last_name: 'Иванов', first_name: 'Иван' }
     let(:project)       { Fabricate :project }
@@ -27,13 +27,13 @@ describe Claim do
     let(:project_participant_permission) { subject.user.permissions.where(context_type: 'Project', context_id: project.id, role: :project_participant).first }
 
     context 'non member' do
-      let(:claim) { Fabricate :claim, user: user, project: project, role: :project_participant }
+      let(:claim) { Fabricate :project_member_claim, user: user, project: project, role: :project_participant }
 
       before { project.stub(:participants).and_return([]) }
       before { project.stub(:project_managers).and_return([]) }
 
       specify {
-        expect { Fabricate(:claim, user: user, project: project, role: :project_participant) }.to raise_error(ActiveRecord::RecordInvalid)
+        expect { Fabricate(:project_member_claim, user: user, project: project, role: :project_participant) }.to raise_error(ActiveRecord::RecordInvalid)
       }
     end
 
@@ -42,17 +42,15 @@ describe Claim do
       before { project.stub(:project_managers).and_return(managers) }
 
       context 'participant' do
-        subject { Fabricate :claim, user: user, project: project, role: :project_participant }
+        subject { Fabricate :project_member_claim, user: user, project: project, role: :project_participant }
 
-        it { should be_approved }
         specify { participant_permission.should be_persisted }
         specify { project_participant_permission.should be_persisted }
       end
 
       context 'project_manager' do
-        subject { Fabricate :claim, user: user, project: project, role: :project_manager }
+        subject { Fabricate :project_member_claim, user: user, project: project, role: :project_manager }
 
-        it { should be_approved }
         specify { participant_permission.should be_persisted }
       end
     end
