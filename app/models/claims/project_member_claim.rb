@@ -13,9 +13,6 @@
 #  type       :string(255)
 #
 
-Fabricator(:claim) do
-  chair
-  project
-  user
-  role :participant
+class ProjectMemberClaim < Claim
+
 end

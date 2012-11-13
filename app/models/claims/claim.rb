@@ -10,6 +10,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  state      :string(255)
+#  type       :string(255)
 #
 
 class Claim < ActiveRecord::Base
