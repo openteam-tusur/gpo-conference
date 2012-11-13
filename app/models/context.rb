@@ -12,4 +12,8 @@
 
 class Context < ActiveRecord::Base
   esp_auth_context
+
+  def self.root
+    find_or_create_by_title('Root context')
+  end
 end
