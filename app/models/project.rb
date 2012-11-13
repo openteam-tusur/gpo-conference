@@ -34,7 +34,7 @@ class Project < ActiveRecord::Base
     false
   end
 
-  def has_project_manager?(user)
+  def has_manager?(user)
     project_managers.each do |project_manager|
       return true if project_manager.last_name == user.last_name &&
         project_manager.first_name == user.first_name

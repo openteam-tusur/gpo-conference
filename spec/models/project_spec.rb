@@ -26,9 +26,9 @@ describe Project do
     specify { project.has_participant?(user).should be_true }
   end
 
-  describe '#has_project_manager?' do
+  describe '#has_manager?' do
     before { project.stub(:project_managers).and_return(members) }
 
-    specify { project.has_project_manager?(user).should be_true }
+    specify { project.has_manager?(user).should be_true }
   end
 end

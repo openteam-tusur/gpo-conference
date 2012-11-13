@@ -34,6 +34,7 @@ group :development do
   gem 'annotate'
   gem 'capistrano'
   gem 'hirb'
+  gem 'rails-erd'
   gem 'rvm-capistrano'
 end
 

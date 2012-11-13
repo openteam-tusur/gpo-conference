@@ -2,6 +2,8 @@
 
 require 'spec_helper'
 
+__END__
+
 describe Ability do
   context 'менеджер' do
     context 'корневого контекста' do
