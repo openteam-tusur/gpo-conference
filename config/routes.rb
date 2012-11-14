@@ -8,7 +8,7 @@ GpoConference::Application.routes.draw do
       get 'with_state/:with_state', action: :index, on: :collection, as: :with_state
     end
 
-    resources :project_member_claims, :only => [:new, :create]
+    resources :project_member_claims, :only => [:new, :create, :show]
 
     root :to => 'application#index'
   end
