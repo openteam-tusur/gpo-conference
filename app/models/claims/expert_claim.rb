@@ -22,6 +22,8 @@ class ExpertClaim < Claim
 
   scope :with_state, ->(state) { where state: state }
 
+  after_destroy :destroy_permissions
+
   state_machine :state, initial: :pending do
     event :approve do
       transition pending: :approved
@@ -33,7 +35,12 @@ class ExpertClaim < Claim
   private
 
   def create_permissions
-    user.permissions.create(context: Context.root, role: :participant)
+    user.create_participant_permission unless user.participant_permission
     user.permissions.create(context: theme, role: :expert)
+  end
+
+  def destroy_permissions
+    user.permissions.where(context_type: 'Theme', context_id: theme.id, role: :expert).first.destroy
+    user.participant_permission_destroy if user.theme_expert_permissions.empty?
   end
 end

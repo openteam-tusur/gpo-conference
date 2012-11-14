@@ -33,4 +33,12 @@ class User < ActiveRecord::Base
   has_many :permissions
   has_many :projects, through: :permissions, source: :context, source_type: 'Project'
   has_many :themes,   through: :permissions, source: :context, source_type: 'Theme'
+
+  has_many :theme_expert_permissions, class_name: 'Permission',
+    conditions: { context_type: 'Theme', role: :expert }
+
+  has_one :participant_permission, class_name: 'Permission',
+    conditions: { context_type: 'Context', context_id: Context.root.id, role: :participant }
+
+  delegate :destroy, to: :participant_permission, prefix: true, allow_nil: true
 end
