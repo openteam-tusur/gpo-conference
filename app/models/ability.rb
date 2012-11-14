@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Ability
   include CanCan::Ability
 
@@ -42,9 +44,16 @@ class Ability
       user.manager_of? subcontext
     end
 
-    can [:create, :read], Claim
+    # Заявки
+    can :new, Claim
+    can [:new, :create, :show], [ExpertClaim, ProjectMemberClaim]
 
-    # REMOVE IT LATER
-    can :manage, :all
+    can :manage, ExpertClaim do
+      user.manager?
+    end
+
+    # Доклады
+    # Комментарии
+    # Экспертные оценки
   end
 end
