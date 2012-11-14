@@ -1,7 +1,7 @@
 <li class='ajaxed_item'>
   <%= simple_form_for [:manage, association_chain, @discourse].flatten, :html => { :remote => true } do |f| %>
     <%= f.input :title, :as => :string %>
-    <%= f.input :authors %>
+    <%= f.input :authors, :as => :check_boxes, :collection => project_participants_select_collection(@discourse), :selected => @discourse.authors %>
     <%= f.input :description %>
 
     <div class='add_file_wrapper'>

@@ -9,6 +9,7 @@ group :assets do
 end
 
 group :default do
+  gem 'attribute_normalizer'
   gem 'compass-rails'
   gem 'curb'
   gem 'el_vfs_client'
