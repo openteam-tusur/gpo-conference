@@ -53,8 +53,8 @@ class Ability
     end
 
     # Доклады
-    can :create, Discourse do |project|
-      user.project_participant_of? project
+    can :manage, Discourse do |discourse|
+      user.project_participant_of? discourse.project
     end
 
     # Комментарии
