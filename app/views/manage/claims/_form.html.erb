@@ -1,12 +1,23 @@
-<%= simple_form_for [:manage, @project_member_claim || current_user.project_member_claims.build] do |f| %>
-  <%= f.error :base %>
-  <%= f.input :project_id, as: :select, collection: Project.ordered_by_title %>
-  <%= f.input :role, as: :radio_buttons %>
-  <%= f.button :submit %>
-<% end %>
+<%= content_for :page_title,  "Создание заявки для участия в конференции" %>
 
-<%= simple_form_for [:manage, @expert_claim || current_user.expert_claims.build] do |f| %>
-  <%= f.input :theme_id, as: :select, collection: Theme.ordered_by_name %>
-  <%= f.button :submit %>
-<% end %>
+<div class="claim_forms">
 
+  <fieldset>
+    <legend>В качестве участника проекта</legend>
+    <%= simple_form_for [:manage, @project_member_claim || current_user.project_member_claims.build] do |f| %>
+      <%= f.error :base %>
+      <%= f.input :project_id, as: :select, collection: Project.ordered_by_title, hint: "Начните вводить код или название проекта" %>
+      <%= f.input :role, as: :radio_buttons %>
+      <%= f.button :submit, "Создать заявку" %>
+    <% end %>
+  </fieldset>
+
+  <fieldset>
+    <legend>В качестве эксперта</legend>
+    <%= simple_form_for [:manage, @expert_claim || current_user.expert_claims.build] do |f| %>
+      <%= f.input :theme_id, as: :select, collection: Theme.ordered_by_name %>
+      <%= f.button :submit, "Создать заявку" %>
+    <% end %>
+  </fieldset>
+
+</div>

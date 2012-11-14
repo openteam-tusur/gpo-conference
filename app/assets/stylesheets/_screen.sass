@@ -149,11 +149,11 @@ a
         +small_line_height
         color: $comment_color
         display: block
-  #container-two-collumn,
-  #container-one-collumn
+  #container-two-column,
+  #container-one-column
     +clearfix
     padding: 25px 30px 100px 30px
-    border-top: 1px solid #cccccc
+    border-top: 1px solid #ccc
     p
       margin-bottom: 10px
     #left
@@ -165,44 +165,28 @@ a
       float: right
       width: 26%
 
-  .faculties_list
-    h2
-      margin-bottom: 1em
-      margin-left: 25px
-    .chairs_list
-      margin-bottom: 2em
-      li
-        +clearfix
-        margin-bottom: 1em
-        border-bottom: 1px solid #ddd
-        padding-bottom: 1em
-        .title
-          float: left
-          width: 400px
-          margin-right: 10px
-          img
-            float: left
-            margin-top: 2px
-          h3
-            margin-left: 25px
-          .mentors
-            margin-left: 25px
-        .stats
-          float: left
-          dl
-            width: 145px
-            +clearfix
-            dt
-              float: left
-            dd
-              cursor: help
-              font-weight: bold
-              float: left
+  .claim_forms
+    +clearfix
+    fieldset
+      float: left
+      width: 800px / 2 - 2 - 20
+      border: 1px solid #ddd
+      padding: 5px 10px 10px
+      &:first-child
+        margin-right: 30px
+      legend
+        font-size: 16px
+      #project_member_claim_project_name
+        width: 368px
+        margin-right: 0
+      #expert_claim_theme_id
+        width: 378px
+        margin-right: 0
 
 .project-level, .order-level
   #content
-    #container-two-collumn,
-    #container-one-collumn
+    #container-two-column,
+    #container-one-column
       border: none
     #page-header
       #page-title
@@ -218,11 +202,11 @@ a
   #content
     #page-header
       padding-bottom: 15px
-      border-bottom: 1px solid #cccccc
+      border-bottom: 1px solid #ccc
 
 .chair-level, .top-level
-  #container-two-collumn,
-  #container-one-collumn
+  #container-two-column,
+  #container-one-column
     h1
       display: none
 
@@ -237,8 +221,8 @@ img.icon
   margin-right: 6px
   vertical-align: middle
 
-#container-two-collumn,
-#container-one-collumn
+#container-two-column,
+#container-one-column
   &.error_page
     p
       margin-bottom: 20px
@@ -339,7 +323,7 @@ img.icon
           display: block
           padding: 10px 0
 
-#container-one-collumn
+#container-one-column
   .clearfix
     +clearfix
   #warning
@@ -369,7 +353,7 @@ img.icon
       td, th
         +small_text
         vertical-align: top
-        border: 1px solid #cccccc
+        border: 1px solid #ccc
         padding: 5px 8px
       th
         cursor: default

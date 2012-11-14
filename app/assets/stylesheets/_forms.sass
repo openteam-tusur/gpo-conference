@@ -5,6 +5,8 @@
   +border-radius(3px)
   margin: 0 10px 0 0
   padding: 4px
+  &:focus
+    //background-color: dark-yellow
 
 .simple_form
   p
@@ -57,10 +59,13 @@
       &.datepicker
         width: 65px
         margin-right: 3px
-      &#project_member_claim_project_name
-        width: 400px
     img.ui-datepicker-trigger
       cursor: pointer
+
+    .hint
+      color: #999
+      font-size: 11px
+      font-style: italic
 
     .error
       color: #cc3333
