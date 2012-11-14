@@ -40,7 +40,7 @@ class ExpertClaim < Claim
   end
 
   def destroy_permissions
-    user.permissions.where(context_type: 'Theme', context_id: theme.id, role: :expert).first.destroy
+    user.permissions.where(context_type: 'Theme', context_id: theme.id, role: :expert).first.try(:destroy)
     user.participant_permission_destroy if user.theme_expert_permissions.empty?
   end
 end
