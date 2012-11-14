@@ -51,7 +51,6 @@ ActiveRecord::Schema.define(:version => 20121114034317) do
 
   create_table "discourses", :force => true do |t|
     t.string   "vfs_path"
-    t.string   "url"
     t.text     "description"
     t.integer  "project_id"
     t.datetime "created_at",  :null => false

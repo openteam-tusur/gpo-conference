@@ -1,6 +1,6 @@
 <li class='ajaxed_item'>
   <%= discourse.description %>
-  <%= link_to "Скачать доклад", discourse.url %>
+  <%= link_to "Скачать доклад", discourse.vfs_path %>
   <%= link_to "Редактировать", edit_manage_project_discourse_path(discourse.project, discourse), :remote => true %>
   <%= link_to "Удалить", manage_project_discourse_path(discourse.project, discourse), :method => :delete, :remote => true %>
 </li>

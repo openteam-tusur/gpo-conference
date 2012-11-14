@@ -1,7 +1,16 @@
 <li class='ajaxed_item'>
   <%= simple_form_for [:manage, association_chain, @discourse].flatten, :html => { :remote => true } do |f| %>
     <%= f.input :description %>
-    <%= f.input :vfs_path, :as => :hidden %>
+
+    <div class='add_file_wrapper'>
+      <% if f.object.vfs_path? %>
+        <%= link_to "Скачать файл (#{URI.decode(f.object.vfs_path.match(/([^\/.]+)(\.(.{3}))?$/)[0])})", f.object.vfs_path, :class => 'link' %>
+        <%= link_to "Удалить", '#', :class => 'link remove_file' %>
+      <% else %>
+        <%= link_to 'Выбрать файл', '#', :class => 'choose_file' %>
+      <% end %>
+      <%= f.input :vfs_path, :as => :hidden, :input_html => { :params => "vfs_path=/gpo-conference/#{I18n.transliterate(f.object.project.cipher)}" } %>
+    </div>
 
     <div class="buttons">
       <%= f.submit "Сохранить" %>
@@ -13,3 +22,5 @@
     </div>
   <% end %>
 </li>
+
+
