@@ -1,4 +1,9 @@
 <li>
   <%= project %>
-  <%= render project.discourses %>
+  <div class="discourses_wrapper ajaxed">
+    <ul>
+      <%= render project.discourses %>
+    </ul>
+    <%= link_to "Добавить доклад", new_manage_project_discourse_path(project), :remote => true, :class => 'new_record' %>
+  </div>
 </li>

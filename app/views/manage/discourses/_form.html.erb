@@ -1,0 +1,15 @@
+<li class='ajaxed_item'>
+  <%= simple_form_for [:manage, association_chain, @discourse].flatten, :html => { :remote => true } do |f| %>
+    <%= f.input :description %>
+    <%= f.input :vfs_path, :as => :hidden %>
+
+    <div class="buttons">
+      <%= f.submit "Сохранить" %>
+      <% if resource.new_record? %>
+        <%= link_to 'Отмена', '#', :class => 'cancel new_record' %>
+      <% else %>
+        <%= link_to 'Отмена', resource_path, :remote => true %>
+      <% end %>
+    </div>
+  <% end %>
+</li>
