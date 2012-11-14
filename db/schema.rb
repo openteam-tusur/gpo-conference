@@ -78,7 +78,6 @@ ActiveRecord::Schema.define(:version => 20121114034317) do
     t.string   "title"
     t.integer  "chair_id"
     t.string   "cipher"
-    t.string   "vfs_path"
   end
 
   add_index "projects", ["chair_id"], :name => "index_projects_on_chair_id"
