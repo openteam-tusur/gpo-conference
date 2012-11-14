@@ -18,7 +18,11 @@ GpoConference::Application.routes.draw do
   end
 
   scope :module => :public do
-    resources :themes, :only => [:index, :show]
+    resources :themes, :only => [:index, :show] do
+      resources :projects, :only => [] do
+        resources :discourses, :only => :show
+      end
+    end
   end
 
   root to: 'application#welcome'

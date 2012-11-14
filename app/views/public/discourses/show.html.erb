@@ -1,0 +1,7 @@
+<h1><%= resource.title %></h1>
+
+<ul>
+  <li>Авторы: <%= resource.authors.join(', ') %></li>
+  <li>Описание: <%= resource.description %></li>
+  <li><%= link_to "Скачать доклад", resource.vfs_path %></li>
+</ul>

@@ -1,4 +1,5 @@
 <h1><%= resource.name %></h1>
+
 <ul>
   <% resource.projects.group_by(&:chair).each do |chair, projects| %>
     <li>
@@ -9,7 +10,7 @@
             <h4><%= project.title %></h4>
             <ul>
               <% project.discourses.each do |discourse| %>
-                <li><%= link_to discourse.title, discourse %></li>
+                <li><%= link_to discourse.title, theme_project_discourse_path(resource, project, discourse) %></li>
               <% end %>
             </ul>
           </li>

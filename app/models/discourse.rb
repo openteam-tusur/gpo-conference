@@ -2,6 +2,8 @@ class Discourse < ActiveRecord::Base
   attr_accessible :description, :url, :vfs_path, :authors, :title
 
   belongs_to :project
+  has_one :theme, :through => :project
+  has_one :chair, :through => :project
 
   validates_presence_of :authors, :vfs_path, :title
 
