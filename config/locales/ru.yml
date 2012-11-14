@@ -12,6 +12,7 @@ ru:
       permission:
         role_enum:
           expert:               Эксперт
+          manager:              Менеджер системы
           participant:          Участник конференции
           project_participant:  Участник проекта
 

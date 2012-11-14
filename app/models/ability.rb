@@ -53,6 +53,10 @@ class Ability
     end
 
     # Доклады
+    can :create, Discourse do |project|
+      user.project_participant_of? project
+    end
+
     # Комментарии
     # Экспертные оценки
   end
