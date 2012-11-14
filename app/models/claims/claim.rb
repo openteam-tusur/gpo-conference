@@ -15,4 +15,6 @@
 
 class Claim < ActiveRecord::Base
   belongs_to :user
+
+  after_create :create_permissions
 end

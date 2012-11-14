@@ -32,4 +32,5 @@ class User < ActiveRecord::Base
 
   has_many :permissions
   has_many :projects, through: :permissions, source: :context, source_type: 'Project'
+  has_many :themes,   through: :permissions, source: :context, source_type: 'Theme'
 end

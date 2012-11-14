@@ -18,3 +18,8 @@ Fabricator(:project_member_claim) do
   user
   role :participant
 end
+
+Fabricator(:expert_claim) do
+  theme
+  user
+end

@@ -14,7 +14,9 @@
 #
 
 class ExpertClaim < Claim
-  attr_accessible :theme_id
+  attr_accessible :theme_id, :state_event
+
+  belongs_to :theme
 
   validates_presence_of :theme_id
 
@@ -24,5 +26,12 @@ class ExpertClaim < Claim
     end
 
     after_transition pending: :approved, do: :create_permissions
+  end
+
+  private
+
+  def create_permissions
+    user.permissions.create(context: Context.root, role: :participant)
+    user.permissions.create(context: theme, role: :expert)
   end
 end

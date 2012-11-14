@@ -42,6 +42,6 @@ class Ability
       user.manager_of? subcontext
     end
 
-    can [:create, :read], Claim
+    can :manage, :all
   end
 end

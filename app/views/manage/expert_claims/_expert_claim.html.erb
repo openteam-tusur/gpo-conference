@@ -1,0 +1,10 @@
+<li>
+  <p><%= expert_claim.theme %></p>
+  <p><%= expert_claim.user %></p>
+  <p>
+    <%= simple_form_for [:manage, expert_claim] do |f| %>
+      <%= f.input :state_event, as: :hidden, input_html: { value: 'approve' } %>
+      <%= f.button :submit %>
+    <% end %>
+  </p>
+</li>

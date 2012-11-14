@@ -17,4 +17,6 @@ class Theme < ActiveRecord::Base
   validates_presence_of :name, :gpo_id
 
   scope :ordered_by_name, :order => :name
+
+  alias_attribute :to_s, :name
 end
