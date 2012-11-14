@@ -1,0 +1,12 @@
+<h1>Направления</h1>
+
+<ul>
+  <% collection.each do |theme| %>
+    <li>
+      <ul>
+        <li><%= link_to theme.name, theme %><li>
+        <li>Колличестов проектов: <%= theme.projects.count %></li>
+        <li>Колличестов докладов: <%= theme.discourses.count  %></li>
+      </ul>
+  <% end %>
+</ul>

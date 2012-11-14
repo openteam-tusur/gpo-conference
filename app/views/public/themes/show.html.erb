@@ -1,0 +1,20 @@
+<h1><%= resource.name %></h1>
+<ul>
+  <% resource.projects.group_by(&:chair).each do |chair, projects| %>
+    <li>
+      <h3><%= chair.title %></h3>
+      <ul>
+        <% projects.each do |project| %>
+          <li>
+            <h4><%= project.title %></h4>
+            <ul>
+              <% project.discourses.each do |discourse| %>
+                <li><%= link_to discourse.title, discourse %></li>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
+      </ul>
+    </li>
+  <% end %>
+</ul>
