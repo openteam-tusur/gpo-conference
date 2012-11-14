@@ -2,19 +2,22 @@ require 'spec_helper'
 
 describe ExpertClaim do
   describe 'state_machine' do
-    describe 'initial state' do
-      subject { Fabricate :expert_claim }
+    subject { Fabricate :expert_claim }
 
+    describe 'initial state' do
       it { should be_pending }
     end
-  end
 
-  describe 'should create permissions after create' do
-    let(:expert_claim)      { Fabricate :expert_claim }
-    let(:theme)             { expert_claim.theme }
-    let(:user)              { expert_claim.user }
-    let(:expert_permission) { user.permissions.where(context_type: 'Theme', context_id: theme.id, role: :expert).first }
+    describe 'transition :pending => :approve should create permissions' do
+      let(:theme)             { subject.theme }
+      let(:user)              { subject.user }
+      let(:expert_permission) { user.permissions.where(context_type: 'Theme', context_id: theme.id, role: :expert).first }
+      let(:member_permission) { user.permissions.where(context_type: 'Context', context_id: Context.root.id, role: :participant).first }
 
-    specify { expert_permission.should be_persisted }
+      before { subject.approve }
+
+      specify { expert_permission.should be_persisted }
+      specify { member_permission.should be_persisted }
+    end
   end
 end

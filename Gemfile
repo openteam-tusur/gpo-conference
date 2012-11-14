@@ -11,9 +11,10 @@ end
 group :default do
   gem 'compass-rails'
   gem 'curb'
-  gem 'enumerize'
   gem 'el_vfs_client'
+  gem 'enumerize'
   gem 'esp-auth'
+  gem 'has_scope'
   gem 'hashie'
   gem 'openteam-commons'
   gem 'progress_bar'

@@ -20,6 +20,8 @@ class ExpertClaim < Claim
 
   validates_presence_of :theme_id
 
+  scope :with_state, ->(state) { where state: state }
+
   state_machine :state, initial: :pending do
     event :approve do
       transition pending: :approved

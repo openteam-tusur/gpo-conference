@@ -26,6 +26,8 @@ class ProjectMemberClaim < Claim
 
   validates_presence_of :role, :project_id
 
+  after_create :create_permissions
+
   enumerize :role,
     in: [:project_participant, :project_manager],
     predicates: { prefix: true }

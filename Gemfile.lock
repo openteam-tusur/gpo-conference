@@ -317,6 +317,7 @@ DEPENDENCIES
   esp-auth
   fabrication
   formtastic (~> 2.1.0)
+  has_scope
   has_searcher (< 0.0.90)
   hashie
   hirb

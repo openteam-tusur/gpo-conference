@@ -4,8 +4,12 @@ GpoConference::Application.routes.draw do
   namespace :manage do
     resources :claims, only: :new
 
-    resources :expert_claims
+    resources :expert_claims do
+      get ':with_state', action: :index, on: :collection, as: :with_state
+    end
+
     resources :project_member_claims
+
     root :to => 'application#index'
   end
 
