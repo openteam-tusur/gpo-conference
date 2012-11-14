@@ -18,6 +18,8 @@ class Project < ActiveRecord::Base
   belongs_to :chair
   belongs_to :theme
 
+  has_many :discourses
+
   validates_presence_of :chair, :gpo_id, :theme
 
   delegate :analysis, :expected_results, :forecast, :funds_required, :funds_sources, :goal,

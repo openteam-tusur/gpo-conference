@@ -10,6 +10,10 @@ GpoConference::Application.routes.draw do
 
     resources :project_member_claims, :only => [:new, :create, :show]
 
+    resources :projects, :only => [] do
+      resources :discourses, :except => :index
+    end
+
     root :to => 'application#index'
   end
 
