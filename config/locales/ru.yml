@@ -2,12 +2,18 @@ ru:
   activerecord:
     models:
       claim:                    Заявка
+      discourse:                Доклад
 
     attributes:
       claim:
         project_id:             Проект
         role:                   Роль
         theme_id:               Направление
+
+      discourse:
+        authors:                Авторы
+        description:            Описание
+        title:                  Название
 
       permission:
         role_enum:

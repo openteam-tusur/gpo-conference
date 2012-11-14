@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121114034317) do
+ActiveRecord::Schema.define(:version => 20121114081056) do
 
   create_table "chairs", :force => true do |t|
     t.string   "abbr"
@@ -55,6 +55,8 @@ ActiveRecord::Schema.define(:version => 20121114034317) do
     t.integer  "project_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.text     "title"
+    t.string   "authors"
   end
 
   add_index "discourses", ["project_id"], :name => "index_discourses_on_project_id"
