@@ -20,7 +20,7 @@
 
     <div id="wrapper">
       <div id="navigation">
-        # Тут можно воткнуть основную навигацию #
+        <%= render :partial => "manage/navigation/manager" if current_user.manager? %>
       </div>
       <div id="content">
         <div id="page-header">

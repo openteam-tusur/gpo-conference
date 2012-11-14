@@ -9,10 +9,10 @@ namespace :import do
 
     chairs_attributes.each do |chair_attributes|
       chair = Chair.find_or_initialize_by_gpo_id(chair_attributes.id)
-      chair.update_attributes!(abbr: chair_attributes.abbr,
-                               chief: chair_attributes.chief,
-                               faculty: chair_attributes.faculty,
-                               title: chair_attributes.title)
+      chair.update_attributes!(abbr: chair_attributes.abbr.squish,
+                               chief: chair_attributes.chief.squish,
+                               faculty: chair_attributes.faculty.squish,
+                               title: chair_attributes.title.squish)
       progress_bar.increment!
     end
   end
@@ -27,7 +27,7 @@ namespace :import do
 
     themes_attributes.each do |theme_attributes|
       theme = Theme.find_or_initialize_by_gpo_id(theme_attributes.id)
-      theme.update_attributes!(name: theme_attributes.name)
+      theme.update_attributes!(name: theme_attributes.name.squish)
       progress_bar.increment!
     end
   end
@@ -51,9 +51,9 @@ namespace :import do
       end
 
       project.update_attributes!(chair_id: chair.id,
-                                 title: project_attributes.title,
+                                 title: project_attributes.title.squish,
                                  theme_id: theme.id,
-                                 cipher: project_attributes.cipher)
+                                 cipher: project_attributes.cipher.squish)
       progress_bar.increment!
     end
   end
