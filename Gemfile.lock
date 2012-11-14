@@ -265,6 +265,8 @@ GEM
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
+    simple-navigation (3.9.0)
+      activesupport (>= 2.3.2)
     simple_form (2.0.4)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
@@ -334,6 +336,7 @@ DEPENDENCIES
   russian
   rvm-capistrano
   sass-rails
+  simple-navigation
   simple_form
   sqlite3
   state_machine

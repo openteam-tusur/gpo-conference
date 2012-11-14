@@ -21,7 +21,7 @@
     <div id="wrapper">
       <div id="navigation">
         <% if current_user %>
-          <%= render :partial => "manage/navigation/manager" if current_user.manager? %>
+          <%= render_navigation context: :manager if current_user.manager? %>
         <% end %>
       </div>
       <div id="content">

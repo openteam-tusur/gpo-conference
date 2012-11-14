@@ -20,6 +20,7 @@ group :default do
   gem 'progress_bar'
   gem 'rails'
   gem 'russian'
+  gem 'simple-navigation'
   gem 'simple_form'
   gem 'state_machine'
 
