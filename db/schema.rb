@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121113094310) do
+ActiveRecord::Schema.define(:version => 20121114034317) do
 
   create_table "chairs", :force => true do |t|
     t.string   "abbr"
@@ -49,6 +49,17 @@ ActiveRecord::Schema.define(:version => 20121113094310) do
   add_index "contexts", ["ancestry"], :name => "index_contexts_on_ancestry"
   add_index "contexts", ["weight"], :name => "index_contexts_on_weight"
 
+  create_table "discourses", :force => true do |t|
+    t.string   "vfs_path"
+    t.string   "url"
+    t.text     "description"
+    t.integer  "project_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "discourses", ["project_id"], :name => "index_discourses_on_project_id"
+
   create_table "permissions", :force => true do |t|
     t.integer  "user_id"
     t.integer  "context_id"
@@ -68,6 +79,7 @@ ActiveRecord::Schema.define(:version => 20121113094310) do
     t.string   "title"
     t.integer  "chair_id"
     t.string   "cipher"
+    t.string   "vfs_path"
   end
 
   add_index "projects", ["chair_id"], :name => "index_projects_on_chair_id"
