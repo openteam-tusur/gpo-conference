@@ -5,6 +5,14 @@ class Manage::ExpertClaimsController < Manage::ApplicationController
 
   has_scope :with_state, only: :index, default: 'pending'
 
+  def update
+    update! { collection_path }
+  end
+
+  def destroy
+    destroy! { with_state_manage_expert_claims_path(:approved) }
+  end
+
   protected
 
   def begin_of_association_chain

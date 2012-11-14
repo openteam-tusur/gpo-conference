@@ -1,7 +1,7 @@
 class Manage::ProjectMemberClaimsController < Manage::ApplicationController
   inherit_resources
 
-  actions :all
+  actions :new, :create
 
   protected
 
