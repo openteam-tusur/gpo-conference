@@ -20,7 +20,9 @@
 
     <div id="wrapper">
       <div id="navigation">
-        <%= render :partial => "manage/navigation/manager" if current_user.manager? %>
+        <% if current_user %>
+          <%= render :partial => "manage/navigation/manager" if current_user.manager? %>
+        <% end %>
       </div>
       <div id="content">
         <div id="page-header">
