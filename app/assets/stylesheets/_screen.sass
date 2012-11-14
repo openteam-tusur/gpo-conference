@@ -93,18 +93,19 @@ a
   min-height: $min_page_height
   height: auto !important
   height: $min_page_height
+  strong, b
+    font-weight: bold
+  em, i
+    font-style: italic
   #page-header
     +clearfix
     background-color: #ececec
     #local-navigation
       +tabbed_navigation
       clear: both
-      padding-top: 10px
       padding-left: 21px
     #page-title
       padding: 25px 0px
-      width: 650px
-      float: left
       h1
         +huge_header_text
         margin-left: 30px
@@ -153,9 +154,9 @@ a
   #container-one-column
     +clearfix
     padding: 25px 30px 100px 30px
-    border-top: 1px solid #ccc
     p
       margin-bottom: 10px
+  #container-two-column
     #left
       +clearfix
       float: left
@@ -165,23 +166,43 @@ a
       float: right
       width: 26%
 
-  .claim_forms
-    +clearfix
-    fieldset
-      float: left
-      width: 800px / 2 - 2 - 20
-      border: 1px solid #ddd
-      padding: 5px 10px 10px
-      &:first-child
-        margin-right: 30px
-      legend
-        font-size: 16px
-      #project_member_claim_project_name
-        width: 368px
-        margin-right: 0
-      #expert_claim_theme_id
-        width: 378px
-        margin-right: 0
+  #container-one-column
+
+    .claim_forms
+      +clearfix
+      fieldset
+        float: left
+        width: 800px / 2 - 2 - 20
+        border: 1px solid #ddd
+        padding: 5px 10px 10px
+        &:first-child
+          margin-right: 30px
+        legend
+          font-size: 16px
+        #project_member_claim_project_name
+          width: 368px
+          margin-right: 0
+        #expert_claim_theme_id
+          width: 378px
+          margin-right: 0
+
+    .expert_claims
+      li
+        +clearfix
+        border-bottom: 1px solid #ddd
+      .info
+        float: left
+        p
+          margin: 5px 0
+      .actions
+        float: right
+        +clearfix
+        margin-top: 15px
+        form, p
+          float: left
+          margin: 0 0 5px 0
+        form .input
+          margin-bottom: 1px
 
 .project-level, .order-level
   #content

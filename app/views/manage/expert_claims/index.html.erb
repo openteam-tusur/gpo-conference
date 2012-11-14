@@ -1,8 +1,16 @@
-<ul>
-  <li><%= link_to 'Неутвержденные заявки', with_state_manage_expert_claims_path(:pending) %></li>
-  <li><%= link_to 'Утвержденные заявки', with_state_manage_expert_claims_path(:approved) %></li>
-</ul>
+<%= content_for :page_title,  "Заявки для участия в качестве эксперта" %>
 
-<ul>
+<%= content_for :local_navigation do %>
+  <ul>
+    <li<%= " class=current" if current_page?(manage_expert_claims_path) || current_page?(with_state_manage_expert_claims_path(:pending)) %>>
+      <%= link_to 'Неутвержденные заявки', with_state_manage_expert_claims_path(:pending) %>
+    </li>
+    <li<%= " class=current" if current_page?(with_state_manage_expert_claims_path(:approved)) %>>
+      <%= link_to 'Утвержденные заявки', with_state_manage_expert_claims_path(:approved) %>
+    </li>
+  </ul>
+<% end %>
+
+<ul class="expert_claims">
   <%= render @expert_claims %>
 </ul>

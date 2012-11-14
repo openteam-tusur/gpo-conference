@@ -24,9 +24,8 @@
       </div>
       <div id="content">
         <div id="page-header">
-          <div id="page-title">
-            <h1><%= yield :page_title %></h1>
-          </div>
+          <%= content_tag(:div, content_tag(:h1, yield(:page_title)), id: "page-title") if content_for?(:page_title) %>
+          <%= content_tag(:div, yield(:local_navigation), id: "local-navigation") if content_for?(:local_navigation) %>
         </div>
         <div id="container-one-column">
           <%= yield %>

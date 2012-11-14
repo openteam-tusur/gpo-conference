@@ -1,15 +1,15 @@
-<li>
-  <p><%= expert_claim.theme %></p>
-  <p><%= expert_claim.user %></p>
-
-  <% if expert_claim.pending? %>
-    <p>
+<li class="<%= cycle('odd', 'even') %>">
+  <div class="info">
+    <p><strong>Пользователь:</strong> <%= expert_claim.user %></p>
+    <p><strong>Направление:</strong> <%= expert_claim.theme %></p>
+  </div>
+  <div class="actions">
+    <% if expert_claim.pending? %>
       <%= simple_form_for [:manage, expert_claim] do |f| %>
         <%= f.input :state_event, as: :hidden, input_html: { value: 'approve' } %>
-        <%= f.button :submit %>
+        <%= f.button :submit, "Подтвердить" %>
       <% end %>
-    </p>
-  <% end %>
-
-  <p><%= link_to 'Удалить', [:manage, expert_claim], confirm: 'Вы уверены?', method: :delete, class: 'button' %></p>
+    <% end %>
+    <p><%= link_to 'Удалить', [:manage, expert_claim], confirm: 'Вы уверены?', method: :delete, class: 'button danger' %></p>
+  </div>
 </li>
