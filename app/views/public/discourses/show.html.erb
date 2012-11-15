@@ -1,9 +1,47 @@
-<h1><%= resource.title %></h1>
+<% content_for :page_title do %>
+  <h1>
+    <%= image_tag 'icon_report.png', :class => 'icon', :width => '16', :height => '16' %>
+    <%= resource.title %>
+  </h1>
+<% end %>
 
-<%= link_to "&larr; Назад на просмотр направления".html_safe, theme_path(@theme) %>
+<% content_for :local_navigation do %>
+  <%= link_to "&larr; Назад на просмотр направления".html_safe, theme_path(@theme) %>
+<% end %>
 
-<ul>
-  <li>Авторы: <%= resource.authors.join(', ') %></li>
-  <li>Описание: <%= resource.description %></li>
-  <li><%= link_to "Скачать доклад", resource.vfs_path %></li>
-</ul>
+<div id="left">
+  <ul class='listing' id='projects'>
+    <li>
+      <div class='project_with_stats'>
+        <div class='discourse_card'>
+          <div>
+            <%= image_tag 'icon_theme.png', :class => 'icon', :width => '16', :height => '16' %>
+            <%= link_to @theme, theme_path(@theme) %>
+          </div>
+
+          <div>
+            <%= image_tag 'icon_chair.png', :class => 'icon', :width => '16', :height => '16' %>
+            <%= link_to "Кафедра #{resource.chair.abbr}", theme_path(@theme, :anchor => "chair_#{resource.chair.id}") %>
+          </div>
+
+          <div>
+            <%= image_tag 'icon_project.png', :class => 'icon', :width => '16', :height => '16' %>
+            <%= link_to resource.project, theme_path(@theme, :anchor => "project_#{resource.project.id}") %>
+          </div>
+
+          <div>
+            <%= image_tag 'icon_users.png', :class => 'icon', :width => '16', :height => '16' %>
+            <%= resource.authors.join(', ') %>
+          </div>
+
+          <div><%= resource.description %></div>
+
+          <div>
+            <%= image_tag 'icon_pdf.png', :class => 'icon', :width => '16', :height => '16' %>
+            <%= link_to "Скачать доклад", resource.vfs_path %>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

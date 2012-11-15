@@ -11,18 +11,22 @@
 
     <div id="header">
       <div id="header-wrapper">
-        <div id="header-navigation">
-          Интернет-конференция участников ГПО ТУСУР
-        </div>
+        <ul id="header-navigation">
+          <li class="" id="link_to_sessions_dashboard">
+            <%= image_tag 'nav_sessions_dashboard.png', :class => 'icon', :height => '16', :width => '16', :alt => 'Главная' %>
+            <a href="/">Интернет-конференция участников ГПО ТУСУР</a>
+          </li>
+          <li>
+            <%= render_navigation :context => :manager, :renderer => :links if true || current_user && current_user.manager? %>
+          </li>
+        </ul>
         <%= render :partial => "esp_auth/shared/header" %>
       </div>
     </div>
 
     <div id="wrapper">
       <div id="navigation">
-        <% if current_user %>
-          <%= render_navigation context: :manager if current_user.manager? %>
-        <% end %>
+        <h1>Интернет-конференция участников ГПО ТУСУР</h1>
       </div>
       <div id="content">
         <div id="page-header">

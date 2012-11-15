@@ -1,23 +1,53 @@
-<h1><%= resource.name %></h1>
+<%= content_for :page_title do %>
+  <h1>
+    <%= image_tag 'icon_theme.png', :class => 'icon', :width => '16', :height => '16' %>
+    <%= resource.name %>
+  </h1>
+<% end %>
 
-<%= link_to "&larr; Назад к списку направлений".html_safe, themes_path  %>
+<% content_for :local_navigation do %>
+  <%= link_to "&larr; Назад к списку направлений".html_safe, themes_path  %>
+<% end %>
 
-<ul>
-  <% resource.projects.group_by(&:chair).each do |chair, projects| %>
-    <li>
-      <h3><%= chair.title %></h3>
-      <ul>
-        <% projects.each do |project| %>
-          <li>
-            <h4><%= project.title %></h4>
-            <ul>
-              <% project.discourses.each do |discourse| %>
-                <li><%= link_to discourse.title, theme_project_discourse_path(resource, project, discourse) %></li>
+<div id="left">
+  <ul class='listing' id='projects'>
+    <% resource.projects.group_by(&:chair).each do |chair, projects| %>
+      <li>
+        <div class='project_with_stats'>
+          <div>
+            <h2 id="chair_<%= chair.id %>" title='<%= chair.title %>'>
+              <%= image_tag 'icon_chair.png', :class => 'icon', :width => '16', :height => '16' %>
+              Кафедра <%= chair.abbr %>
+            </h2>
+          </div>
+        </div>
+
+        <ul>
+          <% projects.each do |project| %>
+            <li>
+              <h3 id="project_<%= project.id %>">
+                <%= image_tag 'icon_project.png', :class => 'icon', :width => '16', :height => '16' %>
+                <%= project.title.mb_chars.downcase.gsub(/"/, '').sub /./ do |l| l.mb_chars.capitalize end %>
+              </h3>
+              <% if project.discourses.empty? %>
+                <div class='empty'>Нет докладов</div>
               <% end %>
-            </ul>
-          </li>
-        <% end %>
-      </ul>
-    </li>
-  <% end %>
-</ul>
+              <ul>
+                <% project.discourses.each do |discourse| %>
+                  <li>
+                    <%= image_tag 'icon_report.png', :class => 'icon', :width => '16', :height => '16' %>
+                    <%= link_to discourse.title, theme_project_discourse_path(resource, project, discourse) %>
+                    <div style='margin: 7px 0 0 0'>
+                      <%= image_tag 'icon_users.png', :class => 'icon', :width => '16', :height => '16' %>
+                      <%= discourse.authors.join(', ') %>
+                    </div>
+                  </li>
+                <% end %>
+              </ul>
+            </li>
+          <% end %>
+        </ul>
+      </li>
+    <% end %>
+  </ul>
+</div>

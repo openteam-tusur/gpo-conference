@@ -1,12 +1,33 @@
-<h1>Направления</h1>
+<%= content_for :page_title do %>
+  <h1>
+    <%= image_tag 'icon_theme.png', :class => 'icon', :width => '16', :height => '16' %>
+    Направления
+  </h1>
+<% end %>
 
-<ul>
-  <% collection.each do |theme| %>
-    <li>
-      <ul>
-        <li><%= link_to theme.name, theme %><li>
-        <li>Колличестов проектов: <%= theme.projects.count %></li>
-        <li>Колличестов докладов: <%= theme.discourses.count  %></li>
-      </ul>
-  <% end %>
-</ul>
+<div id="left">
+  <ul class='listing' id='projects'>
+    <% collection.each do |theme| %>
+      <li>
+        <div class='project_with_stats'>
+          <div>
+            <div class="theme_stats">
+              <div>
+                <%= image_tag 'icon_project.png', :class => 'icon', :width => '16', :height => '16' %>
+                Количество проектов: <%= theme.projects.count %>
+              </div>
+              <div>
+                <%= image_tag 'icon_report.png', :class => 'icon', :width => '16', :height => '16' %>
+                Количество докладов: <%= theme.discourses.count %>
+              </div>
+            </div>
+            <h2>
+              <%= image_tag 'icon_theme.png', :class => 'icon', :width => '16', :height => '16', :alt => theme.name %>
+              <%= link_to theme.name, theme %>
+            </h2>
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+</div>
