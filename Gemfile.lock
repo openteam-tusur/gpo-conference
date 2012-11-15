@@ -310,6 +310,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  ancestry
   annotate
   attribute_normalizer
   capistrano

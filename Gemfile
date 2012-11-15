@@ -9,6 +9,7 @@ group :assets do
 end
 
 group :default do
+  gem 'ancestry'
   gem 'attribute_normalizer'
   gem 'compass-rails'
   gem 'curb'

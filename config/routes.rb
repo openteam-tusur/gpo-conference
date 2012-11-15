@@ -17,14 +17,14 @@ GpoConference::Application.routes.draw do
     root :to => 'application#index'
   end
 
-  scope :module => :public do
-    resources :statistics
-    resources :themes, :only => [:index, :show] do
-      resources :projects, :only => [] do
-        resources :discourses, :only => :show
+  resources :statistics
+  resources :themes, :only => [:index, :show] do
+    resources :projects, :only => [] do
+      resources :discourses, :only => :show do
+        resources :comments, :only => [:show, :new, :create]
       end
     end
-
-  root to: 'themes#index'
   end
+
+  root :to => 'themes#index'
 end

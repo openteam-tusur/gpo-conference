@@ -1,4 +1,4 @@
-class Public::DiscoursesController < ApplicationController
+class DiscoursesController < ApplicationController
   inherit_resources
 
   belongs_to :theme do

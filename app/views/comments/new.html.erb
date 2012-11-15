@@ -1,0 +1,12 @@
+<li class='ajaxed_item'>
+  <%= simple_form_for [association_chain, @comment].flatten, :html => { :remote => true } do |f| %>
+    <%= f.input :ancestry, :as => :hidden %>
+    <%= f.input :body, :as => :text, :label => false %>
+
+    <div class="buttons">
+      <%= f.submit %>
+      <%= link_to 'Отмена', '#', :class => 'cancel new_record' %>
+    </div>
+
+  <% end %>
+</li>
