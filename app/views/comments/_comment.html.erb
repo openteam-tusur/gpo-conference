@@ -4,7 +4,7 @@
   <%= l comment.created_at, :format => :short %>
 
   <% if current_user %>
-    <%= link_to "Ответить", new_theme_project_discourse_comment_path(@theme, @project, resource, :parent_id => comment.id), :remote => true, :class => 'new_record' %>
+    <%= link_to "Ответить", new_theme_project_discourse_comment_path(@theme, @project, comment.discourse, :parent_id => comment.id), :remote => true, :class => 'new_record' %>
   <% end %>
 
   <ul>
