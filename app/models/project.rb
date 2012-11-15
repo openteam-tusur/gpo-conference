@@ -28,6 +28,8 @@ class Project < ActiveRecord::Base
     :novelty, :purpose, :release_cost, :source_data, :stakeholders, :participants, :project_managers,
     to: :project_attributes
 
+  delegate :abbr, :to => :chair, :prefix => true
+
   scope :ordered_by_title, :order => [:chair_id, :title]
 
   def complex_title

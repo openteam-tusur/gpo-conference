@@ -11,13 +11,13 @@
 
 <div id="left">
   <ul class='listing' id='projects'>
-    <% resource.projects.group_by(&:chair).each do |chair, projects| %>
+    <% resource.projects.group_by(&:chair_abbr).sort.each do |chair, projects| %>
       <li>
         <div class='project_with_stats'>
           <div>
-            <h2 id="chair_<%= chair.id %>" title='<%= chair.title %>'>
+            <h2 id="chair_<%= I18n.transliterate(chair).gsub(/\s/, '_') %>" title='<%= chair %>'>
               <%= image_tag 'icon_chair.png', :class => 'icon', :width => '16', :height => '16' %>
-              Кафедра <%= chair.abbr %>
+              Кафедра <%= chair %>
             </h2>
           </div>
         </div>

@@ -20,4 +20,6 @@ class Chair < ActiveRecord::Base
   has_many :projects
   has_many :discourses, :through => :projects
   has_many :users, :through => :projects
+
+  default_scope order(:abbr)
 end

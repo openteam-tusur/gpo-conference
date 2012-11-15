@@ -21,7 +21,7 @@
 
           <div>
             <%= image_tag 'icon_chair.png', :class => 'icon', :width => '16', :height => '16' %>
-            <%= link_to "Кафедра #{resource.chair.abbr}", theme_path(@theme, :anchor => "chair_#{resource.chair.id}") %>
+            <%= link_to "Кафедра #{resource.chair.abbr}", theme_path(@theme, :anchor => "chair_#{I18n.transliterate(resource.chair.abbr).gsub(/\s/, '_')}") %>
           </div>
 
           <div>
