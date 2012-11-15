@@ -1,5 +1,7 @@
 <h1><%= resource.name %></h1>
 
+<%= link_to "&larr; Назад к списку направлений".html_safe, themes_path  %>
+
 <ul>
   <% resource.projects.group_by(&:chair).each do |chair, projects| %>
     <li>
