@@ -1,0 +1,22 @@
+<table class='statistics'>
+  <thead>
+    <tr>
+      <th>Кафедра</th>
+      <th>Кол-во проектов</th>
+      <th>Кол-во докладов</th>
+      <th>Кол-во участников</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @chairs.each do |chair| %>
+      <tr>
+        <td style='text-align: left'>
+          <%= chair.abbr %>
+        </td>
+        <td><%= chair.projects.count %></td>
+        <td><%= chair.discourses.count %></td>
+        <td><%= chair.users.count %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

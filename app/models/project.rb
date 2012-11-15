@@ -19,6 +19,8 @@ class Project < ActiveRecord::Base
   belongs_to :theme
 
   has_many :discourses
+  has_many :permissions, :foreign_key => :context_id
+  has_many :users, :through => :permissions
 
   validates_presence_of :chair, :gpo_id, :theme
 

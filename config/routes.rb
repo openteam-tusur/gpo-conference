@@ -18,6 +18,7 @@ GpoConference::Application.routes.draw do
   end
 
   scope :module => :public do
+    resources :statistics
     resources :themes, :only => [:index, :show] do
       resources :projects, :only => [] do
         resources :discourses, :only => :show
