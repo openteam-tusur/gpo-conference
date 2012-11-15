@@ -23,7 +23,7 @@ GpoConference::Application.routes.draw do
         resources :discourses, :only => :show
       end
     end
-  end
 
-  root to: 'application#welcome'
+  root to: 'themes#index'
+  end
 end
