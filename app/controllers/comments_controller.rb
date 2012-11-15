@@ -12,6 +12,12 @@ class CommentsController < ApplicationController
 
   layout false
 
+  def new
+    new!{
+      @comment = Comment.new(:parent_id => params[:parent_id])
+    }
+  end
+
   private
     def set_author
       resource.update_attribute :user_id, current_user.id

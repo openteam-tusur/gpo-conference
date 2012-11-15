@@ -1,5 +1,5 @@
 class Comment < ActiveRecord::Base
-  attr_accessible :body, :ancestry
+  attr_accessible :body, :ancestry, :parent_id
 
   has_ancestry
 
