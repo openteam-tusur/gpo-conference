@@ -8,18 +8,15 @@ class CommentsController < ApplicationController
   end
 
   actions :show, :new, :create
-  after_filter :set_author, :only => :create
 
   layout false
 
-  def new
-    new!{
-      @comment = Comment.new(:parent_id => params[:parent_id])
-    }
-  end
-
   private
-    def set_author
-      resource.update_attribute :user_id, current_user.id
+    alias_method :old_build_resource, :build_resource
+
+    def build_resource
+      old_build_resource.tap do |object|
+        object.user = current_user
+      end
     end
 end

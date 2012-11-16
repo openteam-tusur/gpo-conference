@@ -17,6 +17,7 @@ cancel_handler = () ->
         $('form.new_comment .cancel').click()
         target.hide()
     else
+      target.closest('ul').siblings('.new_comment').show() unless $(jqXHR.responseText).find('.error').length
       target.closest('.ajaxed_item').replaceWith(jqXHR.responseText)
 
     cancel_handler()

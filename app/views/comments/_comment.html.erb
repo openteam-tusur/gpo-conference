@@ -1,10 +1,18 @@
-<li>
-  <%= comment.user_name %>
-  <%= comment.body %>
-  <%= l comment.created_at, :format => :short %>
+<li class='comment_item'>
+  <div class='comment_wrapper'>
+    <span class="user_name">
+      <%= comment.user_name %>,
+    </span>
+    <span class="date">
+      <%= l comment.created_at, :format => :short %>
+    </span>
+    <span class="body">
+      <%= comment.body %>
+    </span>
+  </div>
 
   <% if current_user %>
-    <%= link_to "Ответить", new_theme_project_discourse_comment_path(@theme, @project, comment.discourse, :parent_id => comment.id), :remote => true, :class => 'new_record new_comment' %>
+    <%= link_to "ответить", new_theme_project_discourse_comment_path(@theme, @project, comment.discourse, :comment => {:parent_id => comment.id}), :remote => true, :class => 'new_record new_comment' %>
   <% end %>
 
   <ul>
