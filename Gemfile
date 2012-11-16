@@ -16,6 +16,7 @@ group :default do
   gem 'el_vfs_client'
   gem 'enumerize'
   gem 'esp-auth'
+  gem 'gravatarify', '~> 3.0.0'
   gem 'has_scope'
   gem 'hashie'
   gem 'openteam-commons'

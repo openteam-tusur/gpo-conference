@@ -1,6 +1,7 @@
 <li class='comment_item'>
   <div class='comment_wrapper'>
     <span class="user_name">
+      <%= gravatar_tag comment.user.email, :size => 20 %>
       <%= comment.user_name %>,
     </span>
     <span class="date">

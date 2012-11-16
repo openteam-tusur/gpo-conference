@@ -141,6 +141,7 @@ GEM
     girl_friday (0.11.1)
       connection_pool (~> 0.9.0)
       rubinius-actor
+    gravatarify (3.0.0)
     has_enum (0.10.1)
       rails (> 3.0.0)
     has_scope (0.5.1)
@@ -322,6 +323,7 @@ DEPENDENCIES
   esp-auth
   fabrication
   formtastic (~> 2.1.0)
+  gravatarify (~> 3.0.0)
   has_scope
   has_searcher (< 0.0.90)
   hashie

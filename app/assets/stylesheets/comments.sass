@@ -4,7 +4,6 @@
       color: #aaa
       font-size: 18px
       font-weight: normal
-
     ul
       margin: 0
 
@@ -16,8 +15,14 @@
 
       .comment_item
         .user_name
+          +inline-block
           color: #555
           font-size: 11px
+          line-height: 20px
+          height: 20px
+
+          img
+            +inline-block
 
         .date
           color: #888

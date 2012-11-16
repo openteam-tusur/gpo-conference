@@ -52,6 +52,11 @@
         <li><%= render comment %></li>
       <% end %>
     </ul>
+
+    <% unless current_user %>
+      <h3>Оставлять комментарии могут только зарегистрированные пользователи</h3>
+    <% end %>
+
     <% if current_user %>
       <%= link_to "Оставить комментарий", new_theme_project_discourse_comment_path(@theme, @project, resource), :remote => true, :class => 'new_record new_comment large' %>
     <% end %>
