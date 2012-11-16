@@ -53,7 +53,7 @@
       <% end %>
     </ul>
     <% if current_user %>
-      <%= link_to "Оставить комментарий", new_theme_project_discourse_comment_path(@theme, @project, resource), :remote => true, :class => 'new_record' %>
+      <%= link_to "Оставить комментарий", new_theme_project_discourse_comment_path(@theme, @project, resource), :remote => true, :class => 'new_record new_comment' %>
     <% end %>
   </div>
 

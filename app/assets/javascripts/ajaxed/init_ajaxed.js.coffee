@@ -2,6 +2,7 @@ cancel_handler = () ->
   $('.cancel').on 'click', ->
     link = $(this)
     if link.hasClass('new_record')
+      link.closest('ul').siblings('.new_comment').show()
       link.closest('.ajaxed_item').remove()
     false
 
@@ -9,8 +10,12 @@ cancel_handler = () ->
   $(".ajaxed").on "ajax:success", (evt, response, status, jqXHR) ->
     target = $(evt.target)
     ul = target.siblings("ul")
+
     if target.hasClass('new_record')
       ul.append(jqXHR.responseText)
+      if target.hasClass('new_comment')
+        $('form.new_comment .cancel').click()
+        target.hide()
     else
       target.closest('.ajaxed_item').replaceWith(jqXHR.responseText)
 
