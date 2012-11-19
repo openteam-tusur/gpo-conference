@@ -5,5 +5,6 @@
  * = require choose_file
  * = require claims
  * = require ajaxed
+ * = require help
  * = require main
  */

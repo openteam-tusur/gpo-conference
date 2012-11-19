@@ -1,4 +1,5 @@
 <li class='ajaxed_item'>
+  <%= image_tag 'icon_report.png', :class => 'icon', :width => '16', :height => '16' %>
   <%= discourse.description %>
   <%= link_to "Скачать доклад", discourse.vfs_path %>
   <%= link_to "Редактировать", edit_manage_project_discourse_path(discourse.project, discourse), :remote => true %>

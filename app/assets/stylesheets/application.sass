@@ -45,3 +45,46 @@ ul
         border-bottom: 1px solid #ddd
         padding: 7px 15px
         text-align: center
+
+.help
+  color: #888
+
+  a
+    border-bottom: 1px dashed #888
+    color: #888
+    text-decoration: none
+
+    &.clicked
+      &:before
+        background: image_url('blur.png') repeat
+        bottom: 0
+        content: ''
+        display: block
+        left: 0
+        padding: 100%
+        position: absolute
+        right: 0
+        top: 0
+        z-index: 9999
+
+  .help_box
+    +clearfix
+    +border-radius
+    background: #fff
+    border: 1px solid #888
+    color: #000
+    display: none
+    margin: 0 0 0 168px
+    padding: 10px 15px
+    position: absolute
+    top: 25%
+    width: 450px
+    z-index: 99999
+
+    ol
+      list-style: decimal inside !important
+
+      li
+        border: none !important
+        margin: 0 !important
+        padding: 4px 0 !important
