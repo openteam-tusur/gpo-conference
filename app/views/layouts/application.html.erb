@@ -20,6 +20,9 @@
             <%= render_navigation :context => :manager, :renderer => :links if true || current_user && current_user.manager? %>
           </li>
           <li>
+            <%= link_to "Мои доклады", manage_root_path %>
+          </li>
+          <li>
             <%= link_to "Статистика", statistics_path %>
           </li>
         </ul>
