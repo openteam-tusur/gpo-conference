@@ -12,6 +12,7 @@
 class Theme < ActiveRecord::Base
   attr_accessible :name, :gpo_id
 
+  belongs_to :conference
   has_many :projects
   has_many :discourses, :through => :projects
 

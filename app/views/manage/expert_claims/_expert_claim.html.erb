@@ -5,11 +5,11 @@
   </div>
   <div class="actions">
     <% if expert_claim.pending? %>
-      <%= simple_form_for [:manage, expert_claim] do |f| %>
+      <%= simple_form_for [:manage, @conference, expert_claim] do |f| %>
         <%= f.input :state_event, as: :hidden, input_html: { value: 'approve' } %>
         <%= f.button :submit, "Подтвердить" %>
       <% end %>
     <% end %>
-    <p><%= link_to 'Удалить', [:manage, expert_claim], confirm: 'Вы уверены?', method: :delete, class: 'button danger' %></p>
+    <p><%= link_to 'Удалить', [:manage, @conference, expert_claim], confirm: 'Вы уверены?', method: :delete, class: 'button danger' %></p>
   </div>
 </li>

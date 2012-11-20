@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121115081421) do
+ActiveRecord::Schema.define(:version => 20121119084425) do
 
   create_table "chairs", :force => true do |t|
     t.string   "abbr"
@@ -27,11 +27,12 @@ ActiveRecord::Schema.define(:version => 20121115081421) do
     t.integer  "project_id"
     t.integer  "user_id"
     t.string   "role"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.string   "state"
     t.string   "type"
     t.integer  "theme_id"
+    t.integer  "conference_id"
   end
 
   add_index "claims", ["project_id"], :name => "index_claims_on_project_id"
@@ -50,6 +51,14 @@ ActiveRecord::Schema.define(:version => 20121115081421) do
   add_index "comments", ["ancestry"], :name => "index_comments_on_ancestry"
   add_index "comments", ["discourse_id"], :name => "index_comments_on_discourse_id"
   add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
+
+  create_table "conferences", :force => true do |t|
+    t.string   "year"
+    t.date     "starts_on"
+    t.date     "ends_on"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "contexts", :force => true do |t|
     t.string   "title"
@@ -106,9 +115,10 @@ ActiveRecord::Schema.define(:version => 20121115081421) do
 
   create_table "themes", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.integer  "gpo_id"
+    t.integer  "conference_id"
   end
 
   create_table "users", :force => true do |t|

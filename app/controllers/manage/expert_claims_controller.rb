@@ -3,6 +3,8 @@ class Manage::ExpertClaimsController < Manage::ApplicationController
 
   actions :all
 
+  belongs_to :conference, :finder => :find_by_year!
+
   has_scope :with_state, only: :index, default: 'pending'
 
   def update
@@ -10,12 +12,15 @@ class Manage::ExpertClaimsController < Manage::ApplicationController
   end
 
   def destroy
-    destroy! { with_state_manage_expert_claims_path(:approved) }
+    destroy! { with_state_manage_conference_expert_claims_path(@conference, :approved) }
   end
 
   protected
+    alias_method :old_build_resource, :build_resource
 
-  def begin_of_association_chain
-    current_user
-  end
+    def build_resource
+      old_build_resource.tap do |object|
+        object.user = current_user
+      end
+    end
 end

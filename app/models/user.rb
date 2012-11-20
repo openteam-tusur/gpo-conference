@@ -33,6 +33,7 @@ class User < ActiveRecord::Base
   has_many :permissions
   has_many :projects, through: :permissions, source: :context, source_type: 'Project'
   has_many :themes,   through: :permissions, source: :context, source_type: 'Theme'
+  has_many :conferences, :through => :projects
 
   has_many :theme_expert_permissions, class_name: 'Permission',
     conditions: { context_type: 'Theme', role: :expert }

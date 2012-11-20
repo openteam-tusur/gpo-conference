@@ -3,9 +3,14 @@ class Manage::ProjectMemberClaimsController < Manage::ApplicationController
 
   actions :new, :create, :show
 
-  protected
+  belongs_to :conference, :finder => :find_by_year!
 
-  def begin_of_association_chain
-    current_user
-  end
+  protected
+    alias_method :old_build_resource, :build_resource
+
+    def build_resource
+      old_build_resource.tap do |object|
+        object.user = current_user
+      end
+    end
 end

@@ -13,7 +13,7 @@
   </div>
 
   <% if current_user %>
-    <%= link_to "ответить", new_theme_project_discourse_comment_path(@theme, @project, comment.discourse, :comment => {:parent_id => comment.id}), :remote => true, :class => 'new_record new_comment' %>
+    <%= link_to "ответить", new_conference_theme_project_discourse_comment_path(@conference, @theme, @project, comment.discourse, :comment => {:parent_id => comment.id}), :remote => true, :class => 'new_record new_comment' %>
   <% end %>
 
   <ul>

@@ -6,7 +6,7 @@
 <% end %>
 
 <% content_for :local_navigation do %>
-  <%= link_to "&larr; Назад к списку направлений".html_safe, themes_path  %>
+  <%= link_to "&larr; Назад к списку направлений".html_safe, collection_path  %>
 <% end %>
 
 <div id="left">
@@ -36,7 +36,7 @@
                 <% project.discourses.each do |discourse| %>
                   <li>
                     <%= image_tag 'icon_report.png', :class => 'icon', :width => '16', :height => '16' %>
-                    <%= link_to discourse.title, theme_project_discourse_path(resource, project, discourse) %>
+                    <%= link_to discourse.title, conference_theme_project_discourse_path(@conference, resource, project, discourse) %>
                     <div style='margin: 7px 0 0 0'>
                       <%= image_tag 'icon_users.png', :class => 'icon', :width => '16', :height => '16' %>
                       <%= discourse.authors.join(', ') %>

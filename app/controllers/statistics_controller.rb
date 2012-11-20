@@ -1,5 +1,12 @@
 class StatisticsController < ApplicationController
+  before_filter :find_conference
+
   def index
-    @chairs = Chair.all
+    @chairs_with_projects = @conference.projects.group_by(&:chair)
   end
+
+  private
+    def find_conference
+      @conference = Conference.find_by_year!(params[:conference_id])
+    end
 end

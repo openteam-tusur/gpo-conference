@@ -8,14 +8,14 @@
     </tr>
   </thead>
   <tbody>
-    <% @chairs.each do |chair| %>
+    <% @chairs_with_projects.each do |chair, projects| %>
       <tr>
         <td style='text-align: left'>
           <%= chair.abbr %>
         </td>
-        <td><%= chair.projects.count %></td>
-        <td><%= chair.discourses.count %></td>
-        <td><%= chair.users.count %></td>
+        <td><%= projects.count %></td>
+        <td><%= projects.map{ |p| p.discourses.count }.sum %></td>
+        <td><%= projects.map{ |p| p.users.count }.sum %></td>
       </tr>
     <% end %>
   </tbody>

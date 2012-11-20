@@ -1,9 +1,11 @@
 class CommentsController < ApplicationController
   inherit_resources
 
-  belongs_to :theme do
-    belongs_to :project do
-      belongs_to :discourse
+  belongs_to :conference, :finder => :find_by_year! do
+    belongs_to :theme do
+      belongs_to :project do
+        belongs_to :discourse
+      end
     end
   end
 

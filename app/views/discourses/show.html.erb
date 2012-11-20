@@ -6,7 +6,7 @@
 <% end %>
 
 <% content_for :local_navigation do %>
-  <%= link_to "&larr; Назад на просмотр направления".html_safe, theme_path(@theme) %>
+  <%= link_to "&larr; Назад на просмотр направления".html_safe, conference_theme_path(@conference, @theme) %>
 <% end %>
 
 <div id="left">
@@ -16,17 +16,17 @@
         <div class='discourse_card'>
           <div>
             <%= image_tag 'icon_theme.png', :class => 'icon', :width => '16', :height => '16' %>
-            <%= link_to @theme, theme_path(@theme) %>
+            <%= link_to @theme, conference_theme_path(@conference, @theme) %>
           </div>
 
           <div>
             <%= image_tag 'icon_chair.png', :class => 'icon', :width => '16', :height => '16' %>
-            <%= link_to "Кафедра #{resource.chair.abbr}", theme_path(@theme, :anchor => "chair_#{I18n.transliterate(resource.chair.abbr).gsub(/\s/, '_')}") %>
+            <%= link_to "Кафедра #{resource.chair.abbr}", conference_theme_path(@conference, @theme, :anchor => "chair_#{I18n.transliterate(resource.chair.abbr).gsub(/\s/, '_')}") %>
           </div>
 
           <div>
             <%= image_tag 'icon_project.png', :class => 'icon', :width => '16', :height => '16' %>
-            <%= link_to resource.project, theme_path(@theme, :anchor => "project_#{resource.project.id}") %>
+            <%= link_to resource.project, conference_theme_path(@conference, @theme, :anchor => "project_#{resource.project.id}") %>
           </div>
 
           <div>
@@ -58,7 +58,7 @@
     <% end %>
 
     <% if current_user %>
-      <%= link_to "Оставить комментарий", new_theme_project_discourse_comment_path(@theme, @project, resource), :remote => true, :class => 'new_record new_comment large' %>
+      <%= link_to "Оставить комментарий", new_conference_theme_project_discourse_comment_path(@conference, @theme, @project, resource), :remote => true, :class => 'new_record new_comment large' %>
     <% end %>
   </div>
 
