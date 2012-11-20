@@ -10,7 +10,7 @@
 #
 
 class Theme < ActiveRecord::Base
-  attr_accessible :name, :gpo_id
+  attr_accessible :name, :gpo_id, :conference_id
 
   belongs_to :conference
   has_many :projects
