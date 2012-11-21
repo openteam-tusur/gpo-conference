@@ -6,4 +6,6 @@ class DiscoursesController < ApplicationController
       belongs_to :project
     end
   end
+
+  actions :show
 end
