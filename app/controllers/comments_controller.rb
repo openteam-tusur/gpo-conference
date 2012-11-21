@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  sso_authenticate_and_authorize
+
   inherit_resources
 
   belongs_to :conference, :finder => :find_by_year! do

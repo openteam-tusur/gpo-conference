@@ -6,7 +6,7 @@ class Discourse < ActiveRecord::Base
   has_one :chair, :through => :project
   has_many :comments, :dependent => :destroy
 
-  validates_presence_of :authors, :vfs_path, :title
+  validates_presence_of :authors, :vfs_path, :title, :description
 
   serialize :authors
 

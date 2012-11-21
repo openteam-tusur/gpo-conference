@@ -1,8 +1,6 @@
 <% content_for :page_title do %>
-  <h1>
-    <%= image_tag 'icon_report.png', :class => 'icon', :width => '16', :height => '16' %>
-    <%= resource.title %>
-  </h1>
+  <%= image_tag 'icon_report.png', :class => 'icon', :width => '16', :height => '16' %>
+  <%= resource.title %>
 <% end %>
 
 <% content_for :local_navigation do %>
@@ -58,12 +56,10 @@
       <% end %>
     </ul>
 
-    <% unless current_user %>
-      <h3>Оставлять комментарии могут только зарегистрированные пользователи</h3>
-    <% end %>
-
-    <% if current_user %>
+    <% if can?(:manage, :application) %>
       <%= link_to "Оставить комментарий", new_conference_theme_project_discourse_comment_path(@conference, @theme, @project, resource), :remote => true, :class => 'new_record new_comment large' %>
+    <% else %>
+      <h3>Оставлять комментарии могут только зарегистрированные пользователи</h3>
     <% end %>
   </div>
 

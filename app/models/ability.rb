@@ -45,19 +45,23 @@ class Ability
     end
 
     # Заявки
-    can :new, Claim
-    can [:new, :create, :show], [ExpertClaim, ProjectMemberClaim]
+    #can :new, Claim
+    #can [:new, :create, :show], [ExpertClaim, ProjectMemberClaim]
 
-    can :manage, ExpertClaim do
-      user.manager?
-    end
+    #can :manage, ExpertClaim do
+      #user.manager?
+    #end
 
     # Доклады
-    can :manage, Discourse do |discourse|
-      user.project_participant_of? discourse.project
-    end
+    can :read, Discourse if user.project_participant?
+
+    #can :manage, Discourse do |discourse|
+      #user.project_participant_of?(discourse.project)
+    #end
 
     # Комментарии
+    # Могут создавать пользователи с правами
+
     # Экспертные оценки
   end
 end
