@@ -30,6 +30,11 @@
           </div>
 
           <div>
+            <%= image_tag 'icon_report.png', :class => 'icon', :width => '16', :height => '16' %>
+            <strong><%= resource.title %></strong>
+          </div>
+
+          <div>
             <%= image_tag 'icon_users.png', :class => 'icon', :width => '16', :height => '16' %>
             <%= resource.authors.join(', ') %>
           </div>

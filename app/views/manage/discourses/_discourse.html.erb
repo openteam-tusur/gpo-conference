@@ -1,7 +1,16 @@
 <li class='ajaxed_item'>
   <%= image_tag 'icon_report.png', :class => 'icon', :width => '16', :height => '16' %>
+  <strong>
+    <%= discourse.title %>
+  </strong>
+  <br/>
   <%= discourse.description %>
-  <%= link_to "Скачать доклад", discourse.vfs_path %>
-  <%= link_to "Редактировать", edit_manage_conference_project_discourse_path(@conference, discourse.project, discourse), :remote => true %>
-  <%= link_to "Удалить", manage_conference_project_discourse_path(@conference, discourse.project, discourse), :method => :delete, :remote => true %>
+
+  <div class="actions">
+    <%= link_to "Скачать доклад", discourse.vfs_path %>
+    <%= link_to "Редактировать", edit_manage_conference_project_discourse_path(@conference, discourse.project, discourse), :remote => true %>
+    <%= link_to "Удалить", manage_conference_project_discourse_path(@conference, discourse.project, discourse), :method => :delete, :remote => true %>
+    (<%= discourse.comments.count %>)
+    <%= link_to "Обсудить", conference_theme_project_discourse_path(@conference, discourse.theme, discourse.project, discourse) %>
+  </div>
 </li>

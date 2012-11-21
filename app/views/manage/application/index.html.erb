@@ -1,5 +1,19 @@
+<%= content_for :page_title, "Мои доклады" %>
+
 <div id='left'>
   <ul class='listing' id='projects'>
-    <%= render @projects %>
+    <% if @projects.any?  %>
+      <h2>Вы можете загрузить доклад к следующим проектам:</h2>
+      <%= render @projects %>
+      <div class="message">
+        Чтобы загрузить доклад к другим проектам, <%= link_to "подайте заявку", new_manage_conference_claim_path(@conference) %>
+      </div>
+    <% else %>
+      <h2>Похоже вы не можете загружать доклады на конференцию</h2>
+      <div class="message">
+        Чтобы загрузить доклад, <%= link_to "подайте заявку", new_manage_conference_claim_path(@conference) %>
+        на участие в конференции.
+      </div>
+    <% end  %>
   </ul>
 </div>
