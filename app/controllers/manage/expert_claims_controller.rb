@@ -1,6 +1,4 @@
 class Manage::ExpertClaimsController < Manage::ApplicationController
-  inherit_resources
-
   actions :all
 
   belongs_to :conference, :finder => :find_by_year!

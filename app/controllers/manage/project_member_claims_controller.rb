@@ -1,6 +1,4 @@
 class Manage::ProjectMemberClaimsController < Manage::ApplicationController
-  inherit_resources
-
   actions :new, :create, :show
 
   belongs_to :conference, :finder => :find_by_year!

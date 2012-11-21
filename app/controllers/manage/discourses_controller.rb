@@ -1,6 +1,4 @@
 class Manage::DiscoursesController < Manage::ApplicationController
-  inherit_resources
-
   layout false
 
   belongs_to :conference, :finder => :find_by_year! do
