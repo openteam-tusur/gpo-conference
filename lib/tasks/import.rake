@@ -11,7 +11,7 @@ namespace :import do
       chair = Chair.find_or_initialize_by_gpo_id(chair_attributes.id)
       chair.update_attributes!(abbr: chair_attributes.abbr.squish,
                                chief: chair_attributes.chief.squish,
-                               faculty: chair_attributes.faculty.squish,
+                               faculty: chair_attributes.faculty.try(:squish),
                                title: chair_attributes.title.squish)
       progress_bar.increment!
     end
@@ -45,15 +45,15 @@ namespace :import do
       theme = Theme.find_by_gpo_id(project_attributes.theme_id)
       chair = Chair.find_by_gpo_id(project_attributes.chair_id)
 
-      unless theme
+      if theme
+        project.update_attributes!(chair_id: chair.id,
+                                   title: project_attributes.title.squish,
+                                   theme_id: theme.id,
+                                   cipher: project_attributes.cipher.squish)
+      else
         puts "Project with id #{project_attributes.id} does not have theme"
-        next
       end
 
-      project.update_attributes!(chair_id: chair.id,
-                                 title: project_attributes.title.squish,
-                                 theme_id: theme.id,
-                                 cipher: project_attributes.cipher.squish)
       progress_bar.increment!
     end
   end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121119084425) do
+ActiveRecord::Schema.define(:version => 20121120093153) do
 
   create_table "chairs", :force => true do |t|
     t.string   "abbr"
@@ -60,17 +60,6 @@ ActiveRecord::Schema.define(:version => 20121119084425) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "contexts", :force => true do |t|
-    t.string   "title"
-    t.string   "ancestry"
-    t.string   "weight"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "contexts", ["ancestry"], :name => "index_contexts_on_ancestry"
-  add_index "contexts", ["weight"], :name => "index_contexts_on_weight"
-
   create_table "discourses", :force => true do |t|
     t.string   "vfs_path"
     t.text     "description"
@@ -106,13 +95,6 @@ ActiveRecord::Schema.define(:version => 20121119084425) do
 
   add_index "projects", ["chair_id"], :name => "index_projects_on_chair_id"
 
-  create_table "subcontexts", :force => true do |t|
-    t.string   "title"
-    t.integer  "context_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "themes", :force => true do |t|
     t.string   "name"
     t.datetime "created_at",    :null => false
@@ -125,14 +107,8 @@ ActiveRecord::Schema.define(:version => 20121119084425) do
     t.string   "uid"
     t.text     "name"
     t.text     "email"
-    t.text     "nickname"
     t.text     "first_name"
     t.text     "last_name"
-    t.text     "location"
-    t.text     "description"
-    t.text     "image"
-    t.text     "phone"
-    t.text     "urls"
     t.text     "raw_info"
     t.integer  "sign_in_count"
     t.datetime "current_sign_in_at"

@@ -20,11 +20,11 @@ describe ProjectMemberClaim do
   describe 'try approve after create' do
     let(:user)          { Fabricate :user, last_name: 'Иванов', first_name: 'Иван' }
     let(:project)       { Fabricate :project }
-    let(:participants)  { [ Hashie::Mash.new(last_name: 'Иванов', first_name: 'Иван', mid_name: 'Иванович') ] }
-    let(:managers)      { [ Hashie::Mash.new(last_name: 'Петров', first_name: 'Петр', mid_name: 'Петрович') ] }
+    let(:participants)  { [ Hashie::Mash.new(last_name: 'Иванов', first_name: 'Иван', middle_name: 'Иванович') ] }
+    let(:managers)      { [ Hashie::Mash.new(last_name: 'Петров', first_name: 'Петр', middle_name: 'Петрович') ] }
 
-    let(:participant_permission) { subject.user.permissions.where(context_type: 'Context', context_id: Context.root.id, role: :participant).first }
-    let(:project_participant_permission) { subject.user.permissions.where(context_type: 'Project', context_id: project.id, role: :project_participant).first }
+    let(:participant_permission) { subject.user.permissions.for_context(nil).for_role(:participant).first }
+    let(:project_participant_permission) { subject.user.permissions.for_context(project).for_role(:project_participant).first }
 
     context 'non member' do
       let(:claim) { Fabricate :project_member_claim, user: user, project: project, role: :project_participant }

@@ -10,7 +10,7 @@ class CreatePermissions < ActiveRecord::Migration
 
     User.find_or_initialize_by_uid('1').tap do |user|
       user.save(:validate => false)
-      user.permissions.create! :context => Context.root, :role => :manager if user.permissions.empty?
+      user.permissions.create! :role => 'manager' if user.permissions.empty?
     end
   end
 end

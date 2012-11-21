@@ -6,14 +6,8 @@
 #  uid                :string(255)
 #  name               :text
 #  email              :text
-#  nickname           :text
 #  first_name         :text
 #  last_name          :text
-#  location           :text
-#  description        :text
-#  image              :text
-#  phone              :text
-#  urls               :text
 #  raw_info           :text
 #  sign_in_count      :integer
 #  current_sign_in_at :datetime
@@ -25,7 +19,7 @@
 #
 
 class User < ActiveRecord::Base
-  esp_auth_user
+  sso_auth_user
 
   has_many :expert_claims
   has_many :project_member_claims
@@ -39,7 +33,7 @@ class User < ActiveRecord::Base
     conditions: { context_type: 'Theme', role: :expert }
 
   has_one :participant_permission, class_name: 'Permission',
-    conditions: { context_type: 'Context', context_id: Context.root.id, role: :participant }
+    conditions: { role: :participant }
 
   delegate :destroy, to: :participant_permission, prefix: true, allow_nil: true
 end

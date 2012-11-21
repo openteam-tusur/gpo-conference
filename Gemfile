@@ -15,25 +15,18 @@ group :default do
   gem 'curb'
   gem 'el_vfs_client'
   gem 'enumerize'
-  gem 'esp-auth'
   gem 'gravatarify', '~> 3.0.0'
   gem 'has_scope'
   gem 'hashie'
+  gem 'inherited_resources'
   gem 'openteam-commons'
   gem 'progress_bar'
   gem 'rails'
   gem 'russian'
   gem 'simple-navigation'
   gem 'simple_form'
+  gem 'sso-auth'
   gem 'state_machine'
-
-   # HACK FOR HACK
-  gem 'formtastic', '~> 2.1.0'
-  gem 'has_searcher', '< 0.0.90'
-  gem 'oauth2', '0.6.1'
-  gem 'omniauth',  '1.1.0'
-  gem 'omniauth-oauth2', '1.0.2'
-  gem 'sunspot_matchers'
 end
 
 group :development do

@@ -18,7 +18,7 @@ require 'spec_helper'
 describe Project do
   let(:user) { Fabricate :user, last_name: 'Иванов', first_name: 'Иван' }
   let(:project) { Fabricate :project }
-  let(:members) { [ Hashie::Mash.new(last_name: 'Иванов', first_name: 'Иван', mid_name: 'Иванович') ] }
+  let(:members) { [ Hashie::Mash.new(last_name: 'Иванов', first_name: 'Иван', middle_name: 'Иванович') ] }
 
   describe '#has_participant?' do
     before { project.stub(:participants).and_return(members) }

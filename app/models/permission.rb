@@ -14,5 +14,5 @@
 class Permission < ActiveRecord::Base
   attr_accessible :context, :role
 
-  esp_auth_permission
+  sso_auth_permission :roles => %w[expert manager participant project_participant]
 end

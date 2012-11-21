@@ -41,10 +41,10 @@ class ProjectMemberClaim < Claim
   end
 
   def create_permissions
-    user.permissions.create(context: Context.root, role: :participant)
+    user.permissions.create!(role: :participant)
 
     if role_project_participant? && project.has_participant?(user)
-      user.permissions.create(context: project, role: :project_participant)
+      user.permissions.create!(context: project, role: :project_participant)
     end
   end
 end
