@@ -27,7 +27,7 @@ namespace :import do
 
     themes_attributes.each do |theme_attributes|
       theme = Theme.find_or_initialize_by_gpo_id(theme_attributes.id)
-      theme.update_attributes!(name: theme_attributes.name.squish, conference_id: Conference.find_or_create_by_year(Time.zone.today.year.to_s))
+      theme.update_attributes!(name: theme_attributes.name.squish, conference_id: Conference.current.id)
       progress_bar.increment!
     end
   end

@@ -9,6 +9,6 @@ class ThemesController < ApplicationController
   private
 
     def set_current_year
-      params.merge!(:conference_id => Time.zone.now.year.to_s) unless params.has_key?(:conference_id)
+      params.merge!(:conference_id => Conference.current.year) unless params.has_key?(:conference_id)
     end
 end

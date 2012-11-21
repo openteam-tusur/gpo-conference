@@ -10,4 +10,8 @@ class Conference < ActiveRecord::Base
   def to_param
     year
   end
+
+  def self.current
+    find_or_create_by_year Time.zone.today.year.to_s
+  end
 end
