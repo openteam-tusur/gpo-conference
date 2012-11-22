@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 namespace :import do
   desc 'Import chairs'
   task :chairs => :environment do
@@ -25,10 +27,14 @@ namespace :import do
     themes_attributes = JSON.parse(response.body_str).map { |hash| Hashie::Mash.new(hash) }
     progress_bar      = ProgressBar.new(themes_attributes.size)
 
-    themes_attributes.each do |theme_attributes|
-      theme = Theme.find_or_initialize_by_gpo_id(theme_attributes.id)
-      theme.update_attributes!(name: theme_attributes.name.squish, conference_id: Conference.current.id)
-      progress_bar.increment!
+    if conference = Conference.find_by_year(Time.zone.today.year.to_s)
+      themes_attributes.each do |theme_attributes|
+        theme = Theme.find_or_initialize_by_gpo_id(theme_attributes.id)
+        theme.update_attributes!(name: theme_attributes.name.squish, conference_id: conference.id)
+        progress_bar.increment!
+      end
+    else
+      puts 'Не создана конференция для текущего года'
     end
   end
 

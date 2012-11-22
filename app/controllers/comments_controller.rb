@@ -3,6 +3,8 @@ class CommentsController < ApplicationController
 
   inherit_resources
 
+  actions :show, :new, :create
+
   belongs_to :conference, :finder => :find_by_year! do
     belongs_to :theme do
       belongs_to :project do
@@ -10,8 +12,6 @@ class CommentsController < ApplicationController
       end
     end
   end
-
-  actions :show, :new, :create
 
   layout false
 

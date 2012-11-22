@@ -15,13 +15,6 @@ ru:
         description:            Описание
         title:                  Название
 
-      #permission:
-        #role_enum:
-          #expert:               эксперт
-          #manager:              менеджер системы
-          #participant:          участник конференции
-          #project_participant:  участник проекта
-
     errors:
       claim:
         creating_error: 'Ой! Мы не смогли найти вас среди участников проекта.
@@ -30,5 +23,7 @@ ru:
 
   enumerize:
     role:
+      expert:                   Эксперт
+      manager:                  Менеджер
       project_participant:      Участник проекта
       project_manager:          Руководитель проекта

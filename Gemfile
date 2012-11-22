@@ -13,6 +13,7 @@ group :default do
   gem 'attribute_normalizer'
   gem 'compass-rails'
   gem 'curb'
+  gem 'default_value_for'
   gem 'el_vfs_client'
   gem 'enumerize'
   gem 'gravatarify', '~> 3.0.0'

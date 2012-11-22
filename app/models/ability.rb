@@ -6,21 +6,23 @@ class Ability
   def initialize(user)
     return unless user
 
-    can :manage, :application do
-      user.permissions.any?
-    end
+    can :manage, :all
 
-    can :manage, :all if user.manager?
+    #can :manage, :application do
+      #user.permissions.any?
+    #end
+
+    #can :manage, :all if user.manager?
 
     # Заявки
-    can [:create, :read], [ExpertClaim, ProjectMemberClaim]
+    #can [:create, :read], [ExpertClaim, ProjectMemberClaim]
 
     #can :manage, ExpertClaim do
       #user.manager?
     #end
 
     # Доклады
-    can :read, Discourse if user.project_participant?
+    #can :read, Discourse if user.project_participant?
 
     #can :manage, Discourse do |discourse|
       #user.project_participant_of?(discourse.project)

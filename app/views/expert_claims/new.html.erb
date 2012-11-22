@@ -1,0 +1,4 @@
+<%= simple_form_for [@conference, @expert_claim || current_user.expert_claims.build] do |f| %>
+  <%= f.input :theme_id, as: :select, collection: Theme.ordered_by_name %>
+  <%= f.button :submit, "Создать заявку" %>
+<% end %>

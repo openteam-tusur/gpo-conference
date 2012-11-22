@@ -1,0 +1,37 @@
+<h3>Мои заявки</h3>
+<% if current_user.claims.any? %>
+  <%= render current_user.claims %>
+<% else %>
+  У вас нет заявок.
+<% end %>
+<div>
+  <%= link_to "Я участник проекта ГПО", new_conference_project_member_claim_path(@conference) %>
+  <%= link_to "Я эксперт", new_conference_expert_claim_path(@conference) %>
+</div>
+
+
+<% if current_user.project_participant? %>
+  <h3>Проекты в которых я участвую:</h3>
+  <% current_user.project_member_claims.where(:role => :project_participant).flat_map(&:project).each do |project| %>
+    <%= project.title %>
+    <%= link_to "Добавить доклад", '#' %>
+    <br />
+  <% end %>
+<% end %>
+
+<% if current_user.project_manager? %>
+  <h3>Проекты в которых я руководитель:</h3>
+  <% current_user.project_member_claims.where(:role => :project_manager).flat_map(&:project).each do |project| %>
+    <%= project.title %>
+    <br />
+  <% end %>
+<% end %>
+
+<% if current_user.expert? %>
+  <h3>Проекты для оценки</h3>
+  <% current_user.projects.each do |project| %>
+    <%= project.title %>
+    <%= link_to "Оценить доклад", '#' %>
+    <br />
+  <% end %>
+<% end %>

@@ -19,18 +19,18 @@
           <li>
             <%= link_to "ГПО ТУСУР", "http://gpo.tusur.ru", :target => '_blank' %>
           </li>
-          <% if can?(:manage, Claim) %>
+          <% if current_user.manager? %>
             <li>
               <%= link_to 'Заявки участников', manage_conference_expert_claims_path(@conference) %>
             </li>
           <% end %>
-          <% if can?(:read, Discourse) %>
+          <% if current_user && !current_user.manager? %>
             <li>
-              <%= link_to "Мои доклады", manage_root_path %>
+              <%= link_to "Мой кабинет", dashboard_path %>
             </li>
           <% end %>
           <li>
-            <%= link_to "Статистика", conference_statistics_path(:conference_id => '2012') %>
+            <%= link_to "Статистика", conference_statistics_path(@conference) %>
           </li>
         </ul>
         <%= render :partial => "esp_auth/shared/header" %>
@@ -39,7 +39,9 @@
 
     <div id="wrapper">
       <div id="navigation">
-        <%= link_to "Отправить заявку на участие", new_manage_conference_claim_path(@conference), :class => 'new_claim_link' %>
+        <div class="new_claim_link">
+          Для подачи заявки на участие перейдите в <%= link_to "кабинет", dashboard_path %>
+        </div>
         <h1>Интернет-конференция участников ГПО ТУСУР</h1>
       </div>
       <div id="content">

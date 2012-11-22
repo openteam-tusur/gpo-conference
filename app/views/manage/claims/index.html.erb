@@ -1,0 +1,5 @@
+<ul>
+  <% collection.each do |item| %>
+    <%= render :partial => 'claim', :locals => { :claim => item } %>
+  <% end %>
+</ul>

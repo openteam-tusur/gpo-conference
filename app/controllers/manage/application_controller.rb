@@ -4,10 +4,6 @@ class Manage::ApplicationController < ApplicationController
   before_filter :set_current_year
   before_filter :find_conference
 
-  def index
-    @projects = current_user.projects
-  end
-
   private
     def set_current_year
       params.merge!(:conference_id => Conference.current.year) unless params.has_key?(:conference_id)

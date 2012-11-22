@@ -67,6 +67,7 @@ GEM
       multi_json (>= 1.1)
     connection_pool (0.9.2)
     curb (0.8.3)
+    default_value_for (2.0.1)
     devise (2.1.2)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -256,6 +257,7 @@ DEPENDENCIES
   coffee-rails
   compass-rails
   curb
+  default_value_for
   el_vfs_client
   enumerize
   fabrication

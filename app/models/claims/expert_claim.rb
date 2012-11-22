@@ -14,6 +14,8 @@
 #
 
 class ExpertClaim < Claim
+  extend Enumerize
+
   attr_accessible :theme_id, :state_event
 
   belongs_to :theme
@@ -21,6 +23,8 @@ class ExpertClaim < Claim
   validates_presence_of :theme_id
 
   scope :with_state, ->(state) { where state: state }
+
+  default_value_for :role, :expert
 
   after_destroy :destroy_permissions
 
@@ -32,11 +36,16 @@ class ExpertClaim < Claim
     after_transition pending: :approved, do: :create_permissions
   end
 
+  enumerize :role,
+    in: [:expert],
+    predicates: { prefix: true }
+
   private
 
   def create_permissions
     user.create_participant_permission unless user.participant_permission
     user.permissions.create(context: theme, role: :expert)
+    true
   end
 
   def destroy_permissions

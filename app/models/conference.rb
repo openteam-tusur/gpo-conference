@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Conference < ActiveRecord::Base
   attr_accessible :ends_on, :starts_on, :year
 
@@ -11,7 +13,12 @@ class Conference < ActiveRecord::Base
     year
   end
 
+  def to_s
+    "Конференция #{year}, с #{I18n.l starts_on.to_date, :format => :long} по #{I18n.l ends_on.to_date, :format => :long}"
+  end
+
   def self.current
-    find_or_create_by_year Time.zone.today.year.to_s
+    current_year = Time.zone.today.year
+    find_by_year(current_year.to_s) || find_by_year((current_year-1.year).to_s)
   end
 end

@@ -2,29 +2,22 @@ GpoConference::Application.routes.draw do
   mount ElVfsClient::Engine => '/'
 
   namespace :manage do
-    resources :conferences,             :only => [] do
-      resources :claims,                :only => :new
-
-      resources :expert_claims do
-        get 'with_state/:with_state', :action => :index, :on => :collection, :as => :with_state
-      end
-
-      resources :project_member_claims, :only => [:new, :create, :show]
-
-      resources :projects,              :only => [] do
-        resources :discourses,          :except => :index
-      end
+    resources :conferences,             :except => :show do
+      resources :claims, :only => [:index, :edit, :update, :destroy]
     end
 
-    root :to => 'application#index'
+    root :to => 'conferences#index'
   end
 
-  resources :conferences,       :only => [] do
-    resources :statistics
-    resources :themes,          :only => [:index, :show] do
-      resources :projects,      :only => [] do
-        resources :discourses,  :only => :show do
-          resources :comments,  :only => [:show, :new, :create]
+  resource :dashboard,                  :only => [:show]
+  resources :conference,                :only => [] do
+    resources :project_member_claims,   :only => [:new, :create]
+    resources :expert_claims,           :only => [:new, :create]
+    resource  :statistics,              :only => [:show]
+    resources :themes,                  :only => [:index, :show] do
+      resources :projects,              :only => [] do
+        resources :discourses,          :only => [:show, :new, :create, :update, :edit, :destroy] do
+          resources :comments,          :only => [:show, :new, :create]
         end
       end
     end

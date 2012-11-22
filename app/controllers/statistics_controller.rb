@@ -1,7 +1,7 @@
 class StatisticsController < ApplicationController
   before_filter :find_conference
 
-  def index
+  def show
     @chairs_with_projects = @conference.projects.group_by(&:chair)
   end
 
