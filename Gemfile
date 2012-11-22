@@ -44,5 +44,6 @@ end
 group :test do
   gem 'fabrication'
   gem 'rspec-rails'
+  gem 'shoulda-matchers'
   gem 'sqlite3'
 end
