@@ -42,7 +42,8 @@
         <div class="new_claim_link">
           Для подачи заявки на участие перейдите в <%= link_to "кабинет", dashboard_path %>
         </div>
-        <h1>Интернет-конференция участников ГПО ТУСУР</h1>
+        <h1>Конференция участников ГПО ТУСУР <%= @conference.year %></h1>
+        <span class="conference"><%= @conference  %></span>
       </div>
       <div id="content">
         <div id="page-header">

@@ -7,6 +7,6 @@ class DashboardsController < ApplicationController
 
   private
     def find_current_year
-      @conference = Conference.current.year
+      @conference = Conference.current
     end
 end
