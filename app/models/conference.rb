@@ -1,7 +1,20 @@
 # encoding: utf-8
+# == Schema Information
+#
+# Table name: conferences
+#
+#  id         :integer          not null, primary key
+#  year       :string(255)
+#  starts_on  :date
+#  ends_on    :date
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  hold_on    :date
+#
+
 
 class Conference < ActiveRecord::Base
-  attr_accessible :ends_on, :starts_on, :year
+  attr_accessible :ends_on, :hold_on, :starts_on, :year
 
   has_many :themes
   has_many :projects, :through => :themes

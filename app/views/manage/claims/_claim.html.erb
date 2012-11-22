@@ -1,8 +1,1 @@
-<li>
-  <%= claim.role_text %>
-  <%= claim.user.name %>
-  <%= claim.project if claim.is_a?(ProjectMemberClaim) %>
-  <%= claim.theme if claim.is_a?(ExpertClaim) %>
-  <%= link_to "подтвердить", manage_conference_claim_path(claim.conference, claim, :claim => { :state_event => :approve }), :method => :put if claim.is_a?(ExpertClaim) && claim.pending? %>
-  <%= link_to 'удалить', manage_conference_claim_path(claim.conference, claim), :method => :delete %>
-</li>
+<%= render :partial => 'common/claim', :locals => { :claim => claim } %>

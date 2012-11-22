@@ -6,14 +6,8 @@
 #  uid                :string(255)
 #  name               :text
 #  email              :text
-#  nickname           :text
 #  first_name         :text
 #  last_name          :text
-#  location           :text
-#  description        :text
-#  image              :text
-#  phone              :text
-#  urls               :text
 #  raw_info           :text
 #  sign_in_count      :integer
 #  current_sign_in_at :datetime

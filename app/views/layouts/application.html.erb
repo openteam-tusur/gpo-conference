@@ -19,7 +19,7 @@
           <li>
             <%= link_to "ГПО ТУСУР", "http://gpo.tusur.ru", :target => '_blank' %>
           </li>
-          <% if current_user.manager? %>
+          <% if current_user && current_user.manager? %>
             <li>
               <%= link_to 'Заявки участников', manage_conference_expert_claims_path(@conference) %>
             </li>

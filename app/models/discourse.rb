@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: discourses
+#
+#  id          :integer          not null, primary key
+#  vfs_path    :string(255)
+#  description :text
+#  project_id  :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  title       :text
+#  authors     :string(255)
+#
+
 class Discourse < ActiveRecord::Base
   attr_accessible :description, :url, :vfs_path, :authors, :title
 

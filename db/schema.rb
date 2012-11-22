@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121120093153) do
+ActiveRecord::Schema.define(:version => 20121122023532) do
 
   create_table "chairs", :force => true do |t|
     t.string   "abbr"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(:version => 20121120093153) do
     t.date     "ends_on"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.date     "hold_on"
   end
 
   create_table "discourses", :force => true do |t|

@@ -2,15 +2,16 @@
 #
 # Table name: claims
 #
-#  id         :integer          not null, primary key
-#  project_id :integer
-#  user_id    :integer
-#  role       :string(255)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  state      :string(255)
-#  type       :string(255)
-#  theme_id   :integer
+#  id            :integer          not null, primary key
+#  project_id    :integer
+#  user_id       :integer
+#  role          :string(255)
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  state         :string(255)
+#  type          :string(255)
+#  theme_id      :integer
+#  conference_id :integer
 #
 
 class ExpertClaim < Claim
@@ -21,8 +22,6 @@ class ExpertClaim < Claim
   belongs_to :theme
 
   validates_presence_of :theme_id
-
-  scope :with_state, ->(state) { where state: state }
 
   default_value_for :role, :expert
 

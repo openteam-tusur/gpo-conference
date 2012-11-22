@@ -1,0 +1,28 @@
+<li class='ajaxed_item'>
+  <%= simple_form_for [association_chain, @discourse].flatten, :html => { :remote => true } do |f| %>
+    <%= f.input :title, :as => :string %>
+    <%= f.input :authors, :as => :check_boxes, :collection => project_participants_select_collection(@discourse), :selected => @discourse.authors %>
+    <%= f.input :description %>
+
+    <div class='add_file_wrapper'>
+      <% if f.object.vfs_path? %>
+        <%= link_to "Скачать файл (#{URI.decode(f.object.vfs_path.match(/([^\/.]+)(\.(.{3}))?$/)[0])})", f.object.vfs_path, :class => 'link' %>
+        <%= link_to "Удалить", '#', :class => 'link remove_file' %>
+      <% else %>
+        <%= link_to 'Выбрать файл', '#', :class => 'choose_file' %>
+      <% end %>
+      <%= f.input :vfs_path, :as => :hidden, :input_html => { :params => "vfs_path=/gpo-conference/#{@conference.year}/#{I18n.transliterate(f.object.project.cipher)}" } %>
+    </div>
+
+    <div class="buttons">
+      <%= f.submit "Сохранить" %>
+      <% if resource.new_record? %>
+        <%= link_to 'Отмена', '#', :class => 'cancel new_record' %>
+      <% else %>
+        <%= link_to 'Отмена', resource_path, :remote => true %>
+      <% end %>
+    </div>
+  <% end %>
+</li>
+
+

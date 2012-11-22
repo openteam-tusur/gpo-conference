@@ -21,6 +21,7 @@ class Project < ActiveRecord::Base
   has_many :discourses
   has_many :permissions, :foreign_key => :context_id
   has_many :users, :through => :permissions
+  has_many :project_members, :through => :permissions, :source => :user, :conditions => { 'permissions.role' => :project_participant }
   has_one  :conference, :through => :theme
 
   validates_presence_of :chair, :gpo_id, :theme
