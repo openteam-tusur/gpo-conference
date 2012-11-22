@@ -21,7 +21,7 @@
           </li>
           <% if current_user && current_user.manager? %>
             <li>
-              <%= link_to 'Заявки участников', manage_conference_expert_claims_path(@conference) %>
+              <%= link_to 'Заявки участников', manage_conference_claims_path(@conference) %>
             </li>
           <% end %>
           <% if current_user && !current_user.manager? %>
