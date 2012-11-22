@@ -3,7 +3,7 @@ ru:
     models:
       claim:                    Заявка
       discourse:                Доклад
-      mark:                     Экспертная оценка
+      rate:                     Экспертная оценка
 
     attributes:
       claim:
@@ -16,7 +16,7 @@ ru:
         description:            Описание
         title:                  Название
 
-      mark:
+      rate:
         urgency:                Актуальность разработки
         practicality:           Практическая значимость
         novelty:                Научная новизна
