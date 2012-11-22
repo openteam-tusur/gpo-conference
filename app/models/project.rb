@@ -34,6 +34,8 @@ class Project < ActiveRecord::Base
 
   scope :ordered_by_title, :order => [:chair_id, :title]
 
+  scope :for_current_conference, -> { joins(:theme).where(:themes => { :conference_id => Conference.current }) }
+
   def complex_title
     "#{cipher} #{title}"
   end
