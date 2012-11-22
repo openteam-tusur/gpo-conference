@@ -27,7 +27,7 @@ class Conference < ActiveRecord::Base
   end
 
   def to_s
-    "Конференция #{year}, с #{I18n.l starts_on.to_date, :format => :long} по #{I18n.l ends_on.to_date, :format => :long}"
+    "с #{I18n.l starts_on.to_date, :format => :long} по #{I18n.l ends_on.to_date, :format => :long}"
   end
 
   def self.current
