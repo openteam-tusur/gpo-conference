@@ -11,6 +11,8 @@ class DiscoursesController < ApplicationController
     end
   end
 
+  helper_method :rate
+
   def create
     create! { render resource and return }
   end
@@ -21,6 +23,12 @@ class DiscoursesController < ApplicationController
 
   def destroy
     destroy! { render :nothing => true and return }
+  end
+
+  private
+
+  def rate
+    @rate ||= resource.rate_for(current_user)
   end
 end
 

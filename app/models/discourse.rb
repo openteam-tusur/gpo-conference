@@ -19,6 +19,7 @@ class Discourse < ActiveRecord::Base
   has_one :theme, :through => :project
   has_one :chair, :through => :project
   has_many :comments, :dependent => :destroy
+  has_many :rates, :dependent => :destroy
 
   validates_presence_of :authors, :vfs_path, :title, :description
 
@@ -27,4 +28,9 @@ class Discourse < ActiveRecord::Base
   normalize_attribute :authors do |array|
     array.select { |value| value.present? }
   end
+
+  def rate_for(user)
+    rates.rated_by(user).first || rates.rated_by(user).build
+  end
+
 end

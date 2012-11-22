@@ -79,7 +79,7 @@
                 <% discourses.each do |discourse| %>
                   <li>
                     <%= discourse.title %>
-                    <%= link_to "Оценить доклад", '#' %>
+                    <%= link_to "Оценить доклад", edit_dashboard_discourse_rate_path(discourse) %>
                   </li>
                 <% end %>
               </ul>

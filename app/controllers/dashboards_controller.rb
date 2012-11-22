@@ -11,8 +11,4 @@ class DashboardsController < ApplicationController
     def find_current_year
       @conference = Conference.current
     end
-
-    def projects_for_rating
-      current_user.projects_for_rating.for_current_conference.ordered_by_title.group_by(&:chair)
-    end
 end

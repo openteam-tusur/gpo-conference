@@ -1,0 +1,7 @@
+<%= simple_form_for rate, :url => dashboard_discourse_rate_path(@discourse), :method => :put, :remote => true do |form| %>
+  <%= form.input :urgency,       :as => :radio,  :collection => 1..10 %>
+  <%= form.input :practicality,  :as => :radio,  :collection => 1..10 %>
+  <%= form.input :novelty,       :as => :radio,  :collection => 1..10 %>
+  <%= form.input :typography,    :as => :radio,  :collection => 1..10 %>
+  <%= form.submit %>
+<% end %>

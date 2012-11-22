@@ -9,7 +9,12 @@ GpoConference::Application.routes.draw do
     root :to => 'conferences#index'
   end
 
-  resource :dashboard,                  :only => [:show]
+  resource :dashboard,                  :only => [:show] do
+    resources :discourses,              :only => [] do
+      resource :rate,                   :only => [:edit, :update]
+    end
+  end
+
   resources :conference,                :only => [] do
     resources :project_member_claims,   :only => [:new, :create]
     resources :expert_claims,           :only => [:new, :create]

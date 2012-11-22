@@ -48,6 +48,10 @@
     </li>
   </ul>
 
+  <% if current_user && can?(:manage, @discourse.rate_for(current_user)) %>
+    <h3>Оценка доклада</h3>
+    <%= render :file => 'rates/edit' %>
+  <% end %>
   <div class="comments ajaxed">
     <h3>Комментарии</h3>
     <ul>
