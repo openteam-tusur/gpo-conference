@@ -58,6 +58,10 @@ class Project < ActiveRecord::Base
     false
   end
 
+  def rated_by?(user)
+    rates.for_user(user).any?
+  end
+
   def to_s
     "#{cipher} #{title}"
   end
