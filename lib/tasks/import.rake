@@ -27,7 +27,7 @@ namespace :import do
     themes_attributes = JSON.parse(response.body_str).map { |hash| Hashie::Mash.new(hash) }
     progress_bar      = ProgressBar.new(themes_attributes.size)
 
-    if conference = Conference.find_by_year(Time.zone.today.year.to_s)
+    if (conference = Conference.find_by_year(Time.zone.today.year.to_s)).present?
       themes_attributes.each do |theme_attributes|
         theme = Theme.find_or_initialize_by_gpo_id(theme_attributes.id)
         theme.update_attributes!(name: theme_attributes.name.squish, conference_id: conference.id)

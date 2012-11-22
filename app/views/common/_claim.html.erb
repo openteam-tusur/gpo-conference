@@ -1,12 +1,21 @@
 <li>
-  <%= claim.role_text %>
-  <%= claim.user.name %>
-  <%= claim.human_state_name if claim.is_a?(ExpertClaim) %>
-  <%= claim.project if claim.is_a?(ProjectMemberClaim) %>
-  <%= claim.theme if claim.is_a?(ExpertClaim) %>
+  <span class="role"><%= claim.role_text %></span>
+  <span class="user_name"><%= claim.user.name if controller_path.match(/manage/) %></span>
+
+  <% if claim.is_a?(ExpertClaim) %>
+    <span class="state_name"><%= claim.human_state_name %></span>
+  <% end %>
+
+  <div class="claim_desc">
+    <%= claim.project if claim.is_a?(ProjectMemberClaim) %>
+    <%= claim.theme if claim.is_a?(ExpertClaim) %>
+  </div>
+
   <% if controller_path.match(/manage/) %>
-    <%= link_to "подтвердить", manage_conference_claim_path(claim.conference, claim, :claim => { :state_event => :approve }), :method => :put if claim.is_a?(ExpertClaim) && claim.pending? %>
-    <%= link_to 'удалить', manage_conference_claim_path(claim.conference, claim), :method => :delete %>
+    <div class="actions">
+      <%= link_to "подтвердить", manage_conference_claim_path(claim.conference, claim, :claim => { :state_event => :approve }), :method => :put, :class => :button if claim.is_a?(ExpertClaim) && claim.pending? %>
+      <%= link_to 'удалить', manage_conference_claim_path(claim.conference, claim), :method => :delete, :confirm => t(:confirm), :class => :button %>
+    </div>
   <% end %>
 </li>
 

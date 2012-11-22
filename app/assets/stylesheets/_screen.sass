@@ -167,7 +167,7 @@ a
   #container-two-column,
   #container-one-column
     +clearfix
-    padding: 25px 30px 100px 30px
+    padding: 25px 30px
     p
       margin-bottom: 10px
   #container-two-column
@@ -644,4 +644,47 @@ img.icon
 
 .hint-switcher
   cursor: pointer
+
+#container-one-column
+  .dashboard
+    .wrapper
+      border-bottom: 1px solid #aaa
+      margin: 0 0 10px 0
+      padding: 0 0 10px 0
+
+      h2
+        color: #555
+        font-size: 15px
+
+
+      ul
+        padding: 0 10px
+
+        li
+          +clearfix
+          margin: 0 0 10px
+
+          .role, .title
+            font-size: 14px
+
+          .user_name
+            font-size: 12px
+
+          .state_name
+            +border-radius
+            background: #eee
+            border: 1px solid #ccc
+            font-size: 10px
+            padding: 3px 4px
+
+          .claim_desc
+            color: #555
+            font-size: 12px
+            font-style: italic
+            margin: 0 0 0 10px
+
+          .actions
+
+      .actions
+        margin: 10px 0
 

@@ -48,7 +48,7 @@ class ProjectMemberClaim < Claim
       user.permissions.create(context: project, role: :project_participant)
     end
 
-    if role_project_manager? && project.has_participant?(user)
+    if role_project_manager? && project.has_manager?(user)
       user.permissions.create(context: project, role: :project_manager)
     end
     true

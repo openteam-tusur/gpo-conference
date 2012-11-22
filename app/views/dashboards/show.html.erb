@@ -1,60 +1,94 @@
-<h3>Мои заявки</h3>
-<% if current_user.claims.any? %>
-  <%= render current_user.claims %>
-<% else %>
-  У вас нет заявок.
+<% content_for :page_title do %>
+  Мой кабинет
 <% end %>
-<div>
-  <%= link_to "Я участник проекта ГПО", new_conference_project_member_claim_path(@conference) %>
-  <%= link_to "Я эксперт", new_conference_expert_claim_path(@conference) %>
-</div>
 
+<div class="dashboard">
+  <div class="wrapper">
+    <h2>Мои заявки:</h2>
 
-<% if current_user.project_participant? %>
-  <h3>Проекты в которых я участвую:</h3>
-  <ul>
-    <% current_user.project_member_claims.where(:role => :project_participant).flat_map(&:project).each do |project| %>
-      <li>
-        <%= project.title %>
-        <div class="discourses_wrapper ajaxed">
-          <ul>
-            <%= render project.discourses %>
-          </ul>
-          <%= link_to "Добавить доклад", new_conference_theme_project_discourse_path(@conference, project.theme, project), :remote => true, :class => 'new_record' %>
-          <span class='help'>
-            (<%= link_to "помощь", '#' %>)
-            <div class="help_box">
-              <h2>Помощь</h2>
-              <ol>
-                <li>Укажите название доклада, участников и напишите анотацию к докладу.</li>
-                <li>Нажмите «Выбрать файл».</li>
-                <li>Загрузите ваш доклад в формате PDF в появившемся окошке.</li>
-                <li>Дважды кликните на доклад для добавления.</li>
-              </ol>
-
-              <hr />
-              Чтобы закрыть справку &mdash; нажмите ESC или кликните мышью.
-            </div>
-          </span>
-        </div>
-      </li>
+    <% if current_user.claims.any? %>
+      <ul>
+        <%= render current_user.claims %>
+      </ul>
+    <% else %>
+      <div class="empty">У вас нет заявок.</div>
     <% end %>
-  </ul>
-<% end %>
 
-<% if current_user.project_manager? %>
-  <h3>Проекты в которых я руководитель:</h3>
-  <% current_user.project_member_claims.where(:role => :project_manager).flat_map(&:project).each do |project| %>
-    <%= project.title %>
-    <br />
-  <% end %>
-<% end %>
+    <div class='actions'>
+      <%= link_to "Я участник проекта ГПО", new_conference_project_member_claim_path(@conference), :class => 'button' %>
+      <%= link_to "Я эксперт", new_conference_expert_claim_path(@conference),                      :class => 'button' %>
+    </div>
 
-<% if current_user.expert? %>
-  <h3>Проекты для оценки</h3>
-  <% current_user.projects.each do |project| %>
-    <%= project.title %>
-    <%= link_to "Оценить доклад", '#' %>
-    <br />
+  </div>
+
+  <% if current_user.project_manager? %>
+    <div class="wrapper">
+      <h2>Проекты, где я руководитель:</h2>
+      <ul>
+        <% current_user.project_member_claims.where(:role => :project_manager).flat_map(&:project).each do |project| %>
+          <li><span class='title'><%= project.cipher %> <%= project.title %></span></li>
+        <% end %>
+      </ul>
+    </div>
   <% end %>
-<% end %>
+
+  <% if current_user.project_participant? %>
+    <div class="wrapper">
+      <h2>Проекты, где я участник:</h2>
+      <ul>
+        <% current_user.project_member_claims.where(:role => :project_participant).flat_map(&:project).each do |project| %>
+          <li>
+            <span class='title'><%= project.cipher %> <%= project.title %></span>
+            <div class="discourses_wrapper ajaxed">
+              <ul>
+                <%= render project.discourses %>
+              </ul>
+              <%= link_to "Добавить доклад", new_conference_theme_project_discourse_path(@conference, project.theme, project), :remote => true, :class => 'new_record' %>
+              <span class='help'>
+                (<%= link_to "помощь", '#' %>)
+                <div class="help_box">
+                  <h2>Помощь</h2>
+                  <ol>
+                    <li>Укажите название доклада, участников и напишите анотацию к докладу.</li>
+                    <li>Нажмите «Выбрать файл».</li>
+                    <li>Загрузите ваш доклад в формате PDF в появившемся окошке.</li>
+                    <li>Дважды кликните на доклад для добавления.</li>
+                  </ol>
+
+                  <hr />
+                  Чтобы закрыть справку &mdash; нажмите ESC или кликните мышью.
+                </div>
+              </span>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if current_user.expert? %>
+    <div class="wrapper">
+      <h2>Проекты для оценки:</h2>
+      <% if current_user.rated_discourses.any? %>
+        <ul>
+          <% current_user.rated_discourses.group_by(&:project).each do |project, discourses| %>
+            <li>
+              <span class='title'><%= project.cipher %> <%= project.title %></span>
+              <h3>Доклады по проекту:</h3>
+              <ul>
+                <% discourses.each do |discourse| %>
+                  <li>
+                    <%= discourse.title %>
+                    <%= link_to "Оценить доклад", '#' %>
+                  </li>
+                <% end %>
+              </ul>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <div class="empty">Нет докладов для оценки</div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

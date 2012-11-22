@@ -1,11 +1,15 @@
-<% if collection.any? %>
-  <ul>
-    <% collection.each do |item| %>
-      <%= render :partial => 'claim', :locals => { :claim => item } %>
+<div class="dashboard">
+  <div class="wrapper">
+    <% if collection.any? %>
+      <ul>
+        <% collection.each do |item| %>
+          <%= render :partial => 'claim', :locals => { :claim => item } %>
+        <% end %>
+      </ul>
+    <% else %>
+      <div class="empty">
+        Нет заявок от экспертов, ожидающих подтверждения.
+      </div>
     <% end %>
-  </ul>
-<% else %>
-  <div class="empty">
-    Нет заявок от экспертов, ожидающих подтверждения.
   </div>
-<% end %>
+</div>

@@ -30,6 +30,8 @@ class User < ActiveRecord::Base
   has_many :themes,   through: :permissions, source: :context, source_type: 'Theme'
   has_many :conferences, :through => :projects
   has_many :discourses,  :through => :projects
+  has_many :rated_projects, :through => :themes, :source => :projects
+  has_many :rated_discourses, :through => :rated_projects, :source => :discourses
 
   has_many :theme_expert_permissions, class_name: 'Permission',
     conditions: { context_type: 'Theme', role: :expert }
