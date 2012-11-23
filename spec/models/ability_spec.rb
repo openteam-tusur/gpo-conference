@@ -48,6 +48,7 @@ describe Ability do
 
     it { should be_able_to(:create, comment) }
     it { should_not be_able_to(:update, rate) }
+    it { should_not be_able_to(:manage, discourse) }
   end
 
   context 'participant' do
@@ -55,10 +56,16 @@ describe Ability do
 
     it { should be_able_to(:create, comment) }
     it { should_not be_able_to(:update, rate) }
+    context 'discourse' do
+      it { should be_able_to(:manage, discourse) }
+      it { should be_able_to(:manage, project.discourses.new) }
+      it { should_not be_able_to(:manage, another_project.discourses.new) }
+    end
   end
 
   context 'authenticated' do
     it { should_not be_able_to(:create, comment) }
     it { should_not be_able_to(:update, rate) }
+    it { should_not be_able_to(:manage, discourse) }
   end
 end
