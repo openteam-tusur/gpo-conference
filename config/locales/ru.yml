@@ -6,6 +6,12 @@ ru:
       rate:                     Экспертная оценка
 
     attributes:
+      conference:
+        year:                   Год
+        starts_on:              Начало конференции
+        ends_on:                Окончание конференции
+        hold_on:                Прием докладов до
+
       claim:
         project_id:             Проект
         role:                   Роль
@@ -43,3 +49,5 @@ ru:
       manager:                  Руководитель проекта
 
   confirm:                      Вы уверены в том, что хотите удалить доклад?
+  rated:                        уже оценили
+  not_rated:                    не оценили

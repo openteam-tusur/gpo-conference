@@ -9,6 +9,16 @@
 
 <div id="left">
   <ul class='listing' id='projects'>
+    <div class="theme_experts">
+      <h3>Эксперты этого направления</h3>
+      <% if @theme.experts.any? %>
+        <%= image_tag 'icon_users.png', :class => 'icon', :width => '16', :height => '16' %>
+        <%= @theme.experts.map(&:name).join(', ') %>
+      <% else %>
+        <div class="empty">Нет экспертов</div>
+      <% end %>
+    </div>
+
     <% resource.projects.group_by(&:chair_abbr).sort.each do |chair, projects| %>
       <li>
         <div class='project_with_stats'>

@@ -20,6 +20,9 @@ class Discourse < ActiveRecord::Base
   has_one :chair, :through => :project
   has_many :comments, :dependent => :destroy
   has_many :rates, :dependent => :destroy
+  has_many :experts, :through => :rates, :source => :user
+
+  scope :with_rates, ->{ joins(:rates) }
 
   validates_presence_of :authors, :vfs_path, :title, :description
 
@@ -31,6 +34,10 @@ class Discourse < ActiveRecord::Base
 
   def rate_for(user)
     rates.rated_by(user).first || rates.rated_by(user).build
+  end
+
+  def rate_for?(user)
+    rate_for(user).persisted?
   end
 
   def average_rate

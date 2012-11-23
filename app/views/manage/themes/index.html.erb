@@ -1,4 +1,4 @@
-<%= content_for :page_title, "Заявки экпертов" %>
+<%= content_for :page_title, "Список направлений" %>
 
 <% content_for :local_navigation do %>
   <%= link_to "&larr; назад к списку конференций".html_safe, manage_root_path %>
@@ -8,9 +8,7 @@
   <div class="wrapper">
     <% if collection.any? %>
       <ul>
-        <% collection.each do |item| %>
-          <%= render :partial => 'claim', :locals => { :claim => item } %>
-        <% end %>
+        <%= render collection %>
       </ul>
     <% else %>
       <div class="empty">

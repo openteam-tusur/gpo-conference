@@ -1,1 +1,7 @@
-<%= link_to conference, manage_conference_claims_path(conference) %>
+<h2><%= "Конференция #{conference}" %></h2>
+
+<li>
+  <%= link_to 'Заявки экспертов', manage_conference_claims_path(conference), :class => 'button' %>
+  <%= link_to 'Список направлений', manage_conference_themes_path(conference), :class => 'button' %>
+  <%= link_to 'Статистика докладов', manage_conference_statistics_path(conference), :class => 'button' %>
+</li>

@@ -1,0 +1,17 @@
+<li>
+  <h2><%= theme %></h2>
+  <ul>
+    <% theme.discourses.each do |discourse| %>
+      <li>
+        <%= discourse.title %>
+        <br />
+        Средняя оценка: <%= number_with_precision(discourse.average_rate, :precision => 1) %>
+        <br />
+        <%= discourse.experts.count %> / <%= theme.experts.count %>
+        <br />
+        Следующие эксперты, еще не оценили доклад:
+        <%= (theme.experts - discourse.experts).map(&:name).join(', ') %>
+      </li>
+    <% end %>
+  </ul>
+</li>

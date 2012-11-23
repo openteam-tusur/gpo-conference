@@ -1,2 +1,7 @@
-<%= render collection %>
-<%= link_to 'Создать конференцию', new_manage_conference_path %>
+<%= content_for :page_title, "Управление конференциями" %>
+
+<div class="wrapper">
+  <ul>
+    <%= render collection %>
+  </ul>
+</div>

@@ -4,6 +4,8 @@ GpoConference::Application.routes.draw do
   namespace :manage do
     resources :conferences,             :except => :show do
       resources :claims,                :only => [:index, :update, :destroy]
+      resources :themes,                :only => [:index]
+      resource  :statistics,            :only => [:show]
     end
 
     root :to => 'conferences#index'

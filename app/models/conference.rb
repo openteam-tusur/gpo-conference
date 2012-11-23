@@ -21,6 +21,7 @@ class Conference < ActiveRecord::Base
   has_many :project_member_claims
   has_many :claims
   has_many :expert_claims
+  has_many :discourses, :through => :projects
 
   def to_param
     year
@@ -33,5 +34,9 @@ class Conference < ActiveRecord::Base
   def self.current
     current_year = Time.zone.today.year
     find_by_year(current_year.to_s) || find_by_year((current_year-1.year).to_s)
+  end
+
+  def best_three_with_rate
+    discourses.with_rates.group_by(&:average_rate).sort.first(3)
   end
 end

@@ -1,0 +1,52 @@
+<%= content_for :page_title, "Статистика докладов" %>
+
+<% content_for :local_navigation do %>
+  <%= link_to "&larr; назад к списку конференций".html_safe, manage_root_path %>
+<% end %>
+
+<div class="dashboard">
+  <div class="wrapper">
+    <h3>Лучшая тройка докладов</h3>
+    <ul>
+      <% @conference.best_three_with_rate.each do |rate, discourses| %>
+        <li>
+          Средняя оценка:
+          <%= number_with_precision rate, :precision => 1 %>
+          <ul>
+            <% discourses.each do |discourse| %>
+              <li>
+                <%= discourse.title %>
+              </li>
+            <% end %>
+          </ul>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="wrapper">
+    <h3>Лучшие доклады по направлениям</h3>
+    <ul>
+      <% @conference.themes.each do |theme| %>
+        <li>
+          <h2><%= theme.name %></h2>
+          <ul>
+            <% theme.best_three_with_rate.each do |rate, discourses| %>
+              <li>
+                Средняя оценка:
+                <%= number_with_precision rate, :precision => 1 %>
+                <ul>
+                  <% discourses.each do |discourse| %>
+                    <li>
+                      <%= discourse.title %>
+                    </li>
+                  <% end %>
+                </ul>
+              </li>
+            <% end %>
+          </ul>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+

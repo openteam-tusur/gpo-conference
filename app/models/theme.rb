@@ -16,10 +16,16 @@ class Theme < ActiveRecord::Base
   belongs_to :conference
   has_many :projects
   has_many :discourses, :through => :projects
+  has_many :permissions, :foreign_key => :context_id, :conditions => { :context_type => 'Theme' }
+  has_many :experts, :through => :permissions, :source => :user
 
   validates_presence_of :name, :gpo_id
 
   scope :ordered_by_name, :order => :name
 
   alias_attribute :to_s, :name
+
+  def best_three_with_rate
+    discourses.with_rates.group_by(&:average_rate).sort.first(3)
+  end
 end

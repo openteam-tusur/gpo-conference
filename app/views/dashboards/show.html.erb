@@ -78,6 +78,7 @@
               <ul>
                 <% discourses.each do |discourse| %>
                   <li>
+                    <span class="<%= discourse.rate_for?(current_user) ? 'rated' : 'not_rated' %>"><%= discourse.rate_for?(current_user) ? t('rated') : t('not_rated') %></span>
                     <%= discourse.title %>
                     <%= link_to "Оценить доклад", conference_theme_project_discourse_path(@conference, discourse.theme, discourse.project, discourse) %>
                   </li>

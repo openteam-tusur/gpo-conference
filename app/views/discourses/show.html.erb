@@ -16,7 +16,7 @@
           <% if @discourse.rates.present? %>
             <div class="average_rate">
               <h3>Средняя оценка доклада</h3>
-              <span class="rate"><%= @discourse.average_rate %></span>
+              <span class="rate"><%= number_with_precision(@discourse.average_rate, :precision => 1) %></span>
             </div>
           <% else %>
             <div class="average_rate">
