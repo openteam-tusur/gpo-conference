@@ -21,38 +21,36 @@ describe ProjectMemberClaim do
   describe 'try approve after create' do
     let(:user)          { Fabricate :user, last_name: 'Иванов', first_name: 'Иван' }
     let(:project)       { Fabricate :project }
-    let(:participants)  { [ Hashie::Mash.new(last_name: 'Иванов', first_name: 'Иван', middle_name: 'Иванович') ] }
-    let(:managers)      { [ Hashie::Mash.new(last_name: 'Петров', first_name: 'Петр', middle_name: 'Петрович') ] }
+    let(:participants)  { [ Hashie::Mash.new(user.attributes) ] }
+    let(:managers)      { [ Hashie::Mash.new(user.attributes) ] }
 
-    let(:participant_permission) { subject.user.permissions.for_context(nil).for_role(:participant).first }
-    let(:project_participant_permission) { subject.user.permissions.for_context(project).for_role(:project_participant).first }
+    before { project.stub(:participants).and_return(participants) }
+    before { project.stub(:managers).and_return(managers) }
 
-    context 'non member' do
-      let(:claim) { Fabricate :project_member_claim, user: user, project: project, role: :project_participant }
-
-      before { project.stub(:participants).and_return([]) }
-      before { project.stub(:project_managers).and_return([]) }
-
-      specify {
-        expect { Fabricate(:project_member_claim, user: user, project: project, role: :project_participant) }.to raise_error(ActiveRecord::RecordInvalid)
-      }
+    def create_claim
+      Fabricate :project_member_claim, user: user, project: project, role: :participant
     end
 
-    describe 'member' do
-      before { project.stub(:participants).and_return(participants) }
-      before { project.stub(:project_managers).and_return(managers) }
+    context 'non member' do
+      let(:managers) { [] }
+      let(:participants) { [] }
+
+      specify { expect { create_claim }.to raise_error(ActiveRecord::RecordInvalid) }
+    end
+
+    context 'member' do
+      before { create_claim }
 
       context 'participant' do
-        subject { Fabricate :project_member_claim, user: user, project: project, role: :project_participant }
+        let(:managers) { [] }
 
-        specify { participant_permission.should be_persisted }
-        specify { project_participant_permission.should be_persisted }
+        specify { user.should be_participant_of(project) }
       end
 
-      context 'project_manager' do
-        subject { Fabricate :project_member_claim, user: user, project: project, role: :project_manager }
+      context 'manager' do
+        let(:participants) { [] }
 
-        specify { participant_permission.should be_persisted }
+        specify { user.should be_manager_of(project) }
       end
     end
   end

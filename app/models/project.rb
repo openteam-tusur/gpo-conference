@@ -21,13 +21,13 @@ class Project < ActiveRecord::Base
   has_many :discourses
   has_many :permissions, :foreign_key => :context_id
   has_many :users, :through => :permissions
-  has_many :project_members, :through => :permissions, :source => :user, :conditions => { 'permissions.role' => :project_participant }
+  has_many :project_members, :through => :permissions, :source => :user, :conditions => { 'permissions.role' => :participant }
   has_one  :conference, :through => :theme
 
   validates_presence_of :chair, :gpo_id, :theme
 
   delegate :analysis, :expected_results, :forecast, :funds_required, :funds_sources, :goal,
-    :novelty, :purpose, :release_cost, :source_data, :stakeholders, :participants, :project_managers,
+    :novelty, :purpose, :release_cost, :source_data, :stakeholders, :participants, :managers,
     to: :project_attributes
 
   delegate :abbr, :to => :chair, :prefix => true
@@ -40,22 +40,9 @@ class Project < ActiveRecord::Base
     "#{cipher} #{title}"
   end
 
-  def has_participant?(user)
-    participants.each do |participant|
-      return true if participant.last_name == user.last_name &&
-        participant.first_name == user.first_name
-    end
-
-    false
-  end
-
-  def has_manager?(user)
-    project_managers.each do |project_manager|
-      return true if project_manager.last_name == user.last_name &&
-        project_manager.first_name == user.first_name
-    end
-
-    false
+  def role_for(user)
+    return :participant if member?(:participant, user)
+    return :manager if member?(:manager, user)
   end
 
   def rated_by?(user)
@@ -67,6 +54,15 @@ class Project < ActiveRecord::Base
   end
 
   private
+
+  def member?(role, user)
+    self.send(role.to_s.pluralize).each do |member|
+      return true if member.last_name == user.last_name &&
+        member.first_name == user.first_name
+    end
+
+    false
+  end
 
   def response
     @response ||= Curl.get("#{Settings['gpo.url']}/api/projects/#{gpo_id}")

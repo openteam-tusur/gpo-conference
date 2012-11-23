@@ -39,7 +39,7 @@ ru:
     role:
       expert:                   Эксперт
       manager:                  Менеджер
-      project_participant:      Участник проекта
-      project_manager:          Руководитель проекта
+      participant:      Участник проекта
+      manager:          Руководитель проекта
 
   confirm:                      Вы уверены в том, что хотите удалить доклад?

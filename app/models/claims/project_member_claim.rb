@@ -19,38 +19,29 @@ class ProjectMemberClaim < Claim
 
   attr_accessible :role, :project_id, :project_name
 
-  attr_accessor :project_name
-
   belongs_to :project
 
-  validate :user_membership_of_project, :if => :project_id?
+  validates_presence_of :role, :project
 
-  validates_presence_of :role, :project_id
+  validates_uniqueness_of :role, scope: [:user_id, :project_id]
+
+  validate :user_membership_of_project
 
   after_create :create_permissions
 
+  attr_accessor :project_name
+
   enumerize :role,
-    in: [:project_participant, :project_manager],
+    in: [:participant, :manager],
     predicates: { prefix: true }
 
   private
 
   def user_membership_of_project
-    if !project.has_participant?(user) && !project.has_manager?(user)
-      errors[:base] << I18n.t('activerecord.errors.claim.creating_error')
-    end
+    errors[:base] << I18n.t('activerecord.errors.claim.creating_error') unless project.role_for(user)
   end
 
   def create_permissions
-    user.permissions.create(role: :participant)
-
-    if role_project_participant? && project.has_participant?(user)
-      user.permissions.create(context: project, role: :project_participant)
-    end
-
-    if role_project_manager? && project.has_manager?(user)
-      user.permissions.create(context: project, role: :project_manager)
-    end
-    true
+    user.permissions.create!(context: project, role: project.role_for(user))
   end
 end

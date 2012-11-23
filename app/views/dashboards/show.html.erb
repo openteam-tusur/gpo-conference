@@ -21,22 +21,22 @@
 
   </div>
 
-  <% if current_user.project_manager? %>
+  <% if current_user.manager? %>
     <div class="wrapper">
       <h2>Проекты, где я руководитель:</h2>
       <ul>
-        <% current_user.project_member_claims.where(:role => :project_manager).flat_map(&:project).each do |project| %>
+        <% current_user.project_member_claims.where(:role => :manager).flat_map(&:project).each do |project| %>
           <li><span class='title'><%= project.cipher %> <%= project.title %></span></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-  <% if current_user.project_participant? %>
+  <% if current_user.participant? %>
     <div class="wrapper">
       <h2>Проекты, где я участник:</h2>
       <ul>
-        <% current_user.project_member_claims.where(:role => :project_participant).flat_map(&:project).each do |project| %>
+        <% current_user.project_member_claims.where(:role => :participant).flat_map(&:project).each do |project| %>
           <li>
             <span class='title'><%= project.cipher %> <%= project.title %></span>
             <div class="discourses_wrapper ajaxed">

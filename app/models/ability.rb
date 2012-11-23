@@ -22,10 +22,10 @@ class Ability
     #end
 
     # Доклады
-    #can :read, Discourse if user.project_participant?
+    #can :read, Discourse if user.participant?
 
     #can :manage, Discourse do |discourse|
-      #user.project_participant_of?(discourse.project)
+      #user.participant_of?(discourse.project)
     #end
 
     # Комментарии

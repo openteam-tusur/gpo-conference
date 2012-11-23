@@ -20,15 +20,23 @@ describe Project do
   let(:project) { Fabricate :project }
   let(:members) { [ Hashie::Mash.new(last_name: 'Иванов', first_name: 'Иван', middle_name: 'Иванович') ] }
 
-  describe '#has_participant?' do
-    before { project.stub(:participants).and_return(members) }
+  describe '#role_for(user)' do
+    before { project.stub(:managers).and_return([]) }
+    before { project.stub(:participants).and_return([]) }
 
-    specify { project.has_participant?(user).should be_true }
+    subject { project.role_for(user) }
+
+    it { should be_nil }
+
+    context 'participant' do
+      before { project.stub(:participants).and_return(members) }
+      it { should == :participant }
+    end
+
+    context 'manager' do
+      before { project.stub(:managers).and_return(members) }
+      it { should == :manager }
+    end
   end
 
-  describe '#has_manager?' do
-    before { project.stub(:project_managers).and_return(members) }
-
-    specify { project.has_manager?(user).should be_true }
-  end
 end
