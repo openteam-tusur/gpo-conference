@@ -12,6 +12,18 @@
     <li>
       <div class='project_with_stats'>
         <div class='discourse_card'>
+
+          <% if @discourse.rates.present? %>
+            <div class="average_rate">
+              <h3>Средняя оценка доклада</h3>
+              <span class="rate"><%= @discourse.average_rate %></span>
+            </div>
+          <% else %>
+            <div class="average_rate">
+              <h3>Доклад еще не оценивали</h3>
+            </div>
+          <% end %>
+
           <div>
             <%= image_tag 'icon_theme.png', :class => 'icon', :width => '16', :height => '16' %>
             <%= link_to @theme, conference_theme_path(@conference, @theme) %>
