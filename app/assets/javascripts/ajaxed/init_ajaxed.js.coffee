@@ -1,3 +1,12 @@
+$.fn.show_loader_for = (content) ->
+  target = $(this)
+  target.addClass('show_loader')
+  setTimeout ->
+    target.removeClass('show_loader').html(content)
+  ,
+    800
+  target
+
 cancel_handler = () ->
   $('.cancel').on 'click', ->
     link = $(this)
@@ -12,7 +21,12 @@ cancel_handler = () ->
     ul = target.siblings("ul")
 
     if target.hasClass('new_record')
-      ul.append(jqXHR.responseText)
+      if ul.length
+        ul.append(jqXHR.responseText)
+      else
+        parent = target.closest('.ajaxed')
+        parent.show_loader_for(jqXHR.responseText)
+
       if target.hasClass('new_comment')
         $('form.new_comment .cancel').click()
         target.hide()

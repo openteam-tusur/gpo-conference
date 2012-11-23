@@ -15,6 +15,11 @@ class RatesController < ApplicationController
 
   helper_method :rate
 
+
+  def update
+    update!{ render :edit and return }
+  end
+
   private
 
   def resource

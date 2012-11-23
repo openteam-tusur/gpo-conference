@@ -1,7 +1,39 @@
-<%= simple_form_for rate, :url => dashboard_discourse_rate_path(@discourse), :method => :put, :remote => true do |form| %>
+<h3>Оценка доклада</h3>
+<%= simple_form_for rate, :url => dashboard_discourse_rate_path(@discourse), :html => {:class => 'rate_form new_record' }, :method => :put, :remote => true do |form| %>
+  <div class="ruler">
+    <div>Низкая</div>
+    <div>Ниже среднего</div>
+    <div>Средняя</div>
+    <div>Выше среднего</div>
+    <div>Высокая</div>
+  </div>
   <%= form.input :urgency,       :as => :radio,  :collection => 1..10 %>
+  <div class="ruler">
+    <div>Низкая</div>
+    <div>Ниже среднего</div>
+    <div>Средняя</div>
+    <div>Выше среднего</div>
+    <div>Высокая</div>
+  </div>
   <%= form.input :practicality,  :as => :radio,  :collection => 1..10 %>
+  <div class="ruler">
+    <div>Низкая</div>
+    <div>Ниже среднего</div>
+    <div>Средняя</div>
+    <div>Выше среднего</div>
+    <div>Высокая</div>
+  </div>
   <%= form.input :novelty,       :as => :radio,  :collection => 1..10 %>
+  <div class="ruler">
+    <div>Низкий</div>
+    <div>Ниже среднего</div>
+    <div>Средний</div>
+    <div>Выше среднего</div>
+    <div>Высокий</div>
+  </div>
   <%= form.input :typography,    :as => :radio,  :collection => 1..10 %>
-  <%= form.submit %>
+
+  <div class="actions">
+    <%= form.submit "Оценить", :class => 'button' %>
+  </div>
 <% end %>

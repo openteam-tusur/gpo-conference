@@ -688,3 +688,94 @@ img.icon
       .actions
         margin: 10px 0
 
+#content
+  .show_loader
+
+    form
+      position: relative
+
+      &:before
+        background: image_url('preloader.gif') no-repeat center top
+        color: #fafafa
+        content: ''
+        padding: 25px 0
+        position: absolute
+        text-align: center
+        top: 45%
+        width: 100%
+        z-index: 99999
+
+      &:after
+        background: image_url('blur.png') repeat
+        content: ""
+        display: block
+        height: 461px
+        margin: 0 auto
+        position: absolute
+        top: 0
+        width: 580px
+
+  .simple_form
+    .input
+      position: relative
+
+      .error
+        left: 430px
+        position: absolute
+        top: 0
+
+  .rates
+    h3
+      color: #aaa
+      font-size: 18px
+      font-weight: normal
+
+.rate_form
+  margin: 0 auto 10px auto
+  width: 580px
+
+  .actions
+    margin: 20px 0
+
+    input
+      display: block
+      margin: 0 auto
+      width: 250px
+
+  .ruler
+    +clearfix
+    border-bottom: 1px solid #ccc
+    position: relative
+    top: 43px
+
+    div
+      float: left
+      text-align: center
+      width: 116px
+
+  .radio_buttons
+    border-bottom: 1px solid #ccc
+    margin: 0
+
+    .control-label
+      font-size: 14px
+      margin: 0 0 15px 0
+      text-align: center
+
+    label.radio
+      +inline-block
+      line-height: 12px
+      height: 42px
+      margin: 0 22px
+      text-align: center
+      width: 14px
+
+      input
+        display: block
+        line-height: 12px
+        margin: 0 0 0 1px
+        position: relative
+        top: 26px
+        height: 14px
+        width: 14px
+
