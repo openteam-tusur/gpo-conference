@@ -17,7 +17,8 @@ class Ability
     can :create, Comment if user.permissions.any?
 
     can :manage, Discourse do |discourse|
-      user.participant_of?(discourse.project)
+      user.participant_of?(discourse.project) &&
+        (discourse.conference.starts_on .. (discourse.conference.hold_on - 1.day)).include?(Date.today)
     end
   end
 end

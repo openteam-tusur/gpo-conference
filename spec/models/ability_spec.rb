@@ -29,7 +29,7 @@ describe Ability do
     it { should_not be_able_to(:manage, discourse) }
 
     context 'rates' do
-      before { Timecop.freeze conference.hold_on }
+      before { Timecop.freeze conference.hold_on.beginning_of_day }
       it { should be_able_to(:update, rate) }
 
       context 'of another theme' do
@@ -75,9 +75,25 @@ describe Ability do
     it { should be_able_to(:create, comment) }
     it { should_not be_able_to(:update, rate) }
     context 'discourse' do
+      before { Timecop.freeze(conference.starts_on.beginning_of_day) }
       it { should be_able_to(:manage, discourse) }
       it { should be_able_to(:manage, project.discourses.new) }
       it { should_not be_able_to(:manage, another_project.discourses.new) }
+
+      context 'before discorce disallowed' do
+        before { Timecop.freeze(conference.hold_on.beginning_of_day - 1.second) }
+        it { should be_able_to(:manage, discourse) }
+      end
+
+      context 'before conference starts' do
+        before { Timecop.freeze(conference.starts_on.beginning_of_day - 1.second) }
+        it { should_not be_able_to(:manage, discourse) }
+      end
+
+      context 'after discourse disallowed' do
+        before { Timecop.freeze(conference.hold_on.beginning_of_day) }
+        it { should_not be_able_to(:manage, discourse) }
+      end
     end
   end
 
