@@ -9,16 +9,6 @@
 
 <div id="left">
   <ul class='listing' id='projects'>
-    <div class="theme_experts">
-      <h3>Эксперты этого направления</h3>
-      <% if @theme.experts.any? %>
-        <%= image_tag 'icon_users.png', :class => 'icon', :width => '16', :height => '16' %>
-        <%= @theme.experts.map(&:name).join(', ') %>
-      <% else %>
-        <div class="empty">Нет экспертов</div>
-      <% end %>
-    </div>
-
     <% resource.projects.group_by(&:chair_abbr).sort.each do |chair, projects| %>
       <li>
         <div class='project_with_stats'>
@@ -35,10 +25,7 @@
             <li>
               <h3 id="project_<%= project.id %>">
                 <%= image_tag 'icon_project.png', :class => 'icon', :width => '16', :height => '16' %>
-                <%= link_to "#{project.capitalized_title}",
-                  "http://gpo.tusur.ru/chairs/#{project.chair.gpo_id}/projects/#{project.gpo_id}"
-                %>
-                &#x2B08;
+                <%= project.capitalized_title %>
               </h3>
               <% if project.discourses.empty? %>
                 <div class='empty'>Нет докладов</div>
