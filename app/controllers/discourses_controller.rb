@@ -1,5 +1,10 @@
 class DiscoursesController < ApplicationController
-  sso_load_and_authorize_resource
+  inherit_resources
+
+  load_and_authorize_resource
+  skip_authorize_resource :only => :show
+
+  before_filter :authenticate_user!, :except => :show
 
   actions :show, :new, :create, :update, :edit, :destroy
 

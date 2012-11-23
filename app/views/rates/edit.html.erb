@@ -1,4 +1,9 @@
 <h3>Оценка доклада</h3>
+
+<% if @discourse.rates.present? %>
+   Средняя оценка доклада <%= @discourse.average_rate %>
+<% end %>
+
 <%= simple_form_for rate, :url => dashboard_discourse_rate_path(@discourse), :html => {:class => 'rate_form new_record' }, :method => :put, :remote => true do |form| %>
   <div class="ruler">
     <div>Низкая</div>

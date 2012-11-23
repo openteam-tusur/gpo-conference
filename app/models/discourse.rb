@@ -33,4 +33,8 @@ class Discourse < ActiveRecord::Base
     rates.rated_by(user).first || rates.rated_by(user).build
   end
 
+  def average_rate
+    rates.average('cached_total')
+  end
+
 end
