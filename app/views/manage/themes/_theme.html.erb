@@ -9,8 +9,13 @@
         <br />
         <%= discourse.experts.count %> / <%= theme.experts.count %>
         <br />
-        Следующие эксперты, еще не оценили доклад:
-        <%= (theme.experts - discourse.experts).map(&:name).join(', ') %>
+
+        <% if (theme.experts - discourse.experts).any? %>
+          <span class="warning">
+            Следующие эксперты, еще не оценили доклад:
+            <%= (theme.experts - discourse.experts).map(&:name).join(', ') %>
+          </span>
+        <% end %>
       </li>
     <% end %>
   </ul>

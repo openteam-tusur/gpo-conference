@@ -37,6 +37,6 @@ class Conference < ActiveRecord::Base
   end
 
   def best_three_with_rate
-    discourses.with_rates.group_by(&:average_rate).sort.first(3)
+    discourses.with_rates.group_by(&:average_rate).sort.reverse.first(3)
   end
 end

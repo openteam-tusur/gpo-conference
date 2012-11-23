@@ -26,6 +26,6 @@ class Theme < ActiveRecord::Base
   alias_attribute :to_s, :name
 
   def best_three_with_rate
-    discourses.with_rates.group_by(&:average_rate).sort.first(3)
+    discourses.with_rates.group_by(&:average_rate).sort.reverse.first(3)
   end
 end
