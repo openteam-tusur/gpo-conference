@@ -60,7 +60,7 @@
     </li>
   </ul>
 
-  <% if current_user.try(:expert_of?, @theme) %>
+  <% if can?(:update, rate) && current_user.expert_of?(@theme) %>
     <div class="rates ajaxed">
       <%= render :file => 'rates/edit' %>
     </div>
