@@ -14,5 +14,5 @@
 class Permission < ActiveRecord::Base
   attr_accessible :context, :role
 
-  sso_auth_permission :roles => %w[admin expert participant manager]
+  sso_auth_permission :roles => %w[administrator expert participant manager]
 end

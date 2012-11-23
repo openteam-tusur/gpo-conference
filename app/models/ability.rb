@@ -6,7 +6,11 @@ class Ability
   def initialize(user)
     return unless user
 
-    can :manage, :all
+    can :manage, :all if user.administrator?
+
+    can :manage, Rate do |rate|
+      user.expert_of?(rate.theme) && rate.user == user
+    end
 
     #can :manage, :application do
       #user.permissions.any?

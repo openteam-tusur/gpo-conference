@@ -1,6 +1,10 @@
 class Rate < ActiveRecord::Base
   belongs_to :user
   belongs_to :discourse
+
+  has_one :project, through: :discourse
+  has_one :theme, through: :discourse
+
   attr_accessible :urgency, :practicality, :novelty, :typography
   validates :urgency, :practicality, :novelty, :typography, presence: true,
                                                             numericality: { only_integer: true },
