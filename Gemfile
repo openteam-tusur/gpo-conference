@@ -47,4 +47,5 @@ group :test do
   gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'sqlite3'
+  gem 'timecop'
 end

@@ -18,6 +18,7 @@ class Discourse < ActiveRecord::Base
   belongs_to :project
   has_one :theme, :through => :project
   has_one :chair, :through => :project
+  has_one :conference, :through => :project
   has_many :comments, :dependent => :destroy
   has_many :rates, :dependent => :destroy
   has_many :experts, :through => :rates, :source => :user

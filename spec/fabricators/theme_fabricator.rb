@@ -11,6 +11,7 @@
 #
 
 Fabricator(:theme) do
+  conference
   gpo_id  1
   name    'name'
 end

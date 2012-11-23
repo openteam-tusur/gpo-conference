@@ -9,7 +9,9 @@ class Ability
     can :manage, :all if user.administrator?
 
     can :update, Rate do |rate|
-      user.expert_of?(rate.theme) && rate.user == user
+      user.expert_of?(rate.theme) &&
+        rate.user == user &&
+        (rate.conference.hold_on .. rate.conference.ends_on).include?(Date.today)
     end
 
     can :create, Comment if user.permissions.any?

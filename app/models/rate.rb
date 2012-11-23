@@ -4,6 +4,7 @@ class Rate < ActiveRecord::Base
 
   has_one :project, through: :discourse
   has_one :theme, through: :discourse
+  has_one :conference, through: :discourse
 
   attr_accessible :urgency, :practicality, :novelty, :typography
   validates :urgency, :practicality, :novelty, :typography, presence: true,

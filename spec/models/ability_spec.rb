@@ -3,7 +3,8 @@
 require 'spec_helper'
 
 describe Ability do
-  let(:theme) { project.theme }
+  let(:conference)    { theme.conference }
+  let(:theme)         { project.theme }
   let(:another_theme) { another_project.theme }
 
   let(:project) { Fabricate :project }
@@ -25,8 +26,10 @@ describe Ability do
     subject { ability_for(expert_of(theme, :user => user)) }
 
     it { should be_able_to(:create, comment) }
+    it { should_not be_able_to(:manage, discourse) }
 
     context 'rates' do
+      before { Timecop.freeze conference.hold_on }
       it { should be_able_to(:update, rate) }
 
       context 'of another theme' do
@@ -38,6 +41,21 @@ describe Ability do
       context 'of another user' do
         subject { ability_for(another_expert_of(theme)) }
 
+        it { should_not be_able_to(:update, rate) }
+      end
+
+      context 'before conference ends' do
+        before { Timecop.freeze(conference.ends_on.end_of_day - 1.second) }
+        it { should be_able_to(:update, rate) }
+      end
+
+      context 'before rating allowed' do
+        before { Timecop.freeze(conference.hold_on.beginning_of_day - 1.second) }
+        it { should_not be_able_to(:update, rate) }
+      end
+
+      context 'after rating allowed' do
+        before { Timecop.freeze(conference.ends_on.end_of_day + 1.second) }
         it { should_not be_able_to(:update, rate) }
       end
     end
