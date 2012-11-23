@@ -35,7 +35,10 @@
             <li>
               <h3 id="project_<%= project.id %>">
                 <%= image_tag 'icon_project.png', :class => 'icon', :width => '16', :height => '16' %>
-                <%= project.title.mb_chars.downcase.gsub(/"/, '').sub /./ do |l| l.mb_chars.capitalize end %>
+                <%= link_to "#{project.capitalized_title}",
+                  "http://gpo.tusur.ru/chairs/#{project.chair.gpo_id}/projects/#{project.gpo_id}"
+                %>
+                &#x2B08;
               </h3>
               <% if project.discourses.empty? %>
                 <div class='empty'>Нет докладов</div>

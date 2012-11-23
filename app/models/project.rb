@@ -53,6 +53,12 @@ class Project < ActiveRecord::Base
     "#{cipher} #{title}"
   end
 
+  def capitalized_title
+    title.mb_chars.downcase.gsub(/"/, '').sub /^./ do |l|
+      l.mb_chars.capitalize
+    end
+  end
+
   private
 
   def member?(role, user)
