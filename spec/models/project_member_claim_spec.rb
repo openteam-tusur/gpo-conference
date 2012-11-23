@@ -21,14 +21,12 @@ describe ProjectMemberClaim do
   describe 'try approve after create' do
     let(:user)          { Fabricate :user, last_name: 'Иванов', first_name: 'Иван' }
     let(:project)       { Fabricate :project }
-    let(:participants)  { [ Hashie::Mash.new(user.attributes) ] }
-    let(:managers)      { [ Hashie::Mash.new(user.attributes) ] }
+    let(:role)          { nil }
 
-    before { project.stub(:participants).and_return(participants) }
-    before { project.stub(:managers).and_return(managers) }
+    before { project.stub(:role_for).with(user).and_return role }
 
     def create_claim
-      Fabricate :project_member_claim, user: user, project: project, role: :participant
+      Fabricate :project_member_claim, user: user, project: project
     end
 
     context 'non member' do
@@ -42,13 +40,13 @@ describe ProjectMemberClaim do
       before { create_claim }
 
       context 'participant' do
-        let(:managers) { [] }
+        let(:role) { :participant }
 
         specify { user.should be_participant_of(project) }
       end
 
       context 'manager' do
-        let(:participants) { [] }
+        let(:role) { :manager }
 
         specify { user.should be_manager_of(project) }
       end

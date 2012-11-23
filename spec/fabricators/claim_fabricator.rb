@@ -17,7 +17,6 @@
 Fabricator(:project_member_claim) do
   project
   user
-  role :participant
 end
 
 Fabricator(:expert_claim) do

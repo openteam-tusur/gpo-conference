@@ -23,6 +23,8 @@ class ExpertClaim < Claim
 
   validates_presence_of :theme_id
 
+  validates_uniqueness_of :theme_id, :scope => [:user_id]
+
   default_value_for :role, :expert
 
   after_destroy :destroy_permission
