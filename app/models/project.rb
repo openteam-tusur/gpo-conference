@@ -42,7 +42,7 @@ class Project < ActiveRecord::Base
 
   def role_for(user)
     return :participant if member?(:participant, user)
-    return :manager if member?(:manager, user) || true
+    return :manager if member?(:manager, user)
   end
 
   def rated_by?(user)
