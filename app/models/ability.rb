@@ -8,9 +8,11 @@ class Ability
 
     can :manage, :all if user.administrator?
 
-    can :manage, Rate do |rate|
+    can :update, Rate do |rate|
       user.expert_of?(rate.theme) && rate.user == user
     end
+
+    can :create, Comment if user.permissions.any?
 
     #can :manage, :application do
       #user.permissions.any?
@@ -26,7 +28,6 @@ class Ability
     #end
 
     # Доклады
-    #can :read, Discourse if user.participant?
 
     #can :manage, Discourse do |discourse|
       #user.participant_of?(discourse.project)

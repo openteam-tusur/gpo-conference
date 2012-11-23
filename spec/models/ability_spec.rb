@@ -10,8 +10,11 @@ describe Ability do
   let(:another_project) { Fabricate :project }
 
   let(:discourse) { project.discourses.new.tap{|d| d.save(:validate => false)} }
+  let(:comment) { Comment.new }
 
-  let(:rate) { discourse.rate_for(expert_of(theme)) }
+  let(:rate) { discourse.rate_for(user) }
+
+  subject { ability_for(user) }
 
   context 'administrator' do
     subject { ability_for(administrator) }
@@ -19,17 +22,43 @@ describe Ability do
   end
 
   context 'expert' do
-    subject { ability_for(expert_of(theme)) }
+    subject { ability_for(expert_of(theme, :user => user)) }
+
+    it { should be_able_to(:create, comment) }
+
     context 'rates' do
-      it { should be_able_to(:manage, rate) }
-      context 'of another project' do
-        subject { ability_for(expert_of(another_theme)) }
-        it { should_not be_able_to(:manage, rate) }
+      it { should be_able_to(:update, rate) }
+
+      context 'of another theme' do
+        subject { ability_for(expert_of(another_theme, :user => user)) }
+
+        it { should_not be_able_to(:update, rate) }
       end
+
       context 'of another user' do
         subject { ability_for(another_expert_of(theme)) }
-        it { should_not be_able_to(:manage, rate) }
+
+        it { should_not be_able_to(:update, rate) }
       end
     end
+  end
+
+  context 'manager' do
+    before { user.permissions.create! :role => :manager, :context => project }
+
+    it { should be_able_to(:create, comment) }
+    it { should_not be_able_to(:update, rate) }
+  end
+
+  context 'participant' do
+    before { user.permissions.create! :role => :participant, :context => project }
+
+    it { should be_able_to(:create, comment) }
+    it { should_not be_able_to(:update, rate) }
+  end
+
+  context 'authenticated' do
+    it { should_not be_able_to(:create, comment) }
+    it { should_not be_able_to(:update, rate) }
   end
 end
