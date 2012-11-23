@@ -25,14 +25,14 @@ class ExpertClaim < Claim
 
   default_value_for :role, :expert
 
-  after_destroy :destroy_permissions
+  after_destroy :destroy_permission
 
   state_machine :state, initial: :pending do
     event :approve do
       transition pending: :approved
     end
 
-    after_transition pending: :approved, do: :create_permissions
+    after_transition pending: :approved, do: :create_permission
   end
 
   enumerize :role,
@@ -41,14 +41,11 @@ class ExpertClaim < Claim
 
   private
 
-  def create_permissions
-    user.create_participant_permission unless user.participant_permission
-    user.permissions.create(context: theme, role: :expert)
-    true
+  def create_permission
+    user.permissions.create!(context: theme, role: :expert)
   end
 
-  def destroy_permissions
-    user.permissions.where(context_type: 'Theme', context_id: theme.id, role: :expert).first.try(:destroy)
-    user.participant_permission_destroy if user.theme_expert_permissions.empty?
+  def destroy_permission
+    user.permissions.for_context(theme).for_role(role).destroy_all
   end
 end

@@ -60,7 +60,7 @@
     </li>
   </ul>
 
-  <% if current_user && can?(:manage, @discourse.rate_for(current_user)) %>
+  <% if current_user.try(:expert_of?, @theme) %>
     <div class="rates ajaxed">
       <%= render :file => 'rates/edit' %>
     </div>
@@ -74,10 +74,10 @@
       <% end %>
     </ul>
 
-    <% if can?(:manage, :application) %>
+    <% if can?(:create, @discourse.comments.new) %>
       <%= link_to "Оставить комментарий", new_conference_theme_project_discourse_comment_path(@conference, @theme, @project, resource), :remote => true, :class => 'new_record new_comment large' %>
     <% else %>
-      <h3>Оставлять комментарии могут только зарегистрированные пользователи</h3>
+      <h3>Оставлять комментарии могут только подтверждённые участники конференции</h3>
     <% end %>
   </div>
 

@@ -12,7 +12,7 @@
     </span>
   </div>
 
-  <% if can?(:manage, :application) %>
+  <% if can?(:create, comment.children.new) %>
     <%= link_to "ответить", new_conference_theme_project_discourse_comment_path(@conference, @theme, @project, comment.discourse, :comment => {:parent_id => comment.id}), :remote => true, :class => 'new_record new_comment' %>
   <% end %>
 

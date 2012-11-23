@@ -1,5 +1,6 @@
 class Manage::ApplicationController < ApplicationController
-  sso_load_and_authorize_resource
+  sso_authenticate_and_authorize
+  inherit_resources
 
   before_filter :set_current_year
   before_filter :find_conference

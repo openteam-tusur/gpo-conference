@@ -27,7 +27,8 @@ class ProjectMemberClaim < Claim
 
   validate :user_membership_of_project
 
-  after_create :create_permissions
+  after_create :create_permission
+  after_destroy :destroy_permission
 
   attr_accessor :project_name
 
@@ -41,7 +42,11 @@ class ProjectMemberClaim < Claim
     errors[:base] << I18n.t('activerecord.errors.claim.creating_error') unless project.role_for(user)
   end
 
-  def create_permissions
+  def create_permission
     user.permissions.create!(context: project, role: project.role_for(user))
+  end
+
+  def destroy_permission
+    user.permissions.for_context(project).for_role(role).destroy_all
   end
 end

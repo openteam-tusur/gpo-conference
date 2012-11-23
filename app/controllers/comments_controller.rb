@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
-  sso_authenticate_and_authorize
+  before_filter :authenticate_user!
+  before_filter :authorize_action!, :except => :show
 
   inherit_resources
 
@@ -16,6 +17,10 @@ class CommentsController < ApplicationController
   layout false
 
   private
+    def authorize_action!
+      can? :create, build_resource
+    end
+
     alias_method :old_build_resource, :build_resource
 
     def build_resource

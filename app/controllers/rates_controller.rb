@@ -1,5 +1,6 @@
 class RatesController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :authorize_action!
 
   layout false
 
@@ -9,12 +10,7 @@ class RatesController < ApplicationController
 
   actions :edit, :update
 
-  has_scope :rated_by_me, default: true, type: :boolean do |controller, scope|
-    scope.rated_by(controller.current_user)
-  end
-
   helper_method :rate
-
 
   def update
     update!{ render :edit and return }
@@ -23,8 +19,12 @@ class RatesController < ApplicationController
   private
 
   def resource
-    @rate ||= collection.first || collection.build
+    @rate ||= parent.rate_for(current_user)
   end
 
   alias_method :rate, :resource
+
+  def authorize_action!
+    authorize! :update, resource
+  end
 end
