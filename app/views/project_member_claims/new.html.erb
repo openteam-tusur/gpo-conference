@@ -1,5 +1,7 @@
+<%= content_for :page_title, "Заявка участника" %>
+
 <%= simple_form_for [@conference, @project_member_claim || current_user.project_member_claims.build] do |f| %>
   <%= f.error :base %>
-  <%= f.input :project_id, as: :select, collection: Project.ordered_by_title, hint: "Начните вводить код или название проекта" %>
+  <%= f.input :project_id, :as => :select, :collection => Project.ordered_by_title, :hint => "Начните вводить код или название проекта", :wrapper_html => { :class => 'long' } %>
   <%= f.button :submit, "Создать заявку" %>
 <% end %>

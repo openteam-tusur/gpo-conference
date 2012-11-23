@@ -26,7 +26,7 @@
       <h2>Проекты, где я руководитель:</h2>
       <ul>
         <% current_user.project_member_claims.where(:role => :manager).flat_map(&:project).each do |project| %>
-          <li><span class='title'><%= project.cipher %> <%= project.title %></span></li>
+          <li><span class='title'><%= project.cipher %> <%= link_to project.title, conference_theme_path(@conference, project.theme, :anchor => "project_#{project.id}") %></span></li>
         <% end %>
       </ul>
     </div>
