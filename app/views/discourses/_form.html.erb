@@ -11,7 +11,7 @@
       <% else %>
         <%= link_to 'Выбрать файл', '#', :class => 'choose_file' %>
       <% end %>
-      <%= f.input :vfs_path, :as => :hidden, :input_html => { :params => "vfs_path=/gpo-conference/#{@conference.year}/#{I18n.transliterate(f.object.project.cipher)}" } %>
+      <%= f.input :vfs_path, :as => :hidden, :input_html => { :id => "vfs_path_#{Time.zone.now.to_i}", :params => "vfs_path=/gpo-conference/#{@conference.year}/#{I18n.transliterate(f.object.project.cipher)}" } %>
     </div>
 
     <div class="buttons">

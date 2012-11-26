@@ -24,6 +24,7 @@
     input.change ->
       file_url = input.val()
       link.hide()
+      $('.link', wrapper).remove()
       wrapper.prepend('<a href='+file_url+' class="link">Скачать файл ('+decodeURI(file_url.match(/([^\/.]+)(\.(.{3}))?$/)[0])+')</a><a href="#" class="remove_file link">Удалить</a>')
       remove_file(wrapper, input, link)
       input.unbind('change')
