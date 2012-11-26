@@ -19,11 +19,17 @@ class DiscoursesController < ApplicationController
   helper_method :rate
 
   def create
-    create! { render resource and return }
+    create! do |success, failure|
+      success.html { render resource and return }
+      failure.html { render :new }
+    end
   end
 
   def update
-    update! { render resource and return }
+    update! do |success, failure|
+      success.html { render resource and return }
+      failure.html { render :edit }
+    end
   end
 
   def destroy
