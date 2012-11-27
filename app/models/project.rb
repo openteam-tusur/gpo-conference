@@ -12,6 +12,8 @@
 #  cipher     :string(255)
 #
 
+require 'open-uri'
+
 class Project < ActiveRecord::Base
   attr_accessible :chair_id, :cipher, :gpo_id, :title, :theme_id
 
@@ -71,10 +73,10 @@ class Project < ActiveRecord::Base
   end
 
   def response
-    @response ||= Curl.get("#{Settings['gpo.url']}/api/projects/#{gpo_id}")
+    @response ||= open("#{Settings['gpo.url']}/api/projects/#{gpo_id}")
   end
 
   def project_attributes
-    @project_attributes ||= Hashie::Mash.new(JSON.parse(response.body_str))
+    @project_attributes ||= Hashie::Mash.new(JSON.parse(response.read))
   end
 end
