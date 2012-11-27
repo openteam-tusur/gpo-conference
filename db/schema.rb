@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121122044114) do
+ActiveRecord::Schema.define(:version => 20121127030348) do
 
   create_table "chairs", :force => true do |t|
     t.string   "abbr"
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(:version => 20121122044114) do
   end
 
   create_table "discourses", :force => true do |t|
-    t.string   "vfs_path"
+    t.text     "vfs_path"
     t.text     "description"
     t.integer  "project_id"
     t.datetime "created_at",  :null => false
