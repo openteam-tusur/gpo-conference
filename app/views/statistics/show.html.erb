@@ -13,7 +13,7 @@
     <% @chairs_with_projects.each do |chair, projects| %>
       <tr>
         <td style='text-align: left'>
-          <%= chair.abbr %>
+          <%= chair %>
         </td>
         <td><%= projects.count %></td>
         <td><%= projects.map{ |p| p.discourses.count }.sum %></td>

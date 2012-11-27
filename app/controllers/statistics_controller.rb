@@ -2,7 +2,7 @@ class StatisticsController < ApplicationController
   before_filter :find_conference
 
   def show
-    @chairs_with_projects = @conference.projects.group_by(&:chair)
+    @chairs_with_projects = @conference.projects.group_by(&:chair_abbr).sort
   end
 
   private
