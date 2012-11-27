@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 # == Schema Information
 #
 # Table name: discourses
@@ -26,6 +28,7 @@ class Discourse < ActiveRecord::Base
   scope :with_rates, ->{ joins(:rates) }
 
   validates_presence_of :authors, :vfs_path, :title, :description
+  validates_format_of :vfs_path, :with => /\.pdf$/, :message => 'файл имеет неверный формат, необходим PDF'
 
   serialize :authors
 
