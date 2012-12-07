@@ -2,6 +2,7 @@
 
 <li>
   <%= link_to 'Заявки экспертов', manage_conference_claims_path(conference), :class => 'button' %>
+  <%= link_to 'Список утвержденных экспертов', manage_conference_expert_claims_path(conference), :class => 'button' %>
   <%= link_to 'Список направлений', manage_conference_themes_path(conference), :class => 'button' %>
   <%= link_to 'Статистика докладов', manage_conference_statistics_path(conference), :class => 'button' %>
 </li>

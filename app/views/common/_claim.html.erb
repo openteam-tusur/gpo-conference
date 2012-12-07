@@ -14,7 +14,7 @@
   <% if controller_path.match(/manage/) %>
     <div class="actions">
       <%= link_to "подтвердить", manage_conference_claim_path(claim.conference, claim, :claim => { :state_event => :approve }), :method => :put, :class => :button if claim.is_a?(ExpertClaim) && claim.pending? %>
-      <%= link_to 'удалить', manage_conference_claim_path(claim.conference, claim), :method => :delete, :confirm => t(:confirm), :class => :button %>
+      <%= link_to 'удалить', [:manage, claim.conference, claim], :method => :delete, :confirm => t(:confirm), :class => :button %>
     </div>
   <% end %>
 </li>

@@ -29,6 +29,8 @@ class ExpertClaim < Claim
 
   after_destroy :destroy_permission
 
+  delegate :last_name, :to => :user, :prefix => true
+
   state_machine :state, initial: :pending do
     event :approve do
       transition pending: :approved

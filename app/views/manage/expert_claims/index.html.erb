@@ -1,0 +1,22 @@
+<%= content_for :page_title, "Утвержденные экперты" %>
+
+<% content_for :local_navigation do %>
+  <%= link_to "&larr; назад к списку конференций".html_safe, manage_root_path %>
+<% end %>
+
+<div class="dashboard">
+  <div class="wrapper">
+    <% if collection.any? %>
+      <% collection.group_by(&:theme).each do |theme, claims| %>
+        <h2><%= theme.name %></h2>
+        <ul>
+          <%= render claims.sort{ |a,b| a.user_last_name <=> b.user_last_name } %>
+        </ul>
+      <% end %>
+    <% else %>
+      <div class="empty">
+        Нет подтвержденных экспертов.
+      </div>
+    <% end %>
+  </div>
+</div>
