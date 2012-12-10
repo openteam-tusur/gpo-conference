@@ -7,7 +7,7 @@
 <div class="dashboard">
   <div class="wrapper">
     <% grouped_claims = collection.group_by(&:theme) %>
-    <% Theme.grouped_by_name.each do |theme| %>
+    <% Theme.ordered_by_name.each do |theme| %>
       <h2><%= theme.name %> - <%= theme.discourses.count %></h2>
       <ul>
         <% grouped_claims[theme].sort{ |a,b| a.user_last_name <=> b.user_last_name }.each_with_index do |claim, index| %>
