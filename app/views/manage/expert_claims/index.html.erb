@@ -6,19 +6,14 @@
 
 <div class="dashboard">
   <div class="wrapper">
-    <% if collection.any? %>
-      <% collection.group_by(&:theme).each do |theme, claims| %>
-        <h2><%= theme.name %></h2>
-        <ul>
-          <% claims.sort{ |a,b| a.user_last_name <=> b.user_last_name }.each_with_index do |claim, index| %>
-            <%= render :partial => 'manage/expert_claims/expert_claim', :locals => { :expert_claim => claim, :index => index+1 } %>
-          <% end %>
-        </ul>
-      <% end %>
-    <% else %>
-      <div class="empty">
-        Нет подтвержденных экспертов.
-      </div>
+    <% grouped_claims = collection.group_by(&:theme) %>
+    <% Theme.grouped_by_name.each do |theme| %>
+      <h2><%= theme.name %> - <%= theme.discourses.count %></h2>
+      <ul>
+        <% grouped_claims[theme].sort{ |a,b| a.user_last_name <=> b.user_last_name }.each_with_index do |claim, index| %>
+          <%= render :partial => 'manage/expert_claims/expert_claim', :locals => { :expert_claim => claim, :index => index+1 } %>
+        <% end if grouped_claims[theme] %>
+      </ul>
     <% end %>
   </div>
 </div>
