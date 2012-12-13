@@ -25,7 +25,7 @@ class Discourse < ActiveRecord::Base
   has_many :rates, :dependent => :destroy
   has_many :experts, :through => :rates, :source => :user
 
-  scope :with_rates, ->{ joins(:rates) }
+  scope :with_rates, ->{ joins(:rates).uniq }
 
   validates_presence_of :authors, :vfs_path, :title, :description
   validates_format_of :vfs_path, :with => /\.pdf$/, :message => 'файл имеет неверный формат, необходим PDF'
@@ -45,7 +45,7 @@ class Discourse < ActiveRecord::Base
   end
 
   def average_rate
-    rates.average('cached_total')
+    "%.1f" % (rates.average('cached_total') || 0)
   end
 
 end

@@ -3,11 +3,11 @@
   <ul>
     <% theme.discourses.each do |discourse| %>
       <li>
-        <%= discourse.title %>
+        <%= link_to discourse.title, conference_theme_project_discourse_path(@conference, theme, discourse.project, discourse) %>
         <br />
-        Средняя оценка: <%= number_with_precision(discourse.average_rate, :precision => 1) %>
+        Средняя оценка: <%= discourse.average_rate %>
         <br />
-        <%= discourse.experts.count %> / <%= theme.experts.count %>
+        Кол-во экспертов: <%= discourse.experts.count %> / <%= theme.experts.count %>
         <br />
 
         <% if (theme.experts - discourse.experts).any? %>

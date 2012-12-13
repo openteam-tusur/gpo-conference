@@ -11,11 +11,13 @@
       <% @conference.best_three_with_rate.each do |rate, discourses| %>
         <li>
           Средняя оценка:
-          <%= number_with_precision rate, :precision => 1 %>
+          <%= rate %>
           <ul>
             <% discourses.each do |discourse| %>
               <li>
-                <%= discourse.title %>
+                <%= link_to discourse.title, conference_theme_project_discourse_path(@conference, discourse.theme, discourse.project, discourse) %>
+                (<%= discourse.project.cipher %>)
+                (<%= discourse.comments.count %> коммент.)
               </li>
             <% end %>
           </ul>
@@ -33,11 +35,13 @@
             <% theme.best_three_with_rate.each do |rate, discourses| %>
               <li>
                 Средняя оценка:
-                <%= number_with_precision rate, :precision => 1 %>
+                <%= rate %>
                 <ul>
                   <% discourses.each do |discourse| %>
                     <li>
-                      <%= discourse.title %>
+                      <%= link_to discourse.title, conference_theme_project_discourse_path(@conference, discourse.theme, discourse.project, discourse) %>
+                      (<%= discourse.project.cipher %>)
+                      (<%= discourse.comments.count %> коммент.)
                     </li>
                   <% end %>
                 </ul>
