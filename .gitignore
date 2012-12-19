@@ -2,6 +2,7 @@
 /.bundle
 /bin
 /config/database.yml
+/config/deploy.yml
 /config/settings.yml
 /erd.pdf
 /db/*.sqlite3
