@@ -33,7 +33,7 @@ class Conference < ActiveRecord::Base
 
   def self.current
     current_year = Time.zone.today.year
-    find_by_year(current_year.to_s) || find_by_year((current_year-1.year).to_s)
+    find_by_year(current_year.to_s) || find_by_year((current_year-1).to_s)
   end
 
   def best_three_with_rate
