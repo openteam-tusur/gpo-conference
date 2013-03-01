@@ -22,7 +22,7 @@ group :default do
   gem 'inherited_resources'
   gem 'openteam-commons'
   gem 'progress_bar'
-  gem 'rails'
+  gem 'rails', '~>3.2.12'
   gem 'russian'
   gem 'simple_form'
   gem 'sso-auth'
@@ -31,7 +31,7 @@ end
 
 group :development do
   gem 'annotate'
-  gem 'capistrano'
+  gem 'brakeman'
   gem 'hirb'
   gem 'rails-erd'
   gem 'rvm-capistrano'
