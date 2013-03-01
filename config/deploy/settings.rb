@@ -20,7 +20,7 @@ set :unicorn_instance_name, "tusur-gpo-conference"
 set :ssh_options, { :forward_agent => true }
 
 set :scm, :git
-set :repository, "https://github.com/openteam-tusur/gpo-conference.git"
+set :repository, "git://github.com/openteam-tusur/gpo-conference.git"
 set :branch, "master"
 set :deploy_via, :remote_cache
 
