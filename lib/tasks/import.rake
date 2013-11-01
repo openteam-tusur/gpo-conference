@@ -28,9 +28,12 @@ namespace :import do
     progress_bar      = ProgressBar.new(themes_attributes.size)
 
     if (conference = Conference.find_by_year(Time.zone.today.year.to_s)).present?
-      themes_attributes.each do |theme_attributes|
-        theme = Theme.find_or_initialize_by_gpo_id(theme_attributes.id)
-        theme.update_attributes!(name: theme_attributes.name.squish, conference_id: conference.id)
+      themes_attributes.each do |theme_attribute|
+        Theme.find_or_create_by_conference_id_and_gpo_id_and_name(
+          :conference_id => conference.id,
+          :gpo_id        => theme_attribute.id,
+          :name          => theme_attribute.name.squish
+        )
         progress_bar.increment!
       end
     else
@@ -46,21 +49,24 @@ namespace :import do
     projects_attributes = JSON.parse(response.body_str).map { |hash| Hashie::Mash.new(hash) }
     progress_bar        = ProgressBar.new(projects_attributes.size)
 
-    projects_attributes.each do |project_attributes|
-      project = Project.find_or_initialize_by_gpo_id(project_attributes.id)
-      theme = Theme.find_by_gpo_id(project_attributes.theme_id)
-      chair = Chair.find_by_gpo_id(project_attributes.chair_id)
+    if (conference = Conference.find_by_year(Time.zone.today.year.to_s)).present?
+      projects_attributes.each do |project_attribute|
+        theme   = Theme.find_by_conference_id_and_gpo_id(conference.id, project_attribute.theme_id)
 
-      if theme
-        project.update_attributes!(chair_id: chair.id,
-                                   title: project_attributes.title.squish,
-                                   theme_id: theme.id,
-                                   cipher: project_attributes.cipher.squish)
-      else
-        puts "Project with id #{project_attributes.id} does not have theme"
+        if theme
+          project = Project.find_or_initialize_by_gpo_id_and_theme_id(project_attribute.id, theme.id)
+          chair   = Chair.find_by_gpo_id(project_attribute.chair_id)
+          project.update_attributes!(chair_id: chair.id,
+                                     title: project_attribute.title.squish,
+                                     cipher: project_attribute.cipher.squish)
+        else
+          puts "Project with id #{project_attribute.id} does not have theme"
+        end
+
+        progress_bar.increment!
       end
-
-      progress_bar.increment!
+    else
+      puts 'Не создана конференция для текущего года'
     end
   end
 
