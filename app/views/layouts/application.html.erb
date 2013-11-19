@@ -32,6 +32,16 @@
           <li>
             <%= link_to "Статистика", conference_statistics_path(@conference) %>
           </li>
+          <li class='archive'>
+            <%= link_to "Архив конференций", '#', :class => 'selector' %>
+            <ul>
+              <% Conference.reorder('year ASC').each do |conference| %>
+                <li>
+                  <%= link_to "Конференция #{conference.year} года", conference_themes_path(conference) %>
+                </li>
+              <% end %>
+            </ul>
+          </li>
         </ul>
         <%= render :partial => "esp_auth/shared/header" %>
       </div>
