@@ -16,6 +16,7 @@ group :default do
   gem 'default_value_for'
   gem 'el_vfs_client'
   gem 'enumerize'
+  gem 'grape'
   gem 'gravatarify', '~> 3.0.0'
   gem 'has_scope'
   gem 'hashie'

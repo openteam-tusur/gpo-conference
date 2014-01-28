@@ -31,5 +31,7 @@ GpoConference::Application.routes.draw do
     end
   end
 
+  mount API => '/'
+
   root :to => 'themes#index'
 end
