@@ -1,12 +1,20 @@
 app:
-  secret:               secret
-
-errors:
-  key:                  api_key
-  host:                 host
+  domain:   DOMAIN
+  secret:   SECRET
 
 gpo:
-  url:                  http://gpo.host
+  url:      URL
 
-storage:
-  url:                  http://storage.host
+profile:
+  url:              http://PROFILE_URL
+  sign_in_url:      http://PROFILE_URL/users/sign_in
+  sign_out_url:     http://PROFILE_URL/users/sign_out
+
+redis_user_connector:
+  url:              redis://REDIS_URL/users
+
+session_store:
+  db:               DB
+  key_prefix:       PREFIX
+  host:             HOST
+  port:             PORT
