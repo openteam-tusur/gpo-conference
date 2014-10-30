@@ -1,4 +1,7 @@
 ru:
+  app:
+    title:                      Конференция ГПО
+
   activerecord:
     models:
       claim:                    Заявка
