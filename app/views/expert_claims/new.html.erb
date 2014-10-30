@@ -1,6 +1,6 @@
 <%= content_for :page_title, "Заявка эксперта" %>
 
-<%= simple_form_for [@conference, @expert_claim || current_user.expert_claims.build] do |f| %>
-  <%= f.input :theme_id, as: :select, collection: @conference.themes.ordered_by_name, :wrapper_html => { :class => 'long' } %>
+<%= simple_form_for [@current_conference, @expert_claim || current_user.expert_claims.build] do |f| %>
+  <%= f.input :theme_id, as: :select, collection: @current_conference.themes.ordered_by_name, :wrapper_html => { :class => 'long' } %>
   <%= f.button :submit, "Создать заявку" %>
 <% end %>

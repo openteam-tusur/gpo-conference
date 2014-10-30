@@ -7,7 +7,14 @@
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
   </head>
-  <body>
+  <body onload='setTimeout(function() {$(".flash_wrapper").remove()}, 2000)'>
+    <% if flash['alert'] %>
+      <div class="flash_wrapper" >
+        <div class="flash alert">
+          <%= flash['alert'] %>
+        </div>
+      </div>
+    <% end %>
 
     <div id="header">
       <div id="header-wrapper">
@@ -30,7 +37,7 @@
             </li>
           <% end %>
           <li>
-            <%= link_to "Статистика", conference_statistics_path(@conference) %>
+            <%= link_to "Статистика", conference_statistics_path(@current_conference) %>
           </li>
           <li class='archive'>
             <%= link_to "Архив конференций", '#', :class => 'selector' %>
@@ -51,12 +58,12 @@
       <div id="navigation">
         <div class="new_claim_link">
           Для подачи заявки на участие перейдите в <%= link_to "кабинет", dashboard_path %>
-        <%= link_to "Инструкция для экпертов", '/help/expert_guide.pdf' %>
-        <%= link_to "Инструкция для участников", '/help/member_guide.pdf' %>
-        <%= link_to "Требования к материалам", '/help/materials.pdf' %>
+          <%= link_to "Инструкция для экпертов", '/help/expert_guide.pdf' %>
+          <%= link_to "Инструкция для участников", '/help/member_guide.pdf' %>
+          <%= link_to "Требования к материалам", '/help/materials.pdf' %>
         </div>
-        <h1>Конференция участников ГПО ТУСУР <%= @conference.year %></h1>
-        <span class="conference"><%= @conference  %></span>
+        <h1>Конференция участников ГПО ТУСУР <%= @current_conference.year %></h1>
+        <span class="conference"><%= @current_conference  %></span>
       </div>
       <div id="content">
         <div id="page-header">

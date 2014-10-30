@@ -3,17 +3,18 @@
   <ul>
     <% theme.discourses.each do |discourse| %>
       <li>
-        <%= link_to discourse.title, conference_theme_project_discourse_path(@conference, theme, discourse.project, discourse) %>
+        <%= link_to discourse.title, conference_theme_project_discourse_path(@current_conference, theme, discourse.project, discourse) %>
         <br />
         Средняя оценка: <%= discourse.average_rate %>
         <br />
         Кол-во экспертов: <%= discourse.experts.count %> / <%= theme.experts.count %>
         <br />
 
-        <% if (theme.experts - discourse.experts).any? %>
+        <% late = (theme.experts.map(&:to_s) - discourse.experts.map(&:to_s)) %>
+        <% if late.any? %>
           <span class="warning">
             Следующие эксперты, еще не оценили доклад:
-            <%= (theme.experts - discourse.experts).map(&:name).join(', ') %>
+            <%= late.to_sentence %>
           </span>
         <% end %>
       </li>

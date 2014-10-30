@@ -18,6 +18,10 @@ class RatesController < ApplicationController
 
   private
 
+  def rate_params
+    params.require(:rate).permit(:urgency, :practicality, :novelty, :typography)
+  end
+
   def resource
     @rate ||= parent.rate_for(current_user)
   end

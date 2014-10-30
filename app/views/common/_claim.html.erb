@@ -1,6 +1,6 @@
 <li>
   <span class="role"><%= claim.role_text %></span>
-  <span class="user_name"><%= claim.user.name if controller_path.match(/manage/) %></span>
+  <span class="user_name"><%= claim.user if controller_path.match(/manage/) %></span>
 
   <% if claim.is_a?(ExpertClaim) %>
     <span class="state_name"><%= claim.human_state_name %></span>

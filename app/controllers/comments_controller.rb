@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_filter :authenticate_user!
+
   before_filter :authorize_action!, :except => :show
 
   inherit_resources
@@ -17,6 +18,10 @@ class CommentsController < ApplicationController
   layout false
 
   private
+    def comment_params
+      params.require(:comment).permit(:parent_id, :body)
+    end
+
     def authorize_action!
       can? :create, build_resource
     end
@@ -25,7 +30,7 @@ class CommentsController < ApplicationController
 
     def build_resource
       old_build_resource.tap do |object|
-        object.user = current_user
+        object.user_id = current_user.id
       end
     end
 end

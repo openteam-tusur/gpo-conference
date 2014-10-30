@@ -1,27 +1,10 @@
-# encoding: utf-8
-# == Schema Information
-#
-# Table name: conferences
-#
-#  id         :integer          not null, primary key
-#  year       :string(255)
-#  starts_on  :date
-#  ends_on    :date
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  hold_on    :date
-#
-
-
 class Conference < ActiveRecord::Base
-  attr_accessible :ends_on, :hold_on, :starts_on, :year
-
-  has_many :themes
+  has_many :themes, -> { order('themes.name').uniq }
   has_many :projects, :through => :themes
   has_many :project_member_claims
   has_many :claims
   has_many :expert_claims
-  has_many :discourses, :through => :projects
+  has_many :discourses, -> { select('themes.name, discourses.*').uniq }, :through => :projects
 
   def to_param
     year

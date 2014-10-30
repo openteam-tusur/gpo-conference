@@ -1,4 +1,6 @@
 class Manage::StatisticsController < ApplicationController
+  load_and_authorize_resource
+  :w
   before_filter :authenticate_user!
   before_filter :find_conference
 

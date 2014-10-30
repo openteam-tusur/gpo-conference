@@ -1,39 +1,24 @@
-# encoding: utf-8
-
-# == Schema Information
-#
-# Table name: discourses
-#
-#  id          :integer          not null, primary key
-#  vfs_path    :string(255)
-#  description :text
-#  project_id  :integer
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  title       :text
-#  authors     :string(255)
-#
-
 class Discourse < ActiveRecord::Base
-  attr_accessible :description, :url, :vfs_path, :authors, :title
-
   belongs_to :project
   has_one :theme, :through => :project
   has_one :chair, :through => :project
   has_one :conference, :through => :project
   has_many :comments, :dependent => :destroy
   has_many :rates, :dependent => :destroy
-  has_many :experts, :through => :rates, :source => :user
 
   scope :with_rates, ->{ joins(:rates).uniq }
 
   validates_presence_of :authors, :vfs_path, :title, :description
-  validates_format_of :vfs_path, :with => /\.pdf$/, :message => 'файл имеет неверный формат, необходим PDF'
+  validates_format_of :vfs_path, :with => /\.pdf\z/, :message => 'файл имеет неверный формат, необходим PDF'
 
   serialize :authors
 
   normalize_attribute :authors do |array|
     array.select { |value| value.present? }
+  end
+
+  def experts
+    @experts ||= rates.map(&:user).compact
   end
 
   def rate_for(user)

@@ -17,9 +17,13 @@ class ProjectMemberClaimsController < ApplicationController
   protected
     alias_method :old_build_resource, :build_resource
 
+    def project_member_claim_params
+      params.require(:project_member_claim).permit(:project_name, :project_id)
+    end
+
     def build_resource
       old_build_resource.tap do |object|
-        object.user = current_user
+        object.user_id = current_user.id
       end
     end
 end

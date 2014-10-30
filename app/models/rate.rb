@@ -1,18 +1,20 @@
 class Rate < ActiveRecord::Base
-  belongs_to :user
   belongs_to :discourse
 
   has_one :project, through: :discourse
   has_one :theme, through: :discourse
   has_one :conference, through: :discourse
 
-  attr_accessible :urgency, :practicality, :novelty, :typography
   validates :urgency, :practicality, :novelty, :typography, presence: true,
                                                             numericality: { only_integer: true },
                                                             inclusion: {in: 1..10}
   before_save :set_cached_total
 
-  scope :rated_by, ->(user) { where(:user_id => user) }
+  scope :rated_by, ->(user) { where(:user_id => user.id) }
+
+  def user
+    @user ||= User.find_by(:id => user_id)
+  end
 
   def total
     cached_total || calculated_total

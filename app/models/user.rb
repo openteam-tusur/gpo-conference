@@ -1,43 +1,27 @@
-# == Schema Information
-#
-# Table name: users
-#
-#  id                 :integer          not null, primary key
-#  uid                :string(255)
-#  name               :text
-#  email              :text
-#  first_name         :text
-#  last_name          :text
-#  raw_info           :text
-#  sign_in_count      :integer
-#  current_sign_in_at :datetime
-#  last_sign_in_at    :datetime
-#  current_sign_in_ip :string(255)
-#  last_sign_in_ip    :string(255)
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
-#
+class User
+  include AuthClient::User
 
-class User < ActiveRecord::Base
-  sso_auth_user
+  def app_name
+    'gpo_conference'
+  end
 
-  has_many :claims
-  has_many :expert_claims
-  has_many :project_member_claims
+  def claims
+    @claims ||= Claim.where(:user_id => id)
+  end
 
-  has_many :permissions
-  has_many :projects, through: :permissions, source: :context, source_type: 'Project'
-  has_many :themes,   through: :permissions, source: :context, source_type: 'Theme'
-  has_many :conferences, :through => :projects
-  has_many :discourses,  :through => :projects
-  has_many :rated_projects, :through => :themes, :source => :projects
-  has_many :rated_discourses, :through => :rated_projects, :source => :discourses
+  def project_member_claims
+    @project_member_claims ||= ProjectMemberClaim.where(:user_id => id)
+  end
 
-  has_many :theme_expert_permissions, class_name: 'Permission',
-    conditions: { context_type: 'Theme', role: :expert }
+  def themes
+    @themes ||= Theme.where(:id => permissions.where(:context_type => 'Theme').pluck(:context_id))
+  end
 
-  has_one :participant_permission, class_name: 'Permission',
-    conditions: { role: :participant }
+  def rated_projects
+    @rated_projects ||= themes.flat_map(&:projects)
+  end
 
-  delegate :destroy, to: :participant_permission, prefix: true, allow_nil: true
+  def rated_discourses
+    @rated_discourses ||= rated_projects.flat_map(&:discourses)
+  end
 end

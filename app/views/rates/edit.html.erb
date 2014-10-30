@@ -12,7 +12,7 @@
     <div>Выше среднего</div>
     <div>Высокая</div>
   </div>
-  <%= form.input :urgency,       :as => :radio,  :collection => 1..10 %>
+  <%= form.input :urgency,       :as => :radio_buttons,  :collection => 1..10 %>
   <div class="ruler">
     <div>Низкая</div>
     <div>Ниже среднего</div>
@@ -20,7 +20,7 @@
     <div>Выше среднего</div>
     <div>Высокая</div>
   </div>
-  <%= form.input :practicality,  :as => :radio,  :collection => 1..10 %>
+  <%= form.input :practicality,  :as => :radio_buttons,  :collection => 1..10 %>
   <div class="ruler">
     <div>Низкая</div>
     <div>Ниже среднего</div>
@@ -28,7 +28,7 @@
     <div>Выше среднего</div>
     <div>Высокая</div>
   </div>
-  <%= form.input :novelty,       :as => :radio,  :collection => 1..10 %>
+  <%= form.input :novelty,       :as => :radio_buttons,  :collection => 1..10 %>
   <div class="ruler">
     <div>Низкий</div>
     <div>Ниже среднего</div>
@@ -36,7 +36,7 @@
     <div>Выше среднего</div>
     <div>Высокий</div>
   </div>
-  <%= form.input :typography,    :as => :radio,  :collection => 1..10 %>
+  <%= form.input :typography,    :as => :radio_buttons,  :collection => 1..10 %>
 
   <div class="actions">
     <%= form.submit "Оценить", :class => 'button' %>

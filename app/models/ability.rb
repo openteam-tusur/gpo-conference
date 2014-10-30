@@ -6,10 +6,10 @@ class Ability
   def initialize(user)
     return unless user
 
-    can :manage, :all if user.administrator?
+    can :manage, :all if user.has_permission?(:role => :administrator)
 
     can :update, Rate do |rate|
-      user.expert_of?(rate.theme) &&
+      user.has_permission?(:role => :expert, :context => rate.theme) &&
         rate.user == user &&
         (rate.conference.hold_on .. rate.conference.ends_on).include?(Date.today)
     end
@@ -17,7 +17,7 @@ class Ability
     can :create, Comment if user.permissions.any?
 
     can :manage, Discourse do |discourse|
-      user.participant_of?(discourse.project) &&
+      user.has_permission?(:role => :participant, :context => discourse.project) &&
         (discourse.conference.starts_on .. (discourse.conference.hold_on - 1.day)).include?(Date.today)
     end
   end

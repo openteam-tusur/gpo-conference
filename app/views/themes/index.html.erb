@@ -5,7 +5,7 @@
 
 <div id="left">
   <ul class='listing' id='projects'>
-    <% collection.each do |theme| %>
+    <% @themes.each do |theme| %>
       <li>
         <div class='project_with_stats'>
           <div>
@@ -21,7 +21,7 @@
             </div>
             <h2>
               <%= image_tag 'icon_theme.png', :class => 'icon', :width => '16', :height => '16', :alt => theme.name %>
-              <%= link_to theme.name, resource_path(theme) %>
+              <%= link_to theme.name, [@current_conference, theme] %>
             </h2>
           </div>
         </div>

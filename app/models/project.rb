@@ -1,29 +1,11 @@
-# == Schema Information
-#
-# Table name: projects
-#
-#  id         :integer          not null, primary key
-#  gpo_id     :integer
-#  theme_id   :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  title      :string(255)
-#  chair_id   :integer
-#  cipher     :string(255)
-#
-
 require 'open-uri'
 
 class Project < ActiveRecord::Base
-  attr_accessible :chair_id, :cipher, :gpo_id, :title, :theme_id
-
   belongs_to :chair
   belongs_to :theme
 
   has_many :discourses
-  has_many :permissions, :foreign_key => :context_id
-  has_many :users, :through => :permissions
-  has_many :project_members, :through => :permissions, :source => :user, :conditions => { 'permissions.role' => :participant }
+  has_many :permissions,    :foreign_key => :context_id
   has_one  :conference, :through => :theme
 
   validates_presence_of :chair, :gpo_id, :theme
@@ -34,9 +16,17 @@ class Project < ActiveRecord::Base
 
   delegate :abbr, :to => :chair, :prefix => true
 
-  scope :ordered_by_title, :order => [:chair_id, :title]
+  scope :ordered_by_title, -> { order(:chair_id, :title) }
 
   scope :for_current_conference, -> { joins(:theme).where(:themes => { :conference_id => Conference.current }) }
+
+  def users
+    @users ||= permissions.map(&:user).compact
+  end
+
+  def project_members
+    @project_members ||= permissions.where(:role => :participant).map(&:user).compact
+  end
 
   def complex_title
     "#{cipher} #{title}"
@@ -65,8 +55,8 @@ class Project < ActiveRecord::Base
 
   def member?(role, user)
     self.send(role.to_s.pluralize).each do |member|
-      return true if member.last_name == user.last_name &&
-        member.first_name == user.first_name
+      return true if member.surname == user.surname &&
+        member.name == user.name
     end
 
     false

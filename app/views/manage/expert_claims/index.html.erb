@@ -7,10 +7,10 @@
 <div class="dashboard">
   <div class="wrapper">
     <% grouped_claims = collection.group_by(&:theme) %>
-    <% @conference.themes.ordered_by_name.each do |theme| %>
+    <% @current_conference.themes.ordered_by_name.each do |theme| %>
       <h2><%= theme.name %> - <%= theme.discourses.count %></h2>
       <ul>
-        <% grouped_claims[theme].sort{ |a,b| a.user_last_name <=> b.user_last_name }.each_with_index do |claim, index| %>
+        <% grouped_claims[theme].sort{ |a,b| a.user_surname <=> b.user_surname }.each_with_index do |claim, index| %>
           <%= render :partial => 'manage/expert_claims/expert_claim', :locals => { :expert_claim => claim, :index => index+1 } %>
         <% end if grouped_claims[theme] %>
       </ul>

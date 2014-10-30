@@ -1,10 +1,10 @@
 <% content_for :page_title do %>
   <%= image_tag 'icon_report.png', :class => 'icon', :width => '16', :height => '16' %>
-  <%= resource.title %>
+  <%= @discourse.title %>
 <% end %>
 
 <% content_for :local_navigation do %>
-  <%= link_to "&larr; Назад на просмотр направления".html_safe, conference_theme_path(@conference, @theme) %>
+  <%= link_to "&larr; Назад на просмотр направления".html_safe, conference_theme_path(@current_conference, @theme) %>
 <% end %>
 
 <div id="left">
@@ -26,56 +26,58 @@
 
           <div>
             <%= image_tag 'icon_theme.png', :class => 'icon', :width => '16', :height => '16' %>
-            <%= link_to @theme, conference_theme_path(@conference, @theme) %>
+            <%= link_to @theme, conference_theme_path(@current_conference, @theme) %>
           </div>
 
           <div>
             <%= image_tag 'icon_chair.png', :class => 'icon', :width => '16', :height => '16' %>
-            <%= link_to "Кафедра #{resource.chair.abbr}", conference_theme_path(@conference, @theme, :anchor => "chair_#{I18n.transliterate(resource.chair.abbr).gsub(/\s/, '_')}") %>
+            <%= link_to "Кафедра #{@discourse.chair.abbr}", conference_theme_path(@current_conference, @theme, :anchor => "chair_#{I18n.transliterate(@discourse.chair.abbr).gsub(/\s/, '_')}") %>
           </div>
 
           <div>
             <%= image_tag 'icon_project.png', :class => 'icon', :width => '16', :height => '16' %>
-            <%= link_to resource.project, conference_theme_path(@conference, @theme, :anchor => "project_#{resource.project.id}") %>
+            <%= link_to @discourse.project, conference_theme_path(@current_conference, @theme, :anchor => "project_#{@discourse.project.id}") %>
           </div>
 
           <div>
             <%= image_tag 'icon_report.png', :class => 'icon', :width => '16', :height => '16' %>
-            <strong><%= resource.title %></strong>
+            <strong><%= @discourse.title %></strong>
           </div>
 
           <div>
             <%= image_tag 'icon_users.png', :class => 'icon', :width => '16', :height => '16' %>
-            <%= resource.authors.join(', ') %>
+            <%= @discourse.authors.join(', ') %>
           </div>
 
-          <div><%= resource.description %></div>
+          <div><%= @discourse.description %></div>
 
           <div>
             <%= image_tag 'icon_pdf.png', :class => 'icon', :width => '16', :height => '16' %>
-            <%= link_to resource.title, resource.vfs_path %>
+            <%= link_to @discourse.title, @discourse.vfs_path %>
           </div>
         </div>
       </div>
     </li>
   </ul>
 
-  <% if can?(:update, rate) && current_user.expert_of?(@theme) %>
-    <div class="rates ajaxed">
-      <%= render :file => 'rates/edit' %>
-    </div>
+  <% if current_user && can?(:update, rate) && current_user.has_permission?(:role => :expert, :context => @theme) %>
+    <% if (rate.conference.hold_on .. rate.conference.ends_on).include?(Date.today) %>
+      <div class="rates ajaxed">
+        <%= render :file => 'rates/edit' %>
+      </div>
+    <% end %>
   <% end %>
 
   <div class="comments ajaxed">
     <h3>Комментарии</h3>
     <ul>
-      <% resource.comments.roots.order('created_at ASC').each do |comment| %>
+      <% @discourse.comments.roots.order('created_at ASC').each do |comment| %>
         <li><%= render comment %></li>
       <% end %>
     </ul>
 
     <% if can?(:create, @discourse.comments.new) %>
-      <%= link_to "Оставить комментарий", new_conference_theme_project_discourse_comment_path(@conference, @theme, @project, resource), :remote => true, :class => 'new_record new_comment large' %>
+      <%= link_to "Оставить комментарий", new_conference_theme_project_discourse_comment_path(@current_conference, @theme, @project, @discourse), :remote => true, :class => 'new_record new_comment large' %>
     <% else %>
       <h3>Оставлять комментарии могут только участники конференции и эксперты</h3>
     <% end %>

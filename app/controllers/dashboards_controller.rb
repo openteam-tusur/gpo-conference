@@ -1,5 +1,6 @@
 class DashboardsController < ApplicationController
   before_filter :authenticate_user!
+
   before_filter :find_current_year
 
   helper_method :projects_for_rating

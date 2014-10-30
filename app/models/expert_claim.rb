@@ -1,23 +1,5 @@
-# == Schema Information
-#
-# Table name: claims
-#
-#  id            :integer          not null, primary key
-#  project_id    :integer
-#  user_id       :integer
-#  role          :string(255)
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  state         :string(255)
-#  type          :string(255)
-#  theme_id      :integer
-#  conference_id :integer
-#
-
 class ExpertClaim < Claim
   extend Enumerize
-
-  attr_accessible :theme_id, :state_event
 
   belongs_to :theme
 
@@ -29,7 +11,7 @@ class ExpertClaim < Claim
 
   after_destroy :destroy_permission
 
-  delegate :last_name, :to => :user, :prefix => true
+  delegate :surname, :to => :user, :prefix => true
 
   state_machine :state, initial: :pending do
     event :approve do

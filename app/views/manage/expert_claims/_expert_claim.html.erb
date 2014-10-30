@@ -1,5 +1,5 @@
 <li>
-  <span class="user_name" style='float:left;'><%= index %>. <%= expert_claim.user.name if controller_path.match(/manage/) %></span>
+  <span class="user_name" style='float:left;'><%= index %>. <%= expert_claim.user if controller_path.match(/manage/) %></span>
 
   <% if controller_path.match(/manage/) %>
     <div class="actions" style='margin: 0 0 0 10px; float: left;'>
