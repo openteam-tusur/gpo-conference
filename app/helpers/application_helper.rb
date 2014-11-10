@@ -1,7 +1,7 @@
 module ApplicationHelper
   def participants_select_collection(discourse)
     discourse.project.participants.map { |participant|
-      full_name = "#{participant.last_name} #{participant.first_name} #{participant.middle_name}".squish
+      full_name = "#{participant.surname} #{participant.name} #{participant.patronymic}".squish
 
       [full_name, full_name]
     }
