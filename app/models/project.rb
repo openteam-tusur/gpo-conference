@@ -55,8 +55,7 @@ class Project < ActiveRecord::Base
 
   def member?(role, user)
     self.send(role.to_s.pluralize).each do |member|
-      return true if member.surname == user.surname &&
-        member.name == user.name
+      return true if member.name == user.fullname
     end
 
     false
