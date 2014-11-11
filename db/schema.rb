@@ -65,7 +65,6 @@ ActiveRecord::Schema.define(version: 20141110094146) do
   end
 
   create_table "discourses", force: true do |t|
-    t.text     "vfs_path"
     t.text     "description"
     t.integer  "project_id"
     t.datetime "created_at",        null: false

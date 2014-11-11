@@ -7,7 +7,7 @@ class AddFileFieldsToDiscourse < ActiveRecord::Migration
     add_column :discourses, :file_url, :text
     migrate_discourse
 
-    remove_column :vfs_path, :discourses
+    remove_column :discourses, :vfs_path
   end
 
   def migrate_discourse
