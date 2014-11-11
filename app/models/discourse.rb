@@ -8,8 +8,11 @@ class Discourse < ActiveRecord::Base
 
   scope :with_rates, ->{ joins(:rates).uniq }
 
-  validates_presence_of :authors, :vfs_path, :title, :description
-  validates_format_of :vfs_path, :with => /\.pdf\z/, :message => 'файл имеет неверный формат, необходим PDF'
+  validates_presence_of :authors, :title, :description
+
+  has_attached_file :file, :storage => :elvfs, :elvfs_url => Settings['storage.url']
+  validates_attachment_content_type :file, :content_type => ["application/pdf"]
+  validates_attachment_presence :file
 
   serialize :authors
 
