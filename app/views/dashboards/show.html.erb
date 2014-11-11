@@ -43,14 +43,14 @@
               <ul>
                 <%= render project.discourses %>
               </ul>
-              <%= link_to "Добавить доклад", new_conference_theme_project_discourse_path(@conference, project.theme, project), :remote => true, :class => 'new_record' %>
+              <%= link_to "Добавить доклад", new_conference_theme_project_discourse_path(@conference, project.theme, project) %>
               <span class='help'>
                 (<%= link_to "помощь", '#' %>)
                 <div class="help_box">
                   <h2>Помощь</h2>
                   <ol>
                     <li>Укажите название доклада, участников и напишите аннотацию к докладу.</li>
-                    <li>Нажмите «Выбрать файл».</li>
+                    <li>Нажмите «Обзор».</li>
                     <li>Загрузите ваш доклад в формате PDF в появившемся окошке.</li>
                     <li>Дважды кликните на доклад для добавления.</li>
                   </ol>

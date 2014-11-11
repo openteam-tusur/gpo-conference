@@ -35,16 +35,3 @@ cancel_handler = () ->
       target.closest('.ajaxed_item').replaceWith(jqXHR.responseText)
 
     cancel_handler()
-
-    if $('.remove_file').length
-      remove_link = $('.remove_file')
-      upload_link = $('<a href="#" class="choose_file">Выбрать файл</a>').hide()
-      remove_link.after(upload_link)
-
-      remove_file(
-        remove_link.parent('.add_file_wrapper'),
-        remove_link.siblings('.input').children('input'),
-        upload_link
-      )
-
-    init_choose_file() if $('.choose_file').length

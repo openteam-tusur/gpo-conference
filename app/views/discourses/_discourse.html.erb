@@ -5,9 +5,9 @@
   <%= discourse.description %>
 
   <div class="actions">
-    <%= link_to "Скачать доклад", discourse.vfs_path %>
-    <%= link_to "Редактировать", edit_conference_theme_project_discourse_path(@conference, discourse.theme, discourse.project, discourse), :remote => true %>
-    <%= link_to "Удалить", conference_theme_project_discourse_path(@conference, discourse.theme, discourse.project, discourse), :confirm => t(:confirm), :method => :delete, :remote => true %>
+    <%= link_to "Скачать доклад", discourse.file_url, :target => '_blank' %>
+    <%= link_to "Редактировать", edit_conference_theme_project_discourse_path(@conference, discourse.theme, discourse.project, discourse) %>
+    <%= link_to "Удалить", conference_theme_project_discourse_path(@conference, discourse.theme, discourse.project, discourse), :method => :delete, 'data-confirm' => 'Вы уверены?' %>
     (<%= discourse.comments.count %>)
     <%= link_to "Обсудить", conference_theme_project_discourse_path(@conference, discourse.theme, discourse.project, discourse) %>
   </div>

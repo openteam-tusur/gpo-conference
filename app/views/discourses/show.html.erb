@@ -53,7 +53,7 @@
 
           <div>
             <%= image_tag 'icon_pdf.png', :class => 'icon', :width => '16', :height => '16' %>
-            <%= link_to @discourse.title, @discourse.vfs_path %>
+            <%= link_to @discourse.title, @discourse.file_url, :target => '_blank' %>
           </div>
         </div>
       </div>
