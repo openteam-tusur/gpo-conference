@@ -10,7 +10,7 @@ class Ability
 
     can :update, Rate do |rate|
       user.has_permission?(:role => :expert, :context => rate.theme) &&
-        rate.user == user &&
+        rate.user_id == user.id &&
         (rate.conference.hold_on .. rate.conference.ends_on).include?(Date.today)
     end
 
