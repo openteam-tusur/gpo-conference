@@ -61,7 +61,7 @@
   </ul>
 
   <% if current_user && can?(:update, rate) && current_user.has_permission?(:role => :expert, :context => @theme) %>
-    <% if (rate.conference.hold_on .. rate.conference.ends_on).include?(Date.today) %>
+    <% if (rate.conference.hold_on .. rate.conference.ends_on).include?(Time.zone.now.to_date) %>
       <div class="rates ajaxed">
         <%= render :file => 'rates/edit' %>
       </div>
