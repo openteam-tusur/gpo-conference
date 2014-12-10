@@ -17,7 +17,8 @@
               <li>
                 <%= link_to discourse.title, conference_theme_project_discourse_path(@conference, discourse.theme, discourse.project, discourse) %>
                 (<%= discourse.project.cipher %>)
-                (<%= discourse.comments.count %> коммент.)
+                (<%= discourse.comments.count %> коммент.),
+                авторы: <%= discourse.authors.join(', ') %>
               </li>
             <% end %>
           </ul>
@@ -41,7 +42,8 @@
                     <li>
                       <%= link_to discourse.title, conference_theme_project_discourse_path(@conference, discourse.theme, discourse.project, discourse) %>
                       (<%= discourse.project.cipher %>)
-                      (<%= discourse.comments.count %> коммент.)
+                      (<%= discourse.comments.count %> коммент.),
+                      авторы: <%= discourse.authors.join(', ') %>
                     </li>
                   <% end %>
                 </ul>
