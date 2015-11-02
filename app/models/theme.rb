@@ -4,7 +4,7 @@ class Theme < ActiveRecord::Base
   has_many :discourses, :through => :projects
   has_many :permissions, -> { where(:permissions => { :context_type => 'Theme' }) }, :foreign_key => :context_id
 
-  validates_presence_of :name, :gpo_id
+  validates_presence_of :name, :conference_id
 
   scope :ordered_by_name, -> { order(:name) }
 

@@ -21,6 +21,7 @@ namespace :import do
   task :themes => :environment do
     puts 'Import themes'
 
+    themes_yaml       = read_themes
     response          = open("#{Settings['gpo.url']}/api/themes")
     themes_attributes = JSON.parse(response.read).map { |hash| Hashie::Mash.new(hash) }
 
@@ -28,8 +29,7 @@ namespace :import do
       themes_attributes.each do |theme_attribute|
         Theme.find_or_create_by(
           :conference_id => conference.id,
-          :gpo_id        => theme_attribute.id,
-          :name          => theme_attribute.name.squish
+          :name          => themes_yaml[theme_attribute.name.squish] || theme_attribute.name.squish
         )
       end
     else
@@ -41,12 +41,14 @@ namespace :import do
   task :projects => :environment do
     puts 'Import projects'
 
+
     response            = open("#{Settings['gpo.url']}/api/projects")
     projects_attributes = JSON.parse(response.read).map { |hash| Hashie::Mash.new(hash) }
+    themes_yaml         = read_themes
 
     if (conference = Conference.find_by(:year => Time.zone.today.year.to_s)).present?
       projects_attributes.each do |project_attribute|
-        theme   = Theme.find_by(:conference_id => conference.id, :gpo_id => project_attribute.theme_id)
+        theme   = Theme.find_by(:conference_id => conference.id, :name => themes_yaml[project_attribute.theme_name.try(:squish)] || project_attribute.theme_name)
 
         if theme
           project = Project.find_or_initialize_by(:gpo_id => project_attribute.id, :theme_id => theme.id)
@@ -68,3 +70,13 @@ namespace :import do
   task :all => [:chairs, :themes, :projects] do
   end
 end
+
+private
+
+  def read_themes
+    reverse_hash YAML.load(File.open "lib/themes.yml")
+  end
+
+  def reverse_hash(hash)
+    hash.keys.inject({}){|sum, key| hash[key].each{|v| sum[v.squish] = key.squish }; sum}
+  end
