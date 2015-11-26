@@ -33,6 +33,7 @@ group :development do
   gem 'capistrano-auth-subscriber'
   gem 'openteam-capistrano',        '~> 1.0.11'
   gem 'rails-erd'
+  gem 'awesome_print'
 end
 
 group :production do

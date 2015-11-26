@@ -6,9 +6,9 @@
   <div class="wrapper">
     <h2>Мои заявки:</h2>
 
-    <% if current_user.claims.any? %>
+    <% if current_user.claims.for_conference(@conference).any? %>
       <ul>
-        <%= render current_user.claims %>
+        <%= render current_user.claims.for_conference(@conference) %>
       </ul>
     <% else %>
       <div class="empty">У вас нет заявок.</div>
@@ -69,9 +69,9 @@
   <% if current_user.has_permission?(:role => :expert) %>
     <div class="wrapper">
       <h2>Проекты для оценки:</h2>
-      <% if current_user.rated_discourses.any? %>
+      <% if current_user.rated_discourses(@conference).any? %>
         <ul>
-          <% current_user.rated_discourses.group_by(&:project).each do |project, discourses| %>
+          <% current_user.rated_discourses(@conference).group_by(&:project).each do |project, discourses| %>
             <li>
               <span class='title'><%= project.cipher %> <%= project.title %></span>
               <h3>Доклады по проекту:</h3>
