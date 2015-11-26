@@ -21,22 +21,22 @@
 
   </div>
 
-  <% if current_user.has_permission?(:role => :manager) %>
+  <% if current_user.manager_projects(@conference).any? %>
     <div class="wrapper">
       <h2>Проекты, где я руководитель:</h2>
       <ul>
-        <% current_user.project_member_claims.where(:role => :manager).flat_map(&:project).each do |project| %>
+        <% current_user.manager_projects(@conference).each do |project| %>
           <li><span class='title'><%= project.cipher %> <%= link_to project.title, conference_theme_path(@conference, project.theme, :anchor => "project_#{project.id}") %></span></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-  <% if current_user.has_permission?(:role => :participant) %>
+  <% if current_user.participant_projects(@conference).any? %>
     <div class="wrapper">
       <h2>Проекты, где я участник:</h2>
       <ul>
-        <% current_user.project_member_claims.where(:role => :participant).flat_map(&:project).each do |project| %>
+        <% current_user.participant_projects(@conference).each do |project| %>
           <li>
             <span class='title'><%= project.cipher %> <%= project.title %></span>
             <div class="discourses_wrapper ajaxed">
