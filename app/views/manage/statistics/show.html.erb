@@ -19,8 +19,10 @@
                   <%= link_to discourse.title, conference_theme_project_discourse_path(@conference, discourse.theme, discourse.project, discourse) %>
                 </p>
                 <p> <strong> <%= discourse.project.cipher %> </strong> (<%= discourse.comments.count %> коммент.),</p>
-                <p> <strong> авторы: </strong> <%= discourse.try(:detailed_participants) %>, </p>
-                <p> <strong> руководители проекта: </strong><%= discourse.try(:project_managers) %> </p>
+                <p> <strong> авторы: </strong> <%= discourse.detailed_participants %> </p>
+                <% if discourse.project_managers.present? %>
+                  <p> <strong> руководители проекта: </strong><%= discourse.project_managers %> </p>
+                <% end %>
               </li>
             <% end %>
           </ul>
@@ -46,8 +48,10 @@
                         <%= link_to discourse.title, conference_theme_project_discourse_path(@conference, discourse.theme, discourse.project, discourse) %>
                       </p>
                       <p> <strong> <%= discourse.project.cipher %> </strong> (<%= discourse.comments.count %> коммент.),</p>
-                      <p> <strong> авторы: </strong> <%= discourse.try(:detailed_participants) %>, </p>
-                      <p> <strong> руководители проекта: </strong><%= discourse.try(:project_managers) %> </p>
+                      <p> <strong> авторы: </strong> <%= discourse.detailed_participants %> </p>
+                      <% if discourse.project_managers.present? %>
+                        <p> <strong> руководители проекта: </strong><%= discourse.project_managers %> </p>
+                      <% end %>
                     </li>
                   <% end %>
                 </ul>

@@ -37,8 +37,15 @@ class Discourse < ActiveRecord::Base
   end
 
   def detailed_participants
-    gpo_request("#{Settings["gpo.url"]}/api/projects/#{self.project.gpo_id}/participants").
-      map{|p| "#{p["name"]} (гр. #{p["edu_group"]})"}.join(", ")
+   project_participants = gpo_request("#{Settings["gpo.url"]}/api/projects/#{self.project.gpo_id}/participants")
+   result = authors.map do |author|
+     if p = project_participants.select{|p| p["name"].squish == author }.first
+       "#{author}(гр.#{p["edu_group"]})"
+     else
+       author
+     end
+   end
+   result.join(", ")
   end
 
   def project_managers
@@ -50,6 +57,7 @@ class Discourse < ActiveRecord::Base
   private
 
   def gpo_request(url)
+    begin
     hash = RestClient::Request.execute(
                        method: :get,
                        url: url,
@@ -59,5 +67,8 @@ class Discourse < ActiveRecord::Base
                       JSON.parse(response)
     end
     hash
+    rescue
+      {}
+    end
   end
 end
