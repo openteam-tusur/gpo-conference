@@ -15,10 +15,12 @@
           <ul>
             <% discourses.each do |discourse| %>
               <li>
-                <%= link_to discourse.title, conference_theme_project_discourse_path(@conference, discourse.theme, discourse.project, discourse) %>
-                (<%= discourse.project.cipher %>)
-                (<%= discourse.comments.count %> коммент.),
-                авторы: <%= discourse.authors.join(', ') %>
+                <p>
+                  <%= link_to discourse.title, conference_theme_project_discourse_path(@conference, discourse.theme, discourse.project, discourse) %>
+                </p>
+                <p> <strong> <%= discourse.project.cipher %> </strong> (<%= discourse.comments.count %> коммент.),</p>
+                <p> <strong> авторы: </strong> <%= discourse.try(:detailed_participants) %>, </p>
+                <p> <strong> руководители проекта: </strong><%= discourse.try(:project_managers) %> </p>
               </li>
             <% end %>
           </ul>
@@ -40,10 +42,12 @@
                 <ul>
                   <% discourses.each do |discourse| %>
                     <li>
-                      <%= link_to discourse.title, conference_theme_project_discourse_path(@conference, discourse.theme, discourse.project, discourse) %>
-                      (<%= discourse.project.cipher %>)
-                      (<%= discourse.comments.count %> коммент.),
-                      авторы: <%= discourse.authors.join(', ') %>
+                      <p>
+                        <%= link_to discourse.title, conference_theme_project_discourse_path(@conference, discourse.theme, discourse.project, discourse) %>
+                      </p>
+                      <p> <strong> <%= discourse.project.cipher %> </strong> (<%= discourse.comments.count %> коммент.),</p>
+                      <p> <strong> авторы: </strong> <%= discourse.try(:detailed_participants) %>, </p>
+                      <p> <strong> руководители проекта: </strong><%= discourse.try(:project_managers) %> </p>
                     </li>
                   <% end %>
                 </ul>

@@ -22,6 +22,7 @@ group :default do
   gem 'pg'
   gem 'rails',                      '4.1.6'
   gem 'redis-session-store'
+  gem 'rest-client'
   gem 'russian'
   gem 'sass-rails',                 '~> 4.0.3'
   gem 'simple_form'

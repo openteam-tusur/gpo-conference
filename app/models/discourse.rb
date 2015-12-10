@@ -36,4 +36,28 @@ class Discourse < ActiveRecord::Base
     "%.1f" % (rates.average('cached_total') || 0)
   end
 
+  def detailed_participants
+    gpo_request("#{Settings["gpo.url"]}/api/projects/#{self.project.gpo_id}/participants").
+      map{|p| "#{p["name"]} (гр. #{p["edu_group"]})"}.join(", ")
+  end
+
+  def project_managers
+    gpo_request("#{Settings["gpo.url"]}/api/projects/#{self.project.gpo_id}/project_managers").
+      map{|pm| pm["name"].squish}.join(", ")
+  end
+
+
+  private
+
+  def gpo_request(url)
+    hash = RestClient::Request.execute(
+                       method: :get,
+                       url: url,
+                       timeout: 600,
+                       headers: { :Accept => 'application/json', :timeout => 600 },
+                      ) do |response, request, result, &block|
+                      JSON.parse(response)
+    end
+    hash
+  end
 end
