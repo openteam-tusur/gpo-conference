@@ -17,7 +17,7 @@
         </td>
         <td><%= projects.count %></td>
         <td><%= projects.map{ |p| p.discourses.count }.sum %></td>
-        <td><%= projects.map{ |p| p.project_members.count }.sum %></td>
+        <td><%= projects.flat_map{ |p| p.discourses.flat_map(&:authors).uniq.count}.sum %></td>
       </tr>
     <% end %>
   </tbody>
