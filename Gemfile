@@ -17,7 +17,7 @@ group :default do
   gem 'inherited_resources'
   gem 'jquery-rails'
   gem 'jquery-ui-rails'
-  gem 'openteam-commons'
+  gem 'openteam-commons', '~> 0.3.3'
   gem 'paperclip-elvfs'
   gem 'pg'
   gem 'rails', '4.1.6'
@@ -32,7 +32,7 @@ end
 
 group :development do
   gem 'capistrano-auth-subscriber'
-  gem 'openteam-capistrano', '~> 1.0.11'
+  gem 'openteam-capistrano', '~> 1.0.16'
   gem 'rails-erd'
   gem 'awesome_print'
 end

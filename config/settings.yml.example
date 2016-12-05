@@ -2,6 +2,14 @@ app:
   domain:   DOMAIN
   secret:   SECRET
 
+errors:
+  key:      KEY
+  url:      http://errbit
+
+slack:
+  channel:  channel
+  webhook:  http://webhook
+
 gpo:
   url:      URL
 
