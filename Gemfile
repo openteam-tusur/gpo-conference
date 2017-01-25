@@ -32,6 +32,7 @@ end
 
 group :development do
   gem 'capistrano-auth-subscriber'
+  gem 'capistrano-db-tasks', '0.4', require: false
   gem 'openteam-capistrano', '~> 1.0.16'
   gem 'rails-erd'
   gem 'awesome_print'

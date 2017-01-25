@@ -49,7 +49,7 @@ GEM
     airbrake (5.6.1)
       airbrake-ruby (~> 1.6)
     airbrake-ruby (1.6.0)
-    airbrussh (1.1.1)
+    airbrussh (1.1.2)
       sshkit (>= 1.6.1, != 1.7.0)
     ancestry (2.1.0)
       activerecord (>= 3.0.0)
@@ -73,7 +73,7 @@ GEM
     capistrano-bundler (1.2.0)
       capistrano (~> 3.1)
       sshkit (~> 1.2)
-    capistrano-db-tasks (0.5)
+    capistrano-db-tasks (0.4)
       capistrano (>= 3.0.0)
     capistrano-harrow (0.5.3)
     capistrano-rails (1.2.0)
@@ -168,7 +168,7 @@ GEM
     multi_xml (0.5.5)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
-    net-ssh (3.2.0)
+    net-ssh (4.0.1)
     netrc (0.11.0)
     openteam-capistrano (1.0.16)
       airbrake
@@ -263,7 +263,7 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
-    sshkit (1.11.4)
+    sshkit (1.11.5)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
     state_machine (1.2.0)
@@ -301,6 +301,7 @@ DEPENDENCIES
   awesome_print
   cancan
   capistrano-auth-subscriber
+  capistrano-db-tasks (= 0.4)
   coffee-rails (~> 4.0.0)
   compass-rails
   default_value_for
@@ -328,4 +329,4 @@ DEPENDENCIES
   unicorn
 
 BUNDLED WITH
-   1.13.6
+   1.14.3
