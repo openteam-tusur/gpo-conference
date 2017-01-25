@@ -39,7 +39,7 @@ class Discourse < ActiveRecord::Base
   def detailed_participants
    project_participants = gpo_request("#{Settings["gpo.url"]}/api/projects/#{self.project.gpo_id}/participants")
    result = authors.map do |author|
-     if p = project_participants.select{|p| p["name"].squish == author }.first
+     if p = project_participants.select{ |p| p['name'].to_s.squish == author }.first
        "#{author}(гр.#{p["edu_group"]})"
      else
        author
