@@ -49,8 +49,8 @@ class Discourse < ActiveRecord::Base
   end
 
   def project_managers
-    gpo_request("#{Settings["gpo.url"]}/api/projects/#{self.project.gpo_id}/project_managers").compact.
-      map{|pm| pm["name"].squish}.join(", ")
+    gpo_request("#{Settings["gpo.url"]}/api/projects/#{self.project.gpo_id}/project_managers")
+      .map{ |pm| pm['name'].squish }.join(', ') rescue 'не найдено'
   end
 
 
