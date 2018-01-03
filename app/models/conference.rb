@@ -15,8 +15,10 @@ class Conference < ActiveRecord::Base
   end
 
   def self.current
-    current_year = Time.zone.today.year
-    find_by_year(current_year.to_s) || find_by_year((current_year-1).to_s)
+    #current_year = Time.zone.today.year
+    #find_by_year(current_year.to_s).presence || find_by_year((current_year-1).to_s)
+
+    Conference.order(:year).last
   end
 
   def best_three_with_rate
