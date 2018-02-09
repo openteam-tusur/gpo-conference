@@ -2,7 +2,7 @@
 <html lang="ru">
   <head>
     <meta charset="UTF-8">
-    <title>Электронный журнал "Российское инженерное дело"</title>
+    <title>Научно-практическая конференция студентов «Наука и практика: проектная деятельность – от идеи до внедрения»</title>
     <%= stylesheet_link_tag    "application", :media => "all" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
@@ -62,7 +62,10 @@
           <%= link_to 'Инструкция для участников', '/help/member_guide.pdf', :target => '_blank' %>
           <%= link_to 'Требования к материалам', '/help/materials.pdf', :target => '_blank' %>
         </div>
-        <h1>Электронный журнал </br> "Российское инженерное дело"</h1>
+        <h1>
+          Научно-практическая конференция<br />
+          студентов «Наука и практика: проектная деятельность – от идеи до внедрения»
+        </h1>
         <span class="conference"><%= @current_conference  %></span>
       </div>
       <div id="content">
